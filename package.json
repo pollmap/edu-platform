@@ -5,7 +5,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "tsc": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "parse:curriculum": "tsx scripts/parse-curriculum.ts",
+    "parse:curriculum:apply": "tsx scripts/parse-curriculum.ts --apply",
+    "gen:pages": "tsx scripts/generate-pages.ts",
+    "gen:pages:apply": "tsx scripts/generate-pages.ts --apply",
+    "validate": "tsx scripts/validate.ts",
+    "lint:md": "tsx scripts/markdown-lint.ts",
+    "secret-grep": "tsx scripts/secret-grep.ts"
   },
   "dependencies": {
     "@types/react-katex": "^3.0.4",
@@ -16,11 +27,16 @@
     "react-katex": "^3.1.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.4",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/ui": "^4.1.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.21.0",
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }
