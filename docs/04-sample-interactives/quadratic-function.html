@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이차함수 탐험기 — y = ax² + bx + c</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    background: #fafafa;
+    color: #1a1a1a;
+    padding: 16px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #1e40af;
+  }
+  .subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+  .panel { display: flex; flex-direction: column; gap: 16px; }
+  .formula-box {
+    background: #eff6ff;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    font-size: 22px;
+    min-height: 60px;
+  }
+  .canvas-wrap {
+    position: relative;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    aspect-ratio: 1 / 1;
+  }
+  canvas { width: 100%; height: 100%; display: block; }
+  .controls { display: flex; flex-direction: column; gap: 14px; }
+  .slider-group {
+    background: #f9fafb;
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .slider-label .var { font-weight: 700; color: #1e40af; }
+  .slider-label .val { font-family: 'JetBrains Mono', monospace; color: #ef4444; font-weight: 600; }
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    background: #d1d5db;
+    border-radius: 3px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #1e40af;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #1e40af;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+  .info-box {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .info-box .label { font-weight: 700; color: #92400e; margin-bottom: 4px; }
+  .info-box .value { font-family: 'JetBrains Mono', monospace; color: #1f2937; }
+  .preset-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+  .preset-btn {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.15s;
+  }
+  .preset-btn:hover { background: #f3f4f6; border-color: #1e40af; color: #1e40af; }
+  .reset-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    align-self: flex-end;
+  }
+  .reset-btn:hover { background: #dc2626; }
+  details {
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+  }
+  summary { font-weight: 600; color: #1e40af; }
+  details[open] { padding-bottom: 16px; }
+  details p { margin-top: 8px; font-size: 14px; color: #374151; cursor: text; }
+  details p strong { color: #1f2937; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>이차함수 탐험기</h1>
+  <p class="subtitle">중학교 3학년 · 변화와 관계 · M9-CR-03 — 슬라이더를 움직여 \(a, b, c\)가 그래프에 어떻게 영향을 주는지 확인해 보세요</p>
+
+  <div class="layout">
+
+    <!-- 왼쪽: 그래프 -->
+    <div class="panel">
+      <div class="formula-box" id="formula"></div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="500" height="500"></canvas>
+      </div>
+      <div class="info-box">
+        <div class="label">꼭짓점 좌표</div>
+        <div class="value" id="vertex">(0, 0)</div>
+        <div class="label" style="margin-top:8px;">대칭축</div>
+        <div class="value" id="axis">x = 0</div>
+        <div class="label" style="margin-top:8px;">판별식 \(D = b² - 4ac\)</div>
+        <div class="value" id="discriminant">D = 0 (실근 1개)</div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 컨트롤 -->
+    <div class="panel">
+      <div class="controls">
+        <div class="slider-group">
+          <div class="slider-label">
+            <span class="var">a (이차항 계수)</span>
+            <span class="val" id="a-val">1.00</span>
+          </div>
+          <input type="range" id="a" min="-3" max="3" step="0.1" value="1">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span class="var">b (일차항 계수)</span>
+            <span class="val" id="b-val">0.00</span>
+          </div>
+          <input type="range" id="b" min="-5" max="5" step="0.1" value="0">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span class="var">c (상수항)</span>
+            <span class="val" id="c-val">0.00</span>
+          </div>
+          <input type="range" id="c" min="-5" max="5" step="0.1" value="0">
+        </div>
+        <div class="preset-buttons">
+          <button class="preset-btn" onclick="setPreset(1, 0, 0)">y = x²</button>
+          <button class="preset-btn" onclick="setPreset(-1, 0, 0)">y = -x²</button>
+          <button class="preset-btn" onclick="setPreset(1, 0, -4)">근 ±2</button>
+          <button class="preset-btn" onclick="setPreset(2, -4, 1)">표준형</button>
+          <button class="preset-btn" onclick="setPreset(0.3, 0, 0)">완만한 곡선</button>
+        </div>
+        <button class="reset-btn" onclick="setPreset(1, 0, 0)">처음으로</button>
+      </div>
+
+      <details>
+        <summary>왜 이렇게 되는가?</summary>
+        <p>
+          <strong>a의 역할:</strong> 그래프의 모양을 결정해요.
+          a &gt; 0이면 아래로 볼록(U자), a &lt; 0이면 위로 볼록(∩자).
+          \|a\|가 클수록 폭이 좁아지고, 작을수록 완만해져요.
+        </p>
+        <p style="margin-top:8px;">
+          <strong>b의 역할:</strong> 꼭짓점의 x좌표를 좌우로 이동시켜요.
+          꼭짓점의 x좌표는 \(-\frac{b}{2a}\)로 계산되죠.
+        </p>
+        <p style="margin-top:8px;">
+          <strong>c의 역할:</strong> y축과 만나는 점이에요.
+          x = 0을 대입하면 y = c가 되니까요.
+        </p>
+        <p style="margin-top:8px;">
+          <strong>판별식 D:</strong> x축과 몇 번 만나는지 알려줘요.
+          D &gt; 0이면 두 점, D = 0이면 한 점(접함), D &lt; 0이면 만나지 않습니다.
+        </p>
+      </details>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+
+// 좌표계: x in [-10, 10], y in [-10, 10]
+const X_MIN = -10, X_MAX = 10;
+const Y_MIN = -10, Y_MAX = 10;
+
+function toCanvasX(x) { return ((x - X_MIN) / (X_MAX - X_MIN)) * W; }
+function toCanvasY(y) { return H - ((y - Y_MIN) / (Y_MAX - Y_MIN)) * H; }
+
+let a = 1, b = 0, c = 0;
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // 격자
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  for (let i = X_MIN; i <= X_MAX; i++) {
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(i), 0);
+    ctx.lineTo(toCanvasX(i), H);
+    ctx.stroke();
+  }
+  for (let i = Y_MIN; i <= Y_MAX; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, toCanvasY(i));
+    ctx.lineTo(W, toCanvasY(i));
+    ctx.stroke();
+  }
+
+  // 축
+  ctx.strokeStyle = '#1f2937';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, toCanvasY(0));
+  ctx.lineTo(W, toCanvasY(0));
+  ctx.moveTo(toCanvasX(0), 0);
+  ctx.lineTo(toCanvasX(0), H);
+  ctx.stroke();
+
+  // 축 레이블
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px sans-serif';
+  for (let i = X_MIN + 1; i <= X_MAX - 1; i++) {
+    if (i === 0) continue;
+    ctx.fillText(i, toCanvasX(i) - 4, toCanvasY(0) + 14);
+  }
+  for (let i = Y_MIN + 1; i <= Y_MAX - 1; i++) {
+    if (i === 0) continue;
+    ctx.fillText(i, toCanvasX(0) + 4, toCanvasY(i) + 4);
+  }
+
+  // 대칭축 (a≠0일 때)
+  if (Math.abs(a) > 0.01) {
+    const axisX = -b / (2 * a);
+    if (axisX > X_MIN && axisX < X_MAX) {
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      ctx.moveTo(toCanvasX(axisX), 0);
+      ctx.lineTo(toCanvasX(axisX), H);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+
+  // 이차함수 곡선
+  ctx.strokeStyle = '#1e40af';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  let started = false;
+  for (let px = 0; px <= W; px += 1) {
+    const x = X_MIN + (px / W) * (X_MAX - X_MIN);
+    const y = a * x * x + b * x + c;
+    if (y > Y_MIN && y < Y_MAX) {
+      const cy = toCanvasY(y);
+      if (!started) { ctx.moveTo(px, cy); started = true; }
+      else ctx.lineTo(px, cy);
+    } else {
+      started = false;
+    }
+  }
+  ctx.stroke();
+
+  // 꼭짓점
+  if (Math.abs(a) > 0.01) {
+    const vx = -b / (2 * a);
+    const vy = a * vx * vx + b * vx + c;
+    if (vx > X_MIN && vx < X_MAX && vy > Y_MIN && vy < Y_MAX) {
+      ctx.fillStyle = '#ef4444';
+      ctx.beginPath();
+      ctx.arc(toCanvasX(vx), toCanvasY(vy), 6, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+
+  // y절편
+  if (c > Y_MIN && c < Y_MAX) {
+    ctx.fillStyle = '#10b981';
+    ctx.beginPath();
+    ctx.arc(toCanvasX(0), toCanvasY(c), 5, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}
+
+function updateFormula() {
+  let formula = 'y = ';
+  let parts = [];
+
+  if (Math.abs(a) > 0.01) {
+    const aStr = a === 1 ? '' : a === -1 ? '-' : a.toFixed(2).replace(/\.?0+$/, '');
+    parts.push(`${aStr}x^2`);
+  }
+  if (Math.abs(b) > 0.01) {
+    const sign = b > 0 ? (parts.length ? '+' : '') : '-';
+    const bAbs = Math.abs(b);
+    const bStr = bAbs === 1 ? '' : bAbs.toFixed(2).replace(/\.?0+$/, '');
+    parts.push(`${sign}${bStr}x`);
+  }
+  if (Math.abs(c) > 0.01) {
+    const sign = c > 0 ? (parts.length ? '+' : '') : '-';
+    parts.push(`${sign}${Math.abs(c).toFixed(2).replace(/\.?0+$/, '')}`);
+  }
+  if (parts.length === 0) parts.push('0');
+
+  formula += parts.join(' ');
+
+  document.getElementById('formula').innerHTML = `\\(${formula}\\)`;
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('formula'));
+  }
+
+  // 꼭짓점·대칭축
+  if (Math.abs(a) > 0.01) {
+    const vx = -b / (2 * a);
+    const vy = a * vx * vx + b * vx + c;
+    document.getElementById('vertex').textContent = `(${vx.toFixed(2)}, ${vy.toFixed(2)})`;
+    document.getElementById('axis').textContent = `x = ${vx.toFixed(2)}`;
+  } else {
+    document.getElementById('vertex').textContent = '(없음 — 직선)';
+    document.getElementById('axis').textContent = '없음';
+  }
+
+  // 판별식
+  const D = b * b - 4 * a * c;
+  let dText;
+  if (Math.abs(a) < 0.01) dText = '이차식이 아님';
+  else if (D > 0.001) dText = `D = ${D.toFixed(2)} > 0 (x축과 두 점에서 만남)`;
+  else if (D < -0.001) dText = `D = ${D.toFixed(2)} < 0 (x축과 만나지 않음)`;
+  else dText = `D = ${D.toFixed(2)} = 0 (x축에 접함)`;
+  document.getElementById('discriminant').textContent = dText;
+}
+
+function update() {
+  document.getElementById('a-val').textContent = a.toFixed(2);
+  document.getElementById('b-val').textContent = b.toFixed(2);
+  document.getElementById('c-val').textContent = c.toFixed(2);
+  draw();
+  updateFormula();
+}
+
+document.getElementById('a').addEventListener('input', e => { a = parseFloat(e.target.value); update(); });
+document.getElementById('b').addEventListener('input', e => { b = parseFloat(e.target.value); update(); });
+document.getElementById('c').addEventListener('input', e => { c = parseFloat(e.target.value); update(); });
+
+function setPreset(av, bv, cv) {
+  a = av; b = bv; c = cv;
+  document.getElementById('a').value = av;
+  document.getElementById('b').value = bv;
+  document.getElementById('c').value = cv;
+  update();
+}
+
+window.setPreset = setPreset;
+update();
+</script>
+
+</body>
+</html>
