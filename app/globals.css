@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
+/* Tailwind v4 manual dark variant (next-themes class strategy) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* 과목별 토큰 (oklch) */
+  --color-math: oklch(0.55 0.18 254);
+  --color-science: oklch(0.55 0.18 152);
+  --color-korean: oklch(0.6 0.22 25);
+  --color-english: oklch(0.55 0.2 290);
+  --color-social: oklch(0.65 0.18 50);
+  --color-accent: oklch(0.85 0.18 95);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-pretendard, var(--font-geist-sans));
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-pretendard, system-ui), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 슬라이더 thumb 크기 (모바일 44px 터치 가이드) */
+input[type='range'] {
+  accent-color: oklch(0.55 0.18 254);
 }
