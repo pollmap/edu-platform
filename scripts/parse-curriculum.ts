@@ -411,7 +411,12 @@ function parse(md: string): { units: ParsedUnit[]; stats: ParseStats } {
     };
 
     if (sec.level === 'highschool') {
-      const cm = COURSE_BY_PREFIX[sec.hsCourse ?? ''] ?? COURSE_BY_PREFIX[idHit.id];
+      // 1) sec.hsCourse 정확 매칭 → 2) ID 자체 → 3) ID prefix (H-IS1-01 → H-IS1)
+      let cm = COURSE_BY_PREFIX[sec.hsCourse ?? ''] ?? COURSE_BY_PREFIX[idHit.id];
+      if (!cm) {
+        const pm = idHit.id.match(/^([A-Z]+-[A-Z]+\d?)/);
+        if (pm) cm = COURSE_BY_PREFIX[pm[1]];
+      }
       if (cm) {
         unit.category = cm.category;
         unit.course = cm.slug;
