@@ -216,7 +216,8 @@ function isSubjectHeader(line: string): Subject | null {
 }
 
 function isHSCategoryHeader(line: string): HSCategory | null {
-  if (/^###\s*공통\s*(과목|\()/.test(line)) return 'common';
+  // 단독 "### 공통" 또는 "### 공통 과목" / "### 공통 (1학년 필수)" 모두 매치
+  if (/^###\s*공통\b/.test(line)) return 'common';
   if (/^###\s*일반\s*선택/.test(line)) return 'general';
   if (/^###\s*진로\s*선택/.test(line)) return 'career';
   if (/^###\s*융합\s*선택/.test(line)) return 'fusion';

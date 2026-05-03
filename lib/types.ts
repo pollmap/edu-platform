@@ -34,7 +34,7 @@ export interface HighSchoolUnit extends Omit<Unit, 'grade' | 'schoolLevel'> {
   schoolLevel: 'highschool';
   category: HighSchoolCategory;
   course: string;
-  courseName: string;
+  courseName?: string;
   credits: number;
   evaluation: 'absolute' | 'relative';
 }

@@ -9,6 +9,7 @@ import { HIGHSCHOOL_COMMON_UNITS } from './highschool-common';
 import { HIGHSCHOOL_FUSION_UNITS } from './highschool-fusion';
 import { HIGHSCHOOL_GENERAL_UNITS } from './highschool-general';
 import { MIDDLE_UNITS } from './middle';
+import { UNIT_OVERRIDES } from './overrides';
 
 export type { Unit, HighSchoolUnit } from '../types';
 export {
@@ -20,19 +21,24 @@ export {
   SUBJECT_TAILWIND,
 } from '../types';
 
+function applyOverride<T extends Unit | HighSchoolUnit>(unit: T): T {
+  const o = UNIT_OVERRIDES[unit.id];
+  if (!o) return unit;
+  return { ...unit, ...o } as T;
+}
+
 export const HIGHSCHOOL_UNITS: HighSchoolUnit[] = [
   ...HIGHSCHOOL_COMMON_UNITS,
   ...HIGHSCHOOL_GENERAL_UNITS,
   ...HIGHSCHOOL_CAREER_UNITS,
   ...HIGHSCHOOL_FUSION_UNITS,
-];
+].map(applyOverride);
 
 export const CURRICULUM: Unit[] = [
   ...ELEMENTARY_UNITS,
   ...MIDDLE_UNITS,
   ...COMMON_CROSS_GRADE_UNITS,
-  // HighSchoolUnit 은 Unit 의 슈퍼셋이라 직접 합치지 않음. 필요 시 unionUnits 사용.
-];
+].map(applyOverride);
 
 export function findUnit(id: string): Unit | HighSchoolUnit | undefined {
   return CURRICULUM.find((u) => u.id === id) ?? HIGHSCHOOL_UNITS.find((u) => u.id === id);
@@ -44,10 +50,9 @@ export function isHighSchoolUnit(u: Unit | HighSchoolUnit): u is HighSchoolUnit 
 
 export function unitPath(u: Unit | HighSchoolUnit): string {
   if (isHighSchoolUnit(u)) {
-    return `/highschool/${u.subject}/${u.course}/${u.id}`;
+    return `/highschool/${u.subject}/${u.course ?? 'unknown'}/${u.id}`;
   }
   if (u.schoolLevel === 'cross-grade') {
-    // 학년 공통은 그 단원이 적용 가능한 첫 학년 페이지에 둠 (라우팅 결정 추후)
     return `/common/${u.subject}/${u.id}`;
   }
   return `/grade-${u.grade}/${u.subject}/${u.id}`;

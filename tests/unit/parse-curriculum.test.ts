@@ -13,9 +13,21 @@ import { MIDDLE_UNITS } from '@/lib/curriculum/middle';
 import { CURRICULUM, findUnit, isHighSchoolUnit, unitPath } from '@/lib/curriculum';
 
 describe('curriculum exports', () => {
-  it('CURRICULUM aggregates split files', () => {
+  it('CURRICULUM aggregates split files (length match)', () => {
     expect(CURRICULUM.length).toBeGreaterThan(0);
-    expect(CURRICULUM).toEqual([...ELEMENTARY_UNITS, ...MIDDLE_UNITS, ...COMMON_CROSS_GRADE_UNITS]);
+    expect(CURRICULUM.length).toBe(
+      ELEMENTARY_UNITS.length + MIDDLE_UNITS.length + COMMON_CROSS_GRADE_UNITS.length,
+    );
+  });
+
+  it('CURRICULUM IDs match split files (override merge preserves IDs)', () => {
+    const ids = CURRICULUM.map((u) => u.id).sort();
+    const expected = [
+      ...ELEMENTARY_UNITS.map((u) => u.id),
+      ...MIDDLE_UNITS.map((u) => u.id),
+      ...COMMON_CROSS_GRADE_UNITS.map((u) => u.id),
+    ].sort();
+    expect(ids).toEqual(expected);
   });
 
   it('all unit IDs unique', () => {
