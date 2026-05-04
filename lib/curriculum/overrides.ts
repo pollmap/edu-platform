@@ -180,4 +180,18 @@ export const UNIT_OVERRIDES: Record<string, Override> = {
     componentName: 'SolarSystemExplorer',
     patternIds: [17],
   },
+  'H4-GE-01': {
+    status: 'draft',
+    prerequisites: [],
+    achievementStandards: ['[4사02-01]'],
+    componentName: 'KoreaRegionExplorer',
+    patternIds: [8],
+  },
+  'H6-HI-01': {
+    status: 'draft',
+    prerequisites: ['H5-HI-01'],
+    achievementStandards: ['[6사07-04]'],
+    componentName: 'KoreanModernHistoryTimeline',
+    patternIds: [7],
+  },
 };

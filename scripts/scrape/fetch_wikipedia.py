@@ -88,6 +88,48 @@ BIOLOGY = [
     ("세균", "세균계"),
 ]
 
+KOREA_HISTORY_LATE = [
+    ("조선", "조선"),
+    ("대한제국", "대한제국"),
+    ("일제강점기", "일제 강점기"),
+    ("대한민국_임시정부", "대한민국 임시정부"),
+    ("대한민국", "대한민국"),
+    ("6월_민주_항쟁", "6월 민주 항쟁"),
+]
+
+KOREA_GEOGRAPHY = [
+    ("서울특별시", "서울특별시"),
+    ("부산광역시", "부산광역시"),
+    ("대전광역시", "대전광역시"),
+    ("대구광역시", "대구광역시"),
+    ("광주광역시", "광주광역시"),
+    ("인천광역시", "인천광역시"),
+    ("울산광역시", "울산광역시"),
+    ("세종특별자치시", "세종특별자치시"),
+    ("제주특별자치도", "제주특별자치도"),
+    ("경기도", "경기도"),
+    ("강원특별자치도", "강원특별자치도"),
+    ("충청북도", "충청북도"),
+    ("충청남도", "충청남도"),
+    ("전북특별자치도", "전북특별자치도"),
+    ("전라남도", "전라남도"),
+    ("경상북도", "경상북도"),
+    ("경상남도", "경상남도"),
+]
+
+ANIMALS = [
+    ("호랑이", "호랑이 (포유류)"),
+    ("반달가슴곰", "반달가슴곰 (포유류)"),
+    ("두루미", "두루미 (조류)"),
+    ("까치", "까치 (조류)"),
+    ("개구리", "개구리 (양서류)"),
+    ("도마뱀", "도마뱀 (파충류)"),
+    ("연어", "연어 (어류)"),
+    ("나비", "나비 (곤충)"),
+    ("거미", "거미 (절지)"),
+    ("문어", "문어 (연체)"),
+]
+
 
 def fetch_set(name: str, items: list[tuple[str, str]]) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
@@ -121,6 +163,9 @@ def main() -> int:
     save("korea-figures", fetch_set("Korea figures", KOREA_FIGURES))
     save("planets", fetch_set("Planets", PLANETS))
     save("biology", fetch_set("Biology kingdoms", BIOLOGY))
+    save("korea-history-late", fetch_set("Korea history late", KOREA_HISTORY_LATE))
+    save("korea-geography", fetch_set("Korea geography", KOREA_GEOGRAPHY))
+    save("animals", fetch_set("Animals", ANIMALS))
     print("DONE.")
     return 0
 

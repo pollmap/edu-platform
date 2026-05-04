@@ -1,0 +1,80 @@
+{
+  "source": "ko.wikipedia.org REST v1",
+  "license": "CC BY-SA 3.0",
+  "fetched_at": "2026-05-04T19:23:22+0900",
+  "count": 6,
+  "items": [
+    {
+      "title": "조선",
+      "extract": "조선(朝鮮)은 한반도에 있던 옛 국가이다. 1392년 이성계가 건국하여 1897년 고종의 칭제건원으로 대한제국 선포로 국호 변경 후 1910년 한일합병까지 존속하였다. 수도는 지금의 서울특별시인 한양이었고 압록강과 두만강을 경계로 만주 및 연해주와 국경이 있었다.",
+      "description": "한반도의 옛 국가 (1392-1897)",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Flag_of_Korea_%281893%29.svg/langko-330px-Flag_of_Korea_%281893%29.svg.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Flag_of_Korea_%281893%29.svg/langko-960px-Flag_of_Korea_%281893%29.svg.png",
+      "pageid": 74134,
+      "wikibase_item": "Q28179",
+      "url": "https://ko.wikipedia.org/wiki/%EC%A1%B0%EC%84%A0",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "조선"
+    },
+    {
+      "title": "대한제국",
+      "extract": "대한제국(大韓帝國), 약칭 대한국(大韓國) 또는 한국(韓國)은 1897년 10월 12일부터 1910년 8월 29일까지 존재했던 황제국으로, 조선을 계승한 국가이자 한반도의 마지막 전제군주국이었다. 대한제국이 존재했던 기간과 그 주변 기간을 합쳐 구한말(舊韓末)이라고 부르기도 한다. 대한제국의 정궁은 덕수궁과 경복궁이었으며, 중요한 행사는 경복궁에서 열렸지만 일반적으로 황실의 생활공간은 덕수궁으로 나누어 사용했다.",
+      "description": "1897년부터 1910년까지 한반도의 국호",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Flag_of_Korea_%281899%29.svg/langko-330px-Flag_of_Korea_%281899%29.svg.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Flag_of_Korea_%281899%29.svg/langko-960px-Flag_of_Korea_%281899%29.svg.png",
+      "pageid": 11293,
+      "wikibase_item": "Q28233",
+      "url": "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C%EC%A0%9C%EA%B5%AD",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "대한제국"
+    },
+    {
+      "title": "일제강점기",
+      "extract": "일제강점기(한국 한자: 日帝強占期, 일본어: 日本統治時代の朝鮮)는 한반도가 일제의 통치 하에 있었던 기간을 가리킨다.",
+      "description": "일본 제국의 한반도 통치 시기 (1910년~1945년)",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flag_of_Japan_%281870%E2%80%931999%29.svg/langko-330px-Flag_of_Japan_%281870%E2%80%931999%29.svg.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flag_of_Japan_%281870%E2%80%931999%29.svg/langko-1280px-Flag_of_Japan_%281870%E2%80%931999%29.svg.png",
+      "pageid": 6483,
+      "wikibase_item": "Q503585",
+      "url": "https://ko.wikipedia.org/wiki/%EC%9D%BC%EC%A0%9C%EA%B0%95%EC%A0%90%EA%B8%B0",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "일제 강점기"
+    },
+    {
+      "title": "대한민국 임시정부",
+      "extract": "대한민국 임시정부(大韓民國臨時政府)는 1919년 발표된 3·1 독립선언서 및 3·1 운동에 기초하여 일본 제국의 대한제국 침탈과 식민 통치를 부인하고 한반도 내외의 항일 독립운동을 주도하기 위한 목적으로 설립된 망명정부이다. 간략히임정정이라고 한다. 1919년 4월 11일 중화민국 상하이시에서 수립되었고, 1948년 8월 15일 대한민국 정부가 수립됨으로써 해산하였다.",
+      "description": "일제강점기에 한반도 독립을 목적으로 한 임시정부 및 망명 정부",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Flag_of_the_Provisional_Government_of_the_Republic_of_Korea.svg/langko-330px-Flag_of_the_Provisional_Government_of_the_Republic_of_Korea.svg.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Flag_of_the_Provisional_Government_of_the_Republic_of_Korea.svg/langko-960px-Flag_of_the_Provisional_Government_of_the_Republic_of_Korea.svg.png",
+      "pageid": 9889,
+      "wikibase_item": "Q28278",
+      "url": "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD_%EC%9E%84%EC%8B%9C%EC%A0%95%EB%B6%80",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "대한민국 임시정부"
+    },
+    {
+      "title": "대한민국",
+      "extract": "대한민국(한국 한자: 大韓民國)은 동아시아의 한반도 군사 분계선 남부에 위치한 나라이다. 약칭으로 한국(한국 한자: 韓國), 별칭으로 남한(한국 한자: 南韓, 문화어: 남조선)이라 부르며 현정체제는 대한민국 제6공화국이다. 대한민국의 국기는 대한민국 국기법에 따라 태극기이며, 국가는 관습상 애국가, 국화는 관습상 무궁화이다. 공용어는 한국어이며 수도는 서울특별시이다. 인구는 2024년 2월 기준으로 5,130만명이고, 이 중 절반이 넘는(50.74%) 2,603만명이 수도권에 거주한다.",
+      "description": "동아시아의 국가",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/langko-330px-Flag_of_South_Korea.svg.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/langko-960px-Flag_of_South_Korea.svg.png",
+      "pageid": 249,
+      "wikibase_item": "Q884",
+      "url": "https://ko.wikipedia.org/wiki/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "대한민국"
+    },
+    {
+      "title": "6월 민주 항쟁",
+      "extract": "6·10 민주 항쟁, 6월 민주 항쟁(한국 한자: 六月民主抗爭, 문화어: 6월인민항쟁), 간단히 6월 항쟁(한국 한자: 六月抗爭)은 1987년 6월 10일부터 6월 29일까지 대한민국에서 전국적으로 벌어진 반정부 시위이다.",
+      "description": "1987년에 일어난 대한민국의 민주화 시위",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/%EA%B3%A0_%EC%9D%B4%ED%95%9C%EC%97%B4_%EC%B6%94%EB%AA%A8_%EA%B5%B0%EC%A4%91.jpg/330px-%EA%B3%A0_%EC%9D%B4%ED%95%9C%EC%97%B4_%EC%B6%94%EB%AA%A8_%EA%B5%B0%EC%A4%91.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/%EA%B3%A0_%EC%9D%B4%ED%95%9C%EC%97%B4_%EC%B6%94%EB%AA%A8_%EA%B5%B0%EC%A4%91.jpg/3840px-%EA%B3%A0_%EC%9D%B4%ED%95%9C%EC%97%B4_%EC%B6%94%EB%AA%A8_%EA%B5%B0%EC%A4%91.jpg",
+      "pageid": 228226,
+      "wikibase_item": "Q497194",
+      "url": "https://ko.wikipedia.org/wiki/6%EC%9B%94_%EB%AF%BC%EC%A3%BC_%ED%95%AD%EC%9F%81",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "6월 민주 항쟁"
+    }
+  ]
+}
