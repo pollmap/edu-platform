@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT_DIR = ROOT / "docs" / "data-sources"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-UA = "edu-platform-research/1.0 (https://github.com/pollmap/edu-platform; lch6817556@gmail.com)"
+UA = "edu-platform-research/1.0 (https://github.com/pollmap/edu-platform)"
 
 REST = "https://ko.wikipedia.org/api/rest_v1/page/summary/{title}"
 
@@ -130,6 +130,58 @@ ANIMALS = [
     ("문어", "문어 (연체)"),
 ]
 
+PLANTS = [
+    ("벚나무", "벚나무"),
+    ("진달래", "진달래"),
+    ("소나무", "소나무"),
+    ("이끼", "이끼"),
+    ("고사리", "고사리"),
+    ("민들레", "민들레"),
+    ("장미", "장미"),
+    ("국화", "국화"),
+    ("사과나무", "사과나무"),
+    ("배나무", "배나무"),
+]
+
+KOREA_HERITAGE = [
+    ("석굴암", "석굴암"),
+    ("불국사", "불국사"),
+    ("해인사", "해인사"),
+    ("종묘", "종묘"),
+    ("경복궁", "경복궁"),
+    ("창덕궁", "창덕궁"),
+    ("첨성대", "첨성대"),
+    ("다보탑", "다보탑"),
+    ("팔만대장경", "팔만대장경"),
+    ("직지심체요절", "직지심체요절"),
+]
+
+WORLD_CITIES = [
+    ("도쿄도", "도쿄"),
+    ("베이징시", "베이징"),
+    ("뉴욕", "뉴욕"),
+    ("런던", "런던"),
+    ("파리", "파리"),
+    ("베를린", "베를린"),
+    ("로마", "로마"),
+    ("시드니", "시드니"),
+    ("카이로", "카이로"),
+    ("모스크바", "모스크바"),
+]
+
+ELEMENTS = [
+    ("수소", "수소"),
+    ("산소", "산소"),
+    ("탄소", "탄소"),
+    ("철", "철"),
+    ("금", "금"),
+    ("은", "은"),
+    ("구리", "구리"),
+    ("알루미늄", "알루미늄"),
+    ("칼슘", "칼슘"),
+    ("나트륨", "나트륨"),
+]
+
 
 def fetch_set(name: str, items: list[tuple[str, str]]) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
@@ -166,6 +218,10 @@ def main() -> int:
     save("korea-history-late", fetch_set("Korea history late", KOREA_HISTORY_LATE))
     save("korea-geography", fetch_set("Korea geography", KOREA_GEOGRAPHY))
     save("animals", fetch_set("Animals", ANIMALS))
+    save("plants", fetch_set("Plants", PLANTS))
+    save("korea-heritage", fetch_set("Korea heritage", KOREA_HERITAGE))
+    save("world-cities", fetch_set("World cities", WORLD_CITIES))
+    save("elements", fetch_set("Chemical elements", ELEMENTS))
     print("DONE.")
     return 0
 

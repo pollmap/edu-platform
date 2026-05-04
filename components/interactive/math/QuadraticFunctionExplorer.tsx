@@ -63,39 +63,39 @@ export function QuadraticFunctionExplorer() {
   };
 
   return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm border border-zinc-200">
-      <h2 className="text-2xl font-bold text-blue-700 mb-1">이차함수 탐험기</h2>
-      <p className="text-sm text-zinc-500 mb-6">
+    <div className="rounded-2xl bg-white dark:bg-zinc-900 p-6 shadow-sm border border-zinc-200 dark:border-zinc-800">
+      <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-1">이차함수 탐험기</h2>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
         중3 · 변화와 관계 · M9-CR-03 — 슬라이더로 a, b, c가 그래프에 어떻게 영향을 주는지 확인해 보세요
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* 좌측: 그래프 */}
         <div className="flex flex-col gap-4">
-          <div className="rounded-xl bg-blue-50 p-4 text-center text-xl min-h-[60px] flex items-center justify-center">
+          <div className="rounded-xl bg-blue-50 dark:bg-blue-950/30 p-4 text-center text-xl min-h-[60px] flex items-center justify-center">
             <MathFormula tex={formula} />
           </div>
-          <div className="aspect-square rounded-xl border border-zinc-200 bg-white overflow-hidden">
+          <div className="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 overflow-hidden">
             <canvas ref={canvasRef} width={500} height={500} className="w-full h-full block" />
           </div>
-          <div className="bg-amber-50 border-l-4 border-amber-500 rounded p-3 text-sm space-y-2">
+          <div className="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 rounded p-3 text-sm space-y-2">
             <div>
-              <div className="font-bold text-amber-900">꼭짓점 좌표</div>
-              <div className="font-mono text-zinc-800">
+              <div className="font-bold text-amber-900 dark:text-amber-200">꼭짓점 좌표</div>
+              <div className="font-mono text-zinc-800 dark:text-zinc-200">
                 {vertexX !== null && vertexY !== null
                   ? `(${vertexX.toFixed(2)}, ${vertexY.toFixed(2)})`
                   : '없음 (직선)'}
               </div>
             </div>
             <div>
-              <div className="font-bold text-amber-900">대칭축</div>
-              <div className="font-mono text-zinc-800">
+              <div className="font-bold text-amber-900 dark:text-amber-200">대칭축</div>
+              <div className="font-mono text-zinc-800 dark:text-zinc-200">
                 {vertexX !== null ? `x = ${vertexX.toFixed(2)}` : '없음'}
               </div>
             </div>
             <div>
-              <div className="font-bold text-amber-900">판별식 D = b² − 4ac</div>
-              <div className="font-mono text-zinc-800">{discriminantText}</div>
+              <div className="font-bold text-amber-900 dark:text-amber-200">판별식 D = b² − 4ac</div>
+              <div className="font-mono text-zinc-800 dark:text-zinc-200">{discriminantText}</div>
             </div>
           </div>
         </div>
@@ -125,9 +125,9 @@ export function QuadraticFunctionExplorer() {
             처음으로
           </button>
 
-          <details className="bg-zinc-50 rounded-xl p-4 cursor-pointer">
+          <details className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-4 cursor-pointer">
             <summary className="font-semibold text-blue-700 cursor-pointer">왜 이렇게 되는가?</summary>
-            <div className="mt-3 space-y-2 text-sm text-zinc-700 cursor-text">
+            <div className="mt-3 space-y-2 text-sm text-zinc-700 dark:text-zinc-300 cursor-text">
               <p>
                 <strong className="text-zinc-900">a의 역할:</strong> 그래프의 모양·방향을 결정. a &gt; 0이면
                 아래로 볼록(U), a &lt; 0이면 위로 볼록(∩). |a|가 클수록 폭이 좁아져요.
@@ -162,7 +162,7 @@ interface SliderProps {
 
 function Slider({ label, value, min, max, step, onChange }: SliderProps) {
   return (
-    <div className="bg-zinc-50 p-3 rounded-lg">
+    <div className="bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-lg">
       <div className="flex justify-between mb-2 text-sm">
         <span className="font-bold text-blue-700">{label}</span>
         <span className="font-mono text-red-500 font-semibold">{value.toFixed(2)}</span>

@@ -1,0 +1,128 @@
+{
+  "source": "ko.wikipedia.org REST v1",
+  "license": "CC BY-SA 3.0",
+  "fetched_at": "2026-05-05T03:50:26+0900",
+  "count": 10,
+  "items": [
+    {
+      "title": "수소",
+      "extract": "수소(水素←일본어: 水素 수이소[*]), 영어: hydrogen 하이드러전[*])는 주기율표의 가장 첫 번째(1족 1주기) 화학 원소로, 원소 기호는 H(←라틴어: hydrogenium 히드로게니움[*]), 원자 번호는 1이다. 표준 원자량은 1.008로, 질량 기준으로 우주의 75%를 구성하는 우주에서 가장 흔한 원소이기도 하다. 순물질은 실온에서 기체상태의 H2로 존재하며, 1족 원소 중에서 유일한 비금속 원소이다. 동위원소로는 중수소(2H)와 삼중수소(3H)가 일반적으로 알려져 있으나 질량수 7까지의 수소 동위원소가 보고되었다. 양성자이다.",
+      "description": "원자 번호 1번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Electron_shell_001_Hydrogen_-_no_label.svg/langko-330px-Electron_shell_001_Hydrogen_-_no_label.svg.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Electron_shell_001_Hydrogen_-_no_label.svg/langko-960px-Electron_shell_001_Hydrogen_-_no_label.svg.png",
+      "pageid": 3540,
+      "wikibase_item": "Q556",
+      "url": "https://ko.wikipedia.org/wiki/%EC%88%98%EC%86%8C",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "수소"
+    },
+    {
+      "title": "산소",
+      "extract": "산소(酸素, 영어: Oxygen, 일본어: 酸素 산소[*])는 화학 원소의 하나로, 원소 기호는 O(라틴어: Oxygenium)이고 원자번호는 8이다. 일반적으로 산소원자 두 개가 결합하여 무색, 무미, 무취인 기체 상태로 존재한다. 공기의 주성분 중 하나로, 지구뿐 아니라 우주 전체에 걸쳐 다른 원소와 공유 결합된 상태로 널리 퍼져있다.",
+      "description": "원자 번호 8번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Liquid_oxygen_in_a_beaker_4.jpg/330px-Liquid_oxygen_in_a_beaker_4.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Liquid_oxygen_in_a_beaker_4.jpg",
+      "pageid": 66823,
+      "wikibase_item": "Q629",
+      "url": "https://ko.wikipedia.org/wiki/%EC%82%B0%EC%86%8C",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "산소"
+    },
+    {
+      "title": "탄소",
+      "extract": "탄소(炭素←일본어: 炭素 탄소[*],carbon 카본 )는 비금속인 화학 원소로, 기호는 C(←라틴어: Carbonium 카르보니움[*])이고 원자번호는 6이다. 원자가 전자는 4개이다. 존재하는 동위 원소는 총 3개로, 12C와 13C는 안정적인 동위 원소지만 14C는 반감기가 약 5730년인 방사성 동위 원소이다. 탄소는 오래 전에 존재가 밝혀진 원소들 중 하나이다.",
+      "description": "원자 번호 6번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Graphite-and-diamond-with-scale.jpg/330px-Graphite-and-diamond-with-scale.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Graphite-and-diamond-with-scale.jpg",
+      "pageid": 95496,
+      "wikibase_item": "Q623",
+      "url": "https://ko.wikipedia.org/wiki/%ED%83%84%EC%86%8C",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "탄소"
+    },
+    {
+      "title": "철",
+      "extract": "철(鐵←일본어: 鉄 데쓰[*]  , 영어: Iron 아이언[*]) 또는 쇠는 화학 원소로 기호는 Fe(←라틴어: Ferrum)이고 원자 번호는 26이다. 철은 핵융합으로 생성되는 최종 원소로, 초신성 등의 격변적인 사건을 필요로 하지 않는 가장 무거운 원소이다. 따라서 우주에 가장 많이 퍼져 있는 중금속이다. 또한 철은 인류가 가장 많이 사용하는 금속 중의 하나이며 차량, 선박, 항공기, 주택, 인공뼈대, 각종 생활용품 등 많은 분야에서 사용되고 있기 때문에 인류에게 있어서 철은 없어서는 안되는 중요한 금속이다.",
+      "description": "원자 번호 26번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Iron_electrolytic_and_1cm3_cube.jpg/330px-Iron_electrolytic_and_1cm3_cube.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Iron_electrolytic_and_1cm3_cube.jpg/3840px-Iron_electrolytic_and_1cm3_cube.jpg",
+      "pageid": 106746,
+      "wikibase_item": "Q677",
+      "url": "https://ko.wikipedia.org/wiki/%EC%B2%A0",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "철"
+    },
+    {
+      "title": "금",
+      "extract": "금(金←일본어: 金 킨[*], 영어: gold)은 화학 원소로, 기호는 Au(←라틴어: aurum)이며, 원자 번호는 79이다. 빛나는 노란색의 무른 금속으로 연성과 가단성이 있는 전이 금속이다. 다른 화학 물질과 화학 반응을 일으키지 않으나, 염소, 플루오린, 왕수와는 반응한다. 덩어리 금속, 또는 바위나 충적토의 알갱이로 산출된다. 수천년 이상 금은 화폐로 쓰였으며, 장신구와 치과, 전자 제품 등에도 사용되었다. 그뿐만 아니라, 전자공학 특히 인쇄기판이나 실리콘(규소)를 겉에 입힌 반도체에 쓰인다. 중세시대에는 인위적으로 황금을 만들기 위해 연금술을 연구하기도 했다. 이제는 바닷물에서도 금을 채취할 수도 있게 되었고, 입자가속기를 이용하여 금을 생성할 수 있게 되었다. 하지만 입자가속기로 생성되는 금의 양은 매우 적고 가속기를 운영하는데 드는 비용이 훨씬 많으므로 경제성이 전혀 없다. 따라서 흔히 상업적으로 쓰이는 모든 금은 아직도 땅에서 얻으므로, 금광업은 매우 중요한 산업이다.",
+      "description": "빛나는 노란색의 무른 금속",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Native_gold_nuggets.jpg/330px-Native_gold_nuggets.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/6/69/Native_gold_nuggets.jpg",
+      "pageid": 55123,
+      "wikibase_item": "Q897",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B8%88",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "금"
+    },
+    {
+      "title": "은",
+      "extract": "은(銀, 영어: silver 실버[*],←일본어: 銀 긴[*]) 또는 백은(白銀)은 화학 원소로 기호는 Ag(←라틴어: argentum 아르겐툼[*]: \"하얀\", \"빛나는\"), 원자 번호는 47이다. 무르고 흰색의 빛나는 전이 금속으로 다른 금속에 비해 전기와 열의 전도도가 뛰어나다. 은 광석 또는 순은 형태로 산출되며, 주화, 장신구, 식기, 사진, 은메달 등에 사용된다.",
+      "description": "원소번호 47번의 화학물질",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Silver_crystal.jpg/330px-Silver_crystal.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Silver_crystal.jpg/3840px-Silver_crystal.jpg",
+      "pageid": 54160,
+      "wikibase_item": "Q1090",
+      "url": "https://ko.wikipedia.org/wiki/%EC%9D%80",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "은"
+    },
+    {
+      "title": "구리",
+      "extract": "구리, 구리쇠, 동(銅←일본어: 銅 도우[*]) 또는 적금(赤金)(영어: copper 카퍼[*])은 화학 원소로 기호는 Cu(←라틴어: cuprum 쿠프룸[*]), 원자 번호는 29이다. 구리는 부드러운 금속으로 열 전도성과 전기 전도성이 매우 높다. 공기에 접촉하기 전 구리 표면은 분홍빛을 띠는 주황빛을 나타낸다. 구리는 열이나 전기를 전달하기 위한 매개체로서 주로 사용되며 그 외에도 건축 자재나 다양한 합금의 원료로 사용된다. 구리는 비교적 반응성이 낮아 자연에 존재하는 금속 원소 중 제련 없이 바로 사용 가능한 순수한 형태로 존재하는 흔치 않은 금속 중 하나이다. 이러한 성질 때문에 구리는 기원전 8세기경부터 인류에 의해 사용되기 시작하였으며 기원전 3세기경에 사용된 구리는 주석과의 합금인 청동의 형태로 청동기 시대를 열기도 했다.",
+      "description": "화학 원소의 하나",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/NatCopper.jpg/330px-NatCopper.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/f/f0/NatCopper.jpg",
+      "pageid": 35451,
+      "wikibase_item": "Q753",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B5%AC%EB%A6%AC",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "구리"
+    },
+    {
+      "title": "알루미늄",
+      "extract": "알루미늄(영어: aluminium 알루미니엄[*], 문화어: 알루미니움←독일어: Aluminium 알루미니움[*], 일본어: アルミニウム 아루미니우무[*]) 또는 반소(礬素←일본어: 礬素 반소[*])는 전이후 금속에 속하는 화학 원소로 기호는 Al(←라틴어: Aluminium 알루미니움[*])이고 원자 번호는 13이다.",
+      "description": "원자 번호 13번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Aluminium-4.jpg/330px-Aluminium-4.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Aluminium-4.jpg",
+      "pageid": 5479,
+      "wikibase_item": "Q663",
+      "url": "https://ko.wikipedia.org/wiki/%EC%95%8C%EB%A3%A8%EB%AF%B8%EB%8A%84",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "알루미늄"
+    },
+    {
+      "title": "칼슘",
+      "extract": "칼슘(영어: Calcium 캘시엄[*], 문화어: 칼시움←독일어: Calcium 칼치움[*], 라틴어: Calcium 칼키움[*], 일본어: カルシウム 카루시우무[*])은 화학 원소로 주기율표에서 기호는 Ca이고 원자 번호는 20, 원자량은 40.078이다. 은회색의 무른 알칼리 토금속 원소이며 지구의 지각에서 질량 기준으로 다섯 번째로 풍부한 원소로 백악, 석회암, 대리암과 같은 암석에서 많이 발견된다. 해수에서는 칼슘 이온이 다섯 번째로 많이 존재하는 이온이다. 생물에게 필수적인 원소로, 생물 내에 가장 많이 존재하는 금속 원소이다. 산소나 물과 쉽게 반응하며, 자연에서는 탄산칼슘(CaCO3), 플루오린화칼슘(CaF2), 황산칼슘(CaSO4)같은 화합물의 형태로 존재한다. 녹는점은 1115K(842℃)이고, 끓는점은 1757K(1484℃)이며, 밀도는 20℃에서 1.55g/cm3이다.",
+      "description": "원자 번호 20번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Calcium_unter_Argon_Schutzgasatmosph%C3%A4re.jpg/330px-Calcium_unter_Argon_Schutzgasatmosph%C3%A4re.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/9/96/Calcium_unter_Argon_Schutzgasatmosph%C3%A4re.jpg",
+      "pageid": 31081,
+      "wikibase_item": "Q706",
+      "url": "https://ko.wikipedia.org/wiki/%EC%B9%BC%EC%8A%98",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "칼슘"
+    },
+    {
+      "title": "나트륨",
+      "extract": "나트륨(독일어: Natrium 나트리움[*], 문화어: 나트리움, 일본어: ナトリウム 나토리우무[*]) 또는 소듐(영어: sodium 소디엄[*], 미국식 영어 발음: /soʊdiəm/, 영국식 영어 발음: /səʊdiəm/)은 알칼리 금속에 속하는 화학 원소로 기호는 Na(←라틴어: Natrium 나트리움[*])이고 원자 번호는 11, 원자량은 22.9898 g/mol이다. 자연상태로는 생성되지 않으며, 화합물로부터 추출이 가능하다.",
+      "description": "원자 번호 11번의 화학 원소",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Na_%28Sodium%29.jpg/330px-Na_%28Sodium%29.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Na_%28Sodium%29.jpg/3840px-Na_%28Sodium%29.jpg",
+      "pageid": 2554,
+      "wikibase_item": "Q658",
+      "url": "https://ko.wikipedia.org/wiki/%EB%82%98%ED%8A%B8%EB%A5%A8",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "나트륨"
+    }
+  ]
+}
