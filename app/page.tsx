@@ -1,90 +1,119 @@
 import Link from 'next/link';
 import { HomeProgress } from '@/components/primitives/HomeProgress';
 import { CURRICULUM, HIGHSCHOOL_UNITS } from '@/lib/curriculum';
-import { GRADE_LABEL, SUBJECT_LABEL } from '@/lib/types';
-import type { Subject } from '@/lib/types';
-
-const SUBJECTS: Subject[] = ['math', 'science', 'korean', 'english', 'social'];
-const ELEMENTARY_GRADES = [3, 4, 5, 6] as const;
-const MIDDLE_GRADES = [7, 8, 9] as const;
 
 export default function Home() {
   const totalUnits = CURRICULUM.length + HIGHSCHOOL_UNITS.length;
-  const draftUnits = CURRICULUM.filter((u) => u.status !== 'planned').length;
+  const draftUnits = CURRICULUM.filter((u) => u.status !== 'planned').length +
+    HIGHSCHOOL_UNITS.filter((u) => u.status !== 'planned').length;
 
   return (
-    <main className="container mx-auto max-w-5xl px-4 py-12">
-      <header className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
-          한국 초3~고3 인터랙티브 교육 플랫폼
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          2022 개정 교육과정 5과목 (수학·과학·국어·영어·사회) — 488 단원 / ~800 인터랙티브 양산.
-        </p>
-        <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-3 font-mono">
-          진행: {draftUnits} / {totalUnits} 단원
-        </p>
-      </header>
+    <main className="container mx-auto max-w-6xl px-4 py-8">
+      <section className="va-hero">
+        <h1 className="va-hero__title">Edu Wiki</h1>
+        <p className="va-hero__subtitle">초3부터 고3까지, 인터랙티브 학습의 모든 것</p>
+        <div className="va-hero__stats">
+          <div className="va-hero__stat">
+            <div className="va-hero__stat-value">{totalUnits}</div>
+            <div className="va-hero__stat-label">단원</div>
+          </div>
+          <div className="va-hero__stat">
+            <div className="va-hero__stat-value">{draftUnits}+</div>
+            <div className="va-hero__stat-label">인터랙티브</div>
+          </div>
+          <div className="va-hero__stat">
+            <div className="va-hero__stat-value">5</div>
+            <div className="va-hero__stat-label">과목</div>
+          </div>
+          <div className="va-hero__stat">
+            <div className="va-hero__stat-value">10</div>
+            <div className="va-hero__stat-label">학년</div>
+          </div>
+        </div>
+      </section>
 
-      <section className="mb-10">
+      <section className="va-feature-grid">
+        <Link href="/grade-3" className="va-feature-card">
+          <div className="va-feature-card__num">01</div>
+          <div className="va-feature-card__title">수학</div>
+          <div className="va-feature-card__desc">
+            수와 연산 · 변화와 관계 · 도형 · 측정 · 자료
+          </div>
+          <div className="va-feature-card__arrow">→</div>
+        </Link>
+
+        <Link href="/grade-3/science" className="va-feature-card">
+          <div className="va-feature-card__num">02</div>
+          <div className="va-feature-card__title">과학</div>
+          <div className="va-feature-card__desc">
+            물질 · 운동·에너지 · 생명 · 지구·우주
+          </div>
+          <div className="va-feature-card__arrow">→</div>
+        </Link>
+
+        <Link href="/common/korean" className="va-feature-card">
+          <div className="va-feature-card__num">03</div>
+          <div className="va-feature-card__title">국어</div>
+          <div className="va-feature-card__desc">
+            듣기·말하기 · 읽기 · 쓰기 · 문법 · 문학
+          </div>
+          <div className="va-feature-card__arrow">→</div>
+        </Link>
+
+        <Link href="/common/english" className="va-feature-card">
+          <div className="va-feature-card__num">04</div>
+          <div className="va-feature-card__title">영어</div>
+          <div className="va-feature-card__desc">
+            발음 · 어휘 · 문법 · 듣기·말하기·읽기·쓰기
+          </div>
+          <div className="va-feature-card__arrow">→</div>
+        </Link>
+
+        <Link href="/grade-3/social" className="va-feature-card">
+          <div className="va-feature-card__num">05</div>
+          <div className="va-feature-card__title">사회</div>
+          <div className="va-feature-card__desc">
+            지리 · 역사 · 일반사회 · 경제 · 정치
+          </div>
+          <div className="va-feature-card__arrow">→</div>
+        </Link>
+
+        <Link href="/highschool" className="va-feature-card">
+          <div className="va-feature-card__num">06</div>
+          <div className="va-feature-card__title">고등학교</div>
+          <div className="va-feature-card__desc">
+            학점제 · 공통 · 일반선택 · 진로선택 · 융합선택
+          </div>
+          <div className="va-feature-card__arrow">→</div>
+        </Link>
+      </section>
+
+      <div className="va-cta">
+        <Link href="/grade-3" className="va-cta__link va-cta__link--primary">
+          학습 시작하기 →
+        </Link>
+        <Link href="/grade-9/math/M9-CR-03" className="va-cta__link va-cta__link--ghost">
+          파일럿 — 이차함수
+        </Link>
+        <Link href="/common/korean/K-GR-01" className="va-cta__link va-cta__link--ghost">
+          한글 자모 체계
+        </Link>
+      </div>
+
+      <section className="mt-12">
         <HomeProgress totalUnits={totalUnits} />
       </section>
 
-      <section className="mb-10 space-y-3">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">초등학교</h2>
-        <GradeRow grades={ELEMENTARY_GRADES} />
-      </section>
-
-      <section className="mb-10 space-y-3">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">중학교</h2>
-        <GradeRow grades={MIDDLE_GRADES} />
-      </section>
-
-      <section className="mb-10 space-y-3">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">고등학교</h2>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          학점제 — 공통 / 일반선택 / 진로선택 / 융합선택 (Sprint 10+ 도착 예정)
+      <div className="va-disclaimer">
+        <div className="va-disclaimer__title">데이터 출처 및 라이선스</div>
+        <p className="va-disclaimer__body">
+          단원 메타데이터는 NCIC 2022 개정 교육과정 마스터 인덱스를 기반으로, 인터랙티브 콘텐츠는 자체 제작입니다.
+          위키백과 요약(생물·지리·역사·인물·행성)은 CC BY-SA 3.0 라이선스로 출처를 표기합니다.
         </p>
-        <Link
-          href="/highschool"
-          className="inline-block px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900"
-        >
-          고등학교 메인 →
-        </Link>
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-          파일럿 (현재 가용)
-        </h2>
-        <Link
-          href="/grade-9/math/M9-CR-03"
-          className="inline-block px-4 py-3 rounded-xl border-2 border-blue-600 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors"
-        >
-          중3 수학 · 이차함수 (M9-CR-03) →
-        </Link>
-      </section>
+        <p className="va-disclaimer__note">
+          본 사이트는 개인 학습 보조용으로 제작되었으며, 디즈니·픽사·지브리 등 저작권 캐릭터, 노래 가사, 문학 작품 본문은 일체 사용하지 않습니다.
+        </p>
+      </div>
     </main>
-  );
-}
-
-function GradeRow({ grades }: { grades: readonly number[] }) {
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      {grades.map((g) => (
-        <Link
-          key={g}
-          href={`/grade-${g}`}
-          className="block p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-blue-600 hover:shadow-sm transition"
-        >
-          <div className="font-semibold text-zinc-900 dark:text-zinc-100">
-            {GRADE_LABEL[g as 3 | 4 | 5 | 6 | 7 | 8 | 9]}
-          </div>
-          <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-            {SUBJECTS.map((s) => SUBJECT_LABEL[s]).join(' · ')}
-          </div>
-        </Link>
-      ))}
-    </div>
   );
 }
