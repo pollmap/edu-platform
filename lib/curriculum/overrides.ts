@@ -194,4 +194,25 @@ export const UNIT_OVERRIDES: Record<string, Override> = {
     componentName: 'KoreanModernHistoryTimeline',
     patternIds: [7],
   },
+  'M5-DP-01': {
+    status: 'draft',
+    prerequisites: [],
+    achievementStandards: ['[6수04-01]'],
+    componentName: 'AverageSimulator',
+    patternIds: [10, 14],
+  },
+  'M6-DP-01': {
+    status: 'draft',
+    prerequisites: ['M5-DP-01', 'M6-CR-01'],
+    achievementStandards: ['[6수04-04]'],
+    componentName: 'PercentChart',
+    patternIds: [14],
+  },
+  'M5-GM-01': {
+    status: 'draft',
+    prerequisites: [],
+    achievementStandards: ['[6수03-04]'],
+    componentName: 'PolygonAreaExplorer',
+    patternIds: [6],
+  },
 };
