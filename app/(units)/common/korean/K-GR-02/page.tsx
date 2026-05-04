@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
 import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
+import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
 
@@ -26,6 +27,7 @@ export default function Page() {
           { label: unit.title },
         ]}
       />
+      <UnitProgressControls unitId={UNIT_ID} />
       <SectionCard title="개념 (작성 예정)">
         <p className="text-sm text-zinc-500 dark:text-zinc-400">이 단원은 아직 콘텐츠가 채워지지 않았어요.</p>
       </SectionCard>

@@ -4,6 +4,7 @@ import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErr
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
 import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
+import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
 import { SUBJECT_LABEL } from '@/lib/types';
@@ -29,6 +30,7 @@ export default function Page() {
           { label: unit.title },
         ]}
       />
+      <UnitProgressControls unitId={UNIT_ID} />
       <SectionCard title="한마디로">
         <p>
           영어의 시제는 <strong>시간(when)</strong> × <strong>상(how it relates)</strong> 두 축이

@@ -7,7 +7,7 @@
  *   tsx scripts/generate-pages.ts --only=M9-CR-03
  *   tsx scripts/generate-pages.ts --force        # 기존 파일 덮어쓰기
  */
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CURRICULUM, HIGHSCHOOL_UNITS, isHighSchoolUnit } from '../lib/curriculum';
@@ -47,6 +47,7 @@ import { notFound } from 'next/navigation';
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
 import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
+import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
 
@@ -69,6 +70,7 @@ export default function Page() {
           { label: unit.title },
         ]}
       />
+      <UnitProgressControls unitId={UNIT_ID} />
       <SectionCard title="개념 (작성 예정)">
         <p className="text-sm text-zinc-500 dark:text-zinc-400">이 단원은 아직 콘텐츠가 채워지지 않았어요.</p>
       </SectionCard>
@@ -90,16 +92,28 @@ function main(): void {
   const all: Array<Unit | HighSchoolUnit> = [...CURRICULUM, ...HIGHSCHOOL_UNITS];
   const target = args.only ? all.filter((u) => u.id === args.only) : all;
 
+  let preserved = 0;
   for (const u of target) {
     const rel = pagePath(u);
     const full = resolve(outputBase, rel);
-    if (!args.force && existsSync(full)) {
-      skip++;
-      continue;
+    if (existsSync(full)) {
+      const isStub = readFileSync(full, 'utf8').startsWith('// AUTO-GENERATED stub');
+      if (!isStub) {
+        // 사람이 작성한 콘텐츠 — --force 라도 덮어쓰지 않음 (안전장치).
+        preserved++;
+        continue;
+      }
+      if (!args.force) {
+        skip++;
+        continue;
+      }
     }
     mkdirSync(dirname(full), { recursive: true });
     writeFileSync(full, template(u), 'utf8');
     count++;
+  }
+  if (preserved > 0) {
+    console.log(`  preserved ${preserved} hand-authored file(s) (no AUTO-GENERATED marker)`);
   }
 
   console.log(`[generate-pages] wrote ${count} files (${skip} skipped, ${target.length} total)`);

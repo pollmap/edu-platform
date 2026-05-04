@@ -4,6 +4,7 @@ import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErr
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
 import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
+import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
 import { GRADE_LABEL, SUBJECT_LABEL } from '@/lib/types';
@@ -29,6 +30,7 @@ export default function Page() {
           { label: unit.title },
         ]}
       />
+      <UnitProgressControls unitId={UNIT_ID} />
       <SectionCard title="한마디로">
         <p>
           모든 물질은 눈에 보이지 않는 작은 알갱이, <strong>입자</strong>로 이루어져 있어요.

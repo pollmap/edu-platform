@@ -4,6 +4,7 @@ import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErr
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
 import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
+import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
 import { GRADE_LABEL, SUBJECT_LABEL } from '@/lib/types';
@@ -29,6 +30,7 @@ export default function Page() {
           { label: unit.title },
         ]}
       />
+      <UnitProgressControls unitId={UNIT_ID} />
       <SectionCard title="한마디로">
         <p>
           분모가 같으면 분자끼리 그냥 더하면 돼요. 그런데 분모가 다르면? 먼저 분모를 맞춰야 해요.

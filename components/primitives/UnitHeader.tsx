@@ -2,6 +2,7 @@ import type { HighSchoolUnit, Unit } from '@/lib/types';
 import { SUBJECT_TAILWIND } from '@/lib/types';
 import { isHighSchoolUnit } from '@/lib/curriculum';
 import { Breadcrumb } from './Breadcrumb';
+import { UnitProgressBadge } from './UnitProgressBadge';
 
 interface UnitHeaderProps {
   unit: Unit | HighSchoolUnit;
@@ -22,8 +23,9 @@ export function UnitHeader({ unit, breadcrumb }: UnitHeaderProps) {
         </span>
         <span className="text-xs text-zinc-500 dark:text-zinc-400">
           {unit.domain}
-          {isHighSchoolUnit(unit) ? ` · ${unit.courseName}` : ''}
+          {isHighSchoolUnit(unit) ? ` · ${unit.courseName ?? ''}` : ''}
         </span>
+        <UnitProgressBadge unitId={unit.id} />
       </div>
       <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">{unit.title}</h1>
       {unit.interactiveTitle ? (

@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import { HomeProgress } from '@/components/primitives/HomeProgress';
 import { CURRICULUM, HIGHSCHOOL_UNITS } from '@/lib/curriculum';
-import { GRADE_LABEL, SUBJECT_LABEL, SUBJECT_TAILWIND } from '@/lib/types';
+import { GRADE_LABEL, SUBJECT_LABEL } from '@/lib/types';
 import type { Subject } from '@/lib/types';
 
 const SUBJECTS: Subject[] = ['math', 'science', 'korean', 'english', 'social'];
@@ -24,6 +25,10 @@ export default function Home() {
           진행: {draftUnits} / {totalUnits} 단원
         </p>
       </header>
+
+      <section className="mb-10">
+        <HomeProgress totalUnits={totalUnits} />
+      </section>
 
       <section className="mb-10 space-y-3">
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">초등학교</h2>

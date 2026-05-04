@@ -3,19 +3,45 @@
 > 2022 개정 교육과정 기준 5과목(국·영·수·사·과) 488 단원 / 약 800 인터랙티브 학습 자원.
 > 단일 Next.js 16 웹앱. 비영리·개인 학습용.
 
-## 개요
+## 진행 현황
 
-- **목적**: 초3 ~ 고3 학습자가 교과 핵심 개념을 인터랙티브 시각화로 학습
-- **범위**: 488 단원 (초·중 206 + 고등 282)
-- **상태**: Sprint 0 인프라 시드 완료, 파일럿 1 단원 (`M9-CR-03` 이차함수) 가동
+| 항목 | 값 |
+|------|-----|
+| 단원 메타 등록 | **392 / 488** (NCIC 마스터 인덱스 기반) |
+| 인터랙티브 콘텐츠 작성 | **11 단원** |
+| Stub 페이지 | **381 단원** (자동 생성, 콘텐츠 작성 대기) |
+| 풀텍스트 검색 | fuse.js 392 docs · Ctrl+K 단축키 |
+| 진도 트래커 | zustand + localStorage (단원별 완료/즐겨찾기) |
+| SEO | sitemap.xml (428 URL) + robots.txt + 동적 metadata |
+
+### 콘텐츠 작성 완료 11 단원
+
+| ID | 단원 | 학년 | 패턴 |
+|----|------|------|------|
+| M3-NA-04 | 분수의 의미 | 초3 수학 | 12 변환기 |
+| M5-NA-04 | 분수의 덧셈/뺄셈 | 초5 수학 | 01·12 |
+| H5-HI-01 | 한국사 타임라인 | 초5 사회 | 07 타임라인 |
+| S7-MA-01 | 입자 모형 | 중1 과학 | 04 입자 |
+| M7-NA-01 | 소인수분해 | 중1 수학 | 13 트리 |
+| M7-NA-02 | 정수와 유리수 | 중1 수학 | 01 슬라이더 |
+| H8-SO-02 | 수요·공급 | 중2 사회 | 01·14 |
+| M9-CR-03 | 이차함수 (파일럿) | 중3 수학 | 01 |
+| K-RD-01 | 글의 구조 | 학년 공통 국어 | 13 트리 |
+| E-GR-04 | 영어 시제 타임라인 | 학년 공통 영어 | 07·12 |
+| E-VOC-01 | 알파벳·파닉스 | 학년 공통 영어 | 11 매칭 + TTS |
 
 ## 기술 스택
 
-- Next.js 16.2 (App Router, Turbopack)
-- React 19.2
-- TypeScript 5
-- Tailwind CSS 4 (CSS-first config)
-- KaTeX (수식 렌더링)
+- Next.js 16.2 (App Router, Turbopack, Route Groups)
+- React 19.2 + TypeScript 5
+- Tailwind CSS 4 (CSS-first, OKLCH 토큰, `@custom-variant dark`)
+- next-themes (다크 모드)
+- zustand v5 + persist (진도 트래커)
+- fuse.js v7 (가중치 풀텍스트 검색)
+- KaTeX + react-katex (수식)
+- recharts (그래프)
+- vitest + Playwright (테스트)
+- Pretendard 가변 폰트 (SIL OFL)
 
 ## 시작하기
 
