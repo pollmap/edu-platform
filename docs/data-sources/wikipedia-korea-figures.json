@@ -1,0 +1,68 @@
+{
+  "source": "ko.wikipedia.org REST v1",
+  "license": "CC BY-SA 3.0",
+  "fetched_at": "2026-05-04T19:18:12+0900",
+  "count": 5,
+  "items": [
+    {
+      "title": "세종",
+      "extract": "세종(한국 한자: 世宗, 중세 한국어: ·솅조ᇰ, 1397년 5월 15일 ~1450년 3월 30일 )은 조선의 제4대 국왕(재위 : 1418년 9월 9일~1450년 3월 30일)으로, 태종과 원경왕후의 아들이다. 형인 양녕대군이 폐세자가 되자 세자에 책봉되었으며 태종의 양위를 받아 즉위하였다.",
+      "description": "조선의 제4대 임금 (1397–1450)",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Korea_Yeouido_Summer_20140805_11_%2814862134703%29.jpg/330px-Korea_Yeouido_Summer_20140805_11_%2814862134703%29.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Korea_Yeouido_Summer_20140805_11_%2814862134703%29.jpg/3840px-Korea_Yeouido_Summer_20140805_11_%2814862134703%29.jpg",
+      "pageid": 2789,
+      "wikibase_item": "Q37682",
+      "url": "https://ko.wikipedia.org/wiki/%EC%84%B8%EC%A2%85",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "세종대왕"
+    },
+    {
+      "title": "이순신",
+      "extract": "이순신(李舜臣, 1545년 4월 28일 ~ 1598년 12월 16일 은 조선 중기 한국의 무신이다. 본관은 덕수, 자는 여해, 시호는 충무 이며 한성 출신이다.",
+      "description": "조선의 무관 (1545–1598)",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/%EC%A0%84_%EC%9D%B4%EC%88%9C%EC%8B%A0_%EC%B4%88%EC%83%81_%28cropped%29.jpg/330px-%EC%A0%84_%EC%9D%B4%EC%88%9C%EC%8B%A0_%EC%B4%88%EC%83%81_%28cropped%29.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/8/82/%EC%A0%84_%EC%9D%B4%EC%88%9C%EC%8B%A0_%EC%B4%88%EC%83%81_%28cropped%29.jpg",
+      "pageid": 210860,
+      "wikibase_item": "Q50184",
+      "url": "https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%88%9C%EC%8B%A0",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "이순신"
+    },
+    {
+      "title": "광개토대왕",
+      "extract": "광개토태왕(廣開土太王, 374년 ~ 412년 음력 10월) 혹은 광개토대왕(廣開土大王)은 고구려의 제19대 군주(재위 : 391년 음력 5월 ~ 412년 음력 10월)이다. 이름은 담덕(談德) 또는 안(安)으로 고국양왕의 아들이다.",
+      "description": "고구려의 19대 태왕",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/20250524_%EA%B5%AC%EB%A6%AC_%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95%EB%B9%84.jpg/330px-20250524_%EA%B5%AC%EB%A6%AC_%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95%EB%B9%84.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/20250524_%EA%B5%AC%EB%A6%AC_%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95%EB%B9%84.jpg/1280px-20250524_%EA%B5%AC%EB%A6%AC_%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95%EB%B9%84.jpg",
+      "pageid": 7039,
+      "wikibase_item": "Q498791",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B4%91%EA%B0%9C%ED%86%A0%EB%8C%80%EC%99%95",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "광개토대왕"
+    },
+    {
+      "title": "정약용",
+      "extract": "정약용(丁若鏞, 1762년 8월 5일~1836년 4월 7일)은 조선 후기의 문신이자 실학자·저술가·시인이다. 본관은 나주, 아명은 귀농(歸農), 자는 미용(美庸), 호는 다산(茶山)·사암(俟菴)·탁옹(籜翁)·태수(苔叟)·자하도인(紫霞道人)·철마산인(鐵馬山人)·문암일인(門巖逸人), 당호는 여유당(與猶堂)이며, 시호는 문도(文度)이다.",
+      "description": "조선의 실학자, 철학자 (1762–1836)",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Jeong_Yak-yong.jpg/330px-Jeong_Yak-yong.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/8/83/Jeong_Yak-yong.jpg",
+      "pageid": 122371,
+      "wikibase_item": "Q256246",
+      "url": "https://ko.wikipedia.org/wiki/%EC%A0%95%EC%95%BD%EC%9A%A9",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "정약용"
+    },
+    {
+      "title": "정조",
+      "extract": "정조(正祖, 1752년 10월 28일 ~ 1800년 8월 18일, 재위: 1776년 4월 27일 ~ 1800년 8월 18일 는 산, 본관은 전주, 자는 형운, 호는 홍재 다.",
+      "description": "조선의 제22대 임금 (1752–1800)",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/b/b5/%C3%87oson_Kral%C4%B1_Conqco.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/b/b5/%C3%87oson_Kral%C4%B1_Conqco.jpg",
+      "pageid": 11099,
+      "wikibase_item": "Q26530",
+      "url": "https://ko.wikipedia.org/wiki/%EC%A0%95%EC%A1%B0",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "정조 (조선)"
+    }
+  ]
+}

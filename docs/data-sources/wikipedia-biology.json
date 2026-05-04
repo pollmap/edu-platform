@@ -1,0 +1,68 @@
+{
+  "source": "ko.wikipedia.org REST v1",
+  "license": "CC BY-SA 3.0",
+  "fetched_at": "2026-05-04T19:18:26+0900",
+  "count": 5,
+  "items": [
+    {
+      "title": "식물",
+      "extract": "식물(植物)은 분류학적으로 식물계(植物界)에 속하는 독립영양생물이다. 보통 광합성을 하여 에너지 비축에 필요한 녹말을 만드나, 일부 기생식물과 공생식물처럼, 엽록소를 잃고, 대신 직접 포식하거나, 기생, 공생 등으로 양분을 얻는 종도 있다. 원래 식물은 운동성이 거의 없으나, 파리지옥, 신경초, 무초처럼 민첩한 운동을 하는 식물도 몇 종 있다.",
+      "description": "세포벽과 엽록소를 가지고 광합성을 하는 생물",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Diversity_of_plants_%28Streptophyta%29_version_2.png/330px-Diversity_of_plants_%28Streptophyta%29_version_2.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/3/31/Diversity_of_plants_%28Streptophyta%29_version_2.png",
+      "pageid": 8554,
+      "wikibase_item": "Q756",
+      "url": "https://ko.wikipedia.org/wiki/%EC%8B%9D%EB%AC%BC",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "식물계"
+    },
+    {
+      "title": "동물",
+      "extract": "동물(動物)은 엽록소를 갖지 않고 세포벽을 갖지 않으며 몸속에 여러 기관이 있는 생물 중 다세포인 것을 말한다. 일반적으로 운동 능력과 감각을 가지고 있으며, 동시에 진핵생물이기도 하다. 일반적으로 ‘동물’이라고 하는 말은 특히 일상어의 수준에서는 인간동물을 포함하지 않는 ‘비인간동물(짐승)’의 의미로 많이 사용된다. 그러나 이것은 어디까지나 ‘동물’이라고 하는 단어의 좁은 의미의 뜻일 뿐이며, 인간도 생물학적으로 동물이다.",
+      "description": "생물 중 유기물을 섭취, 소화, 배설하는 기관이 발달한 것",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Animal_diversity.png/330px-Animal_diversity.png",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/1/14/Animal_diversity.png",
+      "pageid": 7287,
+      "wikibase_item": "Q729",
+      "url": "https://ko.wikipedia.org/wiki/%EB%8F%99%EB%AC%BC",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "동물계"
+    },
+    {
+      "title": "균계",
+      "extract": "균계(菌界, Kingdom Fungi)는 진핵생물의 분류 중 하나로, 효모와 곰팡이, 버섯 등이 포함된다. 균계는 동물, 식물, 세균 등과 구별되는 독립된 계이다. 이 계에 속하는 생물들을 균류(단수: fungus, 복수: fungi, funguses) 또는 곰팡이 또는 진균(眞菌, eumycota, eumycetes)이라고도 한다. 비슷하게 생긴 점균이나 난균과는 다른 분류이다.",
+      "description": "생태계에서 분해자 역할을 하는 진핵생물의 부류",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Fungi_Diversity.jpg/330px-Fungi_Diversity.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/d/da/Fungi_Diversity.jpg",
+      "pageid": 33005,
+      "wikibase_item": "Q764",
+      "url": "https://ko.wikipedia.org/wiki/%EA%B7%A0%EA%B3%84",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "균계"
+    },
+    {
+      "title": "원생생물",
+      "extract": "원생생물(原生生物, 영어: protist 또는 protista)은 진핵생물 중에 동물이나 식물, 균계에 속하지 않는 생물의 분류이다. 따라서 현대의 계통학적 관점에서 볼 때 원생생물이라는 분류군은 단계통이 아니며 진핵생물 중 주요한 분류군을 제외한 생물들의 거대한 집합이다. 크로말베올라타계, 엑스카바타계, 리자리아계는 하나의 계로 취급할 수 있다. 원생생물의 예로는 미역, 아메바, 짚신벌레 등이 있다.",
+      "description": "진핵생물 중에 동물이나 식물, 균계에 속하지 않는 생물의 분류",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Protist_collage.jpg/330px-Protist_collage.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/2/24/Protist_collage.jpg",
+      "pageid": 33007,
+      "wikibase_item": "Q10892",
+      "url": "https://ko.wikipedia.org/wiki/%EC%9B%90%EC%83%9D%EC%83%9D%EB%AC%BC",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "원생생물계"
+    },
+    {
+      "title": "세균",
+      "extract": "세균(細菌) 또는 박테리아(라틴어: bacteria 단수형: bacterium[*])는 생물의 주요 분류군이다. 단세포의 미생물로 세포소기관을 가지지 않은 대부분의 원핵생물이 여기에 속한다. 원핵생물 중에서 고균이 세균과 다른 계를 이루고 있다는 것이 최근에 밝혀졌다. 이를 엄밀하게 구분하기 위해 진정세균(眞正細菌, eubacteria)이라는 말을 쓰기도 한다. 세포벽은 펩티도글리칸 구조이며 세포벽의 형태에 따라 그람 양성세균과 그람 음성세균으로 구분한다. 박테리아라는 이름은, 우측 사진에 있는 바실러스 박테리아의 모양을 보면 쉽게 이해할 수 있듯, '작은 막대기'라는 뜻의 고대 그리스어 박테리온(그리스어: baktērion)에서 비롯되었다. 박테리아는 현미경을 발명한 네덜란드의 안톤 판 레이우엔훅이 1676년에 처음으로 관찰한 것으로 알려져 있다.",
+      "description": "세균역을 구성하는 생물군",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/E._coli_Bacteria_%287316101966%29.jpg/330px-E._coli_Bacteria_%287316101966%29.jpg",
+      "originalimage": "https://upload.wikimedia.org/wikipedia/commons/3/3a/E._coli_Bacteria_%287316101966%29.jpg",
+      "pageid": 8859,
+      "wikibase_item": "Q10876",
+      "url": "https://ko.wikipedia.org/wiki/%EC%84%B8%EA%B7%A0",
+      "license": "CC BY-SA 3.0 (Wikipedia ko)",
+      "label": "세균계"
+    }
+  ]
+}

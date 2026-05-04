@@ -1,9 +1,11 @@
 'use client';
 
 // S5-LI-01 다양한 생물 — 생물 분류 트리.
-// 5계 (식물·동물·균·원생생물·세균) 중심 간단 분류 + 예시 생물.
+// 5계 (식물·동물·균·원생생물·세균) 중심 간단 분류 + 예시 생물 + 위키백과 요약.
 
 import { useState } from 'react';
+import { BIOLOGY, findWiki } from '@/lib/data/wikipedia';
+import { WikipediaInfobox } from '@/components/primitives/WikipediaInfobox';
 
 interface TaxonNode {
   id: string;
@@ -101,16 +103,38 @@ export function BiologyClassificationTree() {
         </p>
       </div>
 
-      <NodeView
-        node={TREE}
-        depth={0}
-        expanded={expanded}
-        onToggle={toggle}
-        selected={selected}
-        onSelect={setSelected}
-      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="md:col-span-2">
+          <NodeView
+            node={TREE}
+            depth={0}
+            expanded={expanded}
+            onToggle={toggle}
+            selected={selected}
+            onSelect={setSelected}
+          />
+        </div>
+        {selected && (() => {
+          const node = findNode(TREE, selected);
+          if (!node || node.level !== 'kingdom' || node.id === 'life') return null;
+          const w = findWiki(BIOLOGY, node.label);
+          return w ? <WikipediaInfobox data={w} /> : null;
+        })()}
+      </div>
+      <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-3">
+        위키백과 요약: CC BY-SA 3.0 (ko.wikipedia.org)
+      </p>
     </div>
   );
+}
+
+function findNode(node: TaxonNode, id: string): TaxonNode | undefined {
+  if (node.id === id) return node;
+  for (const c of node.children ?? []) {
+    const found = findNode(c, id);
+    if (found) return found;
+  }
+  return undefined;
 }
 
 function NodeView({

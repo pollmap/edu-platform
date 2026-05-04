@@ -13,6 +13,7 @@
 | 풀텍스트 검색 | fuse.js 392 docs · Ctrl+K 단축키 |
 | 진도 트래커 | zustand + localStorage (단원별 완료/즐겨찾기) |
 | SEO | sitemap.xml (428 URL) + robots.txt + 동적 metadata |
+| 외부 학습 자료 | 위키백과 ko 27개 항목 (한국사 9 시대 + 5 인물 + 8 행성 + 5 생물계, CC BY-SA 3.0) |
 
 ### 콘텐츠 작성 완료 17 단원
 

@@ -1,8 +1,11 @@
 'use client';
 
 // S5-EU-01 태양계와 별 — 8 행성 궤도 + 상대 크기·거리.
+// 행성 데이터: NASA Planetary Fact Sheet (실측). 사진·요약: 위키백과 ko (CC BY-SA 3.0).
 
 import { useEffect, useRef, useState } from 'react';
+import { findWiki, PLANETS as WIKI_PLANETS } from '@/lib/data/wikipedia';
+import { WikipediaInfobox } from '@/components/primitives/WikipediaInfobox';
 
 interface Planet {
   name: string;
@@ -126,13 +129,22 @@ export function SolarSystemExplorer() {
         </div>
       </div>
 
-      <div className="rounded-xl bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-3 text-sm">
-        <div className="font-bold text-amber-900 dark:text-amber-200">{sel.name}</div>
-        <div className="text-xs text-zinc-700 dark:text-zinc-300 mt-1 space-y-0.5">
-          <div>반지름: {sel.radiusKm.toLocaleString()} km</div>
-          <div>태양과의 평균 거리: {sel.distanceAU} AU (1 AU ≈ 1.5억 km)</div>
-          <div>공전 주기: {sel.periodYears} 년</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-xl bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-3 text-sm">
+          <div className="font-bold text-amber-900 dark:text-amber-200">{sel.name} — 측정값</div>
+          <div className="text-xs text-zinc-700 dark:text-zinc-300 mt-1 space-y-0.5 font-mono">
+            <div>반지름: {sel.radiusKm.toLocaleString()} km</div>
+            <div>태양과의 평균 거리: {sel.distanceAU} AU (1 AU ≈ 1.5억 km)</div>
+            <div>공전 주기: {sel.periodYears} 년</div>
+          </div>
+          <div className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-2">
+            출처: NASA Planetary Fact Sheet
+          </div>
         </div>
+        {(() => {
+          const w = findWiki(WIKI_PLANETS, sel.name);
+          return w ? <WikipediaInfobox data={w} /> : null;
+        })()}
       </div>
 
       <button
