@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def main() -> int:
-    mp = Path('tmp/mappings-w5.txt')
+    mp = Path('tmp/mappings-w6.txt')
     pairs = []
     for line in mp.read_text(encoding='utf-8').splitlines():
         line = line.strip()
