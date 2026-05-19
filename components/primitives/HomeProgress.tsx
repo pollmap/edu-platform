@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { totalCounts, useProgress } from '@/lib/progress';
+import { useEffect, useMemo, useState } from 'react';
+import { useProgress } from '@/lib/progress';
 import { findUnit, unitPath } from '@/lib/curriculum';
 
 interface HomeProgressProps {
@@ -11,13 +11,26 @@ interface HomeProgressProps {
 
 export function HomeProgress({ totalUnits }: HomeProgressProps) {
   const [mounted, setMounted] = useState(false);
-  const counts = useProgress(totalCounts);
-  const favoriteIds = useProgress((s) => Object.keys(s.favorites));
-  const recentCompletedIds = useProgress((s) =>
-    Object.entries(s.completed)
+  const visited = useProgress((s) => s.visited);
+  const completed = useProgress((s) => s.completed);
+  const favorites = useProgress((s) => s.favorites);
+
+  const counts = useMemo(
+    () => ({
+      completed: Object.keys(completed).length,
+      visited: Object.keys(visited).length,
+      favorites: Object.keys(favorites).length,
+    }),
+    [completed, favorites, visited],
+  );
+  const favoriteIds = useMemo(() => Object.keys(favorites), [favorites]);
+  const recentCompletedIds = useMemo(
+    () =>
+      Object.entries(completed)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
       .map(([id]) => id),
+    [completed],
   );
 
   useEffect(() => {
