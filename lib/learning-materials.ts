@@ -1,4 +1,5 @@
 import type { HighSchoolUnit, Subject, Unit } from './types';
+import { getUnitContent, type UnitContent } from './unit-content';
 
 export interface UnitLearningMaterial {
   gradeLabel: string;
@@ -17,6 +18,7 @@ export interface UnitLearningMaterial {
   studentOutput: string;
   reviewQuestions: string[];
   sourceNote: string;
+  unitContent?: UnitContent;
 }
 
 const SUBJECT_LABELS: Record<Subject, string> = {
@@ -185,12 +187,13 @@ export function buildUnitLearningMaterial(unit: Unit | HighSchoolUnit): UnitLear
   const frame = SUBJECT_FRAME[unit.subject];
   const domain = domainLabel(unit);
   const interactiveTitle = unit.interactiveTitle || `${unit.title} 조작`;
+  const unitContent = getUnitContent(unit.id);
 
   return {
     gradeLabel: gradeLabel(unit),
     subjectLabel: SUBJECT_LABELS[unit.subject],
     coreQuestion: frame.question(unit.title, domain),
-    quickSummary: frame.summary(unit.title, domain, interactiveTitle),
+    quickSummary: unitContent?.explanations.easy ?? frame.summary(unit.title, domain, interactiveTitle),
     learningGoals: frame.goals(unit.title, interactiveTitle),
     loopSteps: [
       {
@@ -219,11 +222,18 @@ export function buildUnitLearningMaterial(unit: Unit | HighSchoolUnit): UnitLear
         description: '이해했어요, 헷갈려요, 다시 볼래요 중 하나를 골라 복습 큐에 반영합니다.',
       },
     ],
-    miniChallenge: frame.challenge(unit.title, interactiveTitle),
-    misconception: frame.misconception(unit.title),
-    application: frame.application(unit.title, domain),
+    miniChallenge: unitContent?.miniQuiz[1]
+      ? `${unit.title}: ${unitContent.miniQuiz[1].question}`
+      : frame.challenge(unit.title, interactiveTitle),
+    misconception: unitContent?.commonMistakes[0]
+      ? `${unitContent.commonMistakes[0].mistake} ${unitContent.commonMistakes[0].correction}`
+      : frame.misconception(unit.title),
+    application: unitContent?.realLifeApplications[0]?.description ?? frame.application(unit.title, domain),
     studentOutput: frame.output(unit.title),
-    reviewQuestions: frame.review(unit.title, domain),
-    sourceNote: `단원 기준: ${gradeLabel(unit)} ${SUBJECT_LABELS[unit.subject]} · ${domain} · ${unit.id}`,
+    reviewQuestions: unitContent?.miniQuiz.map((item) => item.question) ?? frame.review(unit.title, domain),
+    sourceNote: unitContent
+      ? `세부 콘텐츠 출처: ${unitContent.sourceRefs.map((ref) => ref.title).join(' · ')} · ${unit.id}`
+      : `단원 기준: ${gradeLabel(unit)} ${SUBJECT_LABELS[unit.subject]} · ${domain} · ${unit.id}`,
+    unitContent,
   };
 }

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CURRICULUM, findUnit, HIGHSCHOOL_UNITS } from '@/lib/curriculum';
 import { buildUnitLearningMaterial } from '@/lib/learning-materials';
+import { getUnitContent } from '@/lib/unit-content';
 
 describe('buildUnitLearningMaterial', () => {
   it('creates a complete learning guide for the pilot unit', () => {
@@ -25,6 +26,7 @@ describe('buildUnitLearningMaterial', () => {
     expect(material.studentOutput).toContain('이차함수');
     expect(material.reviewQuestions).toHaveLength(3);
     expect(material.sourceNote).toContain('M9-CR-03');
+    expect(material.unitContent).toEqual(getUnitContent('M9-CR-03'));
   });
 
   it('covers every registered unit with non-empty educational material', () => {

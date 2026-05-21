@@ -2,12 +2,19 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { CURRICULUM, HIGHSCHOOL_UNITS, unitPath } from '../lib/curriculum';
 import { buildUnitLearningMaterial } from '../lib/learning-materials';
+import {
+  OFFICIAL_VERIFIED_UNIT_TARGET,
+  UNIT_CONTENT,
+  getUnitContent,
+} from '../lib/unit-content';
 import type { HighSchoolUnit, Unit } from '../lib/types';
 
 type AnyUnit = Unit | HighSchoolUnit;
 
 const ROOT = join(__dirname, '..');
 const allUnits: AnyUnit[] = [...CURRICULUM, ...HIGHSCHOOL_UNITS];
+const allUnitIds = new Set(allUnits.map((unit) => unit.id));
+const contentUnitIds = Object.keys(UNIT_CONTENT);
 
 function routeFile(unit: AnyUnit): string {
   return join(ROOT, 'app', '(units)', ...unitPath(unit).slice(1).split('/'), 'page.tsx');
@@ -19,7 +26,49 @@ function hasUsefulText(value: string, minLength = 12): boolean {
 
 const blockers: string[] = [];
 
+if (allUnits.length !== OFFICIAL_VERIFIED_UNIT_TARGET) {
+  blockers.push(`registered unit count ${allUnits.length} does not match verified target ${OFFICIAL_VERIFIED_UNIT_TARGET}`);
+}
+
+if (contentUnitIds.length !== OFFICIAL_VERIFIED_UNIT_TARGET) {
+  blockers.push(`UnitContent count ${contentUnitIds.length} does not match verified target ${OFFICIAL_VERIFIED_UNIT_TARGET}`);
+}
+
+for (const contentUnitId of contentUnitIds) {
+  if (!allUnitIds.has(contentUnitId)) {
+    blockers.push(`${contentUnitId}: UnitContent exists without a registered official unit`);
+  }
+}
+
 for (const unit of allUnits) {
+  const content = getUnitContent(unit.id);
+  if (!content) {
+    blockers.push(`${unit.id}: missing UnitContent`);
+  } else {
+    if (content.sourceRefs.length < 2) blockers.push(`${unit.id}: sourceRefs must include at least 2 refs`);
+    for (const [index, source] of content.sourceRefs.entries()) {
+      if (!hasUsefulText(source.title, 4)) blockers.push(`${unit.id}: weak source title ${index + 1}`);
+      if (!source.document && !source.url) blockers.push(`${unit.id}: source ref ${index + 1} lacks document or URL`);
+    }
+    if (!hasUsefulText(content.explanations.easy, 24)) blockers.push(`${unit.id}: missing easy explanation`);
+    if (!hasUsefulText(content.explanations.standard, 40)) blockers.push(`${unit.id}: missing standard explanation`);
+    if (!hasUsefulText(content.explanations.advanced, 40)) blockers.push(`${unit.id}: missing advanced explanation`);
+    if (content.examples.length < 2) blockers.push(`${unit.id}: UnitContent examples must be at least 2`);
+    if (content.miniQuiz.length !== 3) blockers.push(`${unit.id}: miniQuiz count is not 3`);
+    const expectedKinds = ['concept-check', 'application', 'mistake-or-transfer'];
+    for (const [index, quiz] of content.miniQuiz.entries()) {
+      if (quiz.kind !== expectedKinds[index]) blockers.push(`${unit.id}: miniQuiz ${index + 1} has wrong kind`);
+      if (!hasUsefulText(quiz.question, 12)) blockers.push(`${unit.id}: weak miniQuiz question ${index + 1}`);
+      if (!hasUsefulText(quiz.answer, 2)) blockers.push(`${unit.id}: weak miniQuiz answer ${index + 1}`);
+      if (!hasUsefulText(quiz.explanation, 20)) blockers.push(`${unit.id}: weak miniQuiz explanation ${index + 1}`);
+    }
+    if (content.commonMistakes.length < 1) blockers.push(`${unit.id}: missing common mistakes`);
+    if (content.realLifeApplications.length < 1) blockers.push(`${unit.id}: missing real-life applications`);
+    for (const nextUnitId of content.nextUnitIds) {
+      if (!allUnitIds.has(nextUnitId)) blockers.push(`${unit.id}: broken nextUnitId ${nextUnitId}`);
+    }
+  }
+
   const material = buildUnitLearningMaterial(unit);
   if (!hasUsefulText(material.coreQuestion)) blockers.push(`${unit.id}: missing core question`);
   if (!hasUsefulText(material.quickSummary, 40)) blockers.push(`${unit.id}: missing quick summary`);
@@ -54,7 +103,9 @@ for (const unit of allUnits) {
 
 console.log('[content-audit] unit learning material coverage');
 console.log(`[content-audit] units checked: ${allUnits.length}`);
-console.log('[content-audit] required sections: core question, quick summary, 3 goals, 5-step loop, mini challenge, misconception, application, student output, 3 review questions');
+console.log(`[content-audit] verified target: ${OFFICIAL_VERIFIED_UNIT_TARGET}`);
+console.log(`[content-audit] UnitContent checked: ${contentUnitIds.length}`);
+console.log('[content-audit] required sections: UnitContent sourceRefs, easy/standard/advanced explanations, 2+ examples, fixed 3-question miniQuiz, common mistakes, real-life applications, valid nextUnitIds, legacy learning surface');
 console.log(`[content-audit] blockers: ${blockers.length}`);
 
 for (const blocker of blockers.slice(0, 50)) {

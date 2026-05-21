@@ -1,5 +1,5 @@
 // 단원 메타데이터 타입 + 라벨 상수
-// 488 단원 인덱스 (docs/00-MASTER-INDEX.md) 의 코드 표현.
+// 현재 공식 검증 범위 392개 단원 인덱스 (docs/00-MASTER-INDEX.md) 의 코드 표현.
 
 export type Subject = 'math' | 'science' | 'korean' | 'english' | 'social';
 export type Grade = 3 | 4 | 5 | 6 | 7 | 8 | 9;

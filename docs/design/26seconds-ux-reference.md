@@ -46,12 +46,14 @@
 | Surface | Code |
 |---------|------|
 | 오늘의 3분 개념 | `components/learning/TodayConceptQueue.tsx` |
+| 단원 3분 훑어보기 | `components/learning/UnitLearningMaterial.tsx` |
 | 이해도 체크 | `components/learning/SelfCheckBar.tsx` |
 | 복습 큐 상태 | `lib/progress.ts` `reviewQueue` |
 | 연속 탐구 | `lib/progress.ts` `streak` |
 | 큐 추천 로직 | `lib/learning.ts` |
+| 세부 학습자료 데이터 | `lib/unit-content/` |
 
-현재 구현은 26초의 플래시카드 구조를 그대로 복제하지 않고, **개념 카드 + 인터랙티브 조작 + 자기평가 + 복습 큐**로 변환한다.
+현재 구현은 26초의 플래시카드 구조를 그대로 복제하지 않고, **개념 카드 + 인터랙티브 조작 + 3문항 미니 문제 + 자기평가 + 복습 큐**로 변환한다.
 
 ## 4. P0 Component Pattern
 
