@@ -30,5 +30,6 @@
 
 ## 의존성 모니터링
 
-- `npm audit` 정기 실행
-- `dependabot` 자동 PR 검토
+- `npm run audit:security` (`npm audit --audit-level=moderate`) 정기 실행
+- GitHub Actions CI에서 보안 감사 실행
+- `.github/dependabot.yml` 기반 npm/GitHub Actions 자동 PR 검토

@@ -1,7 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   CartesianGrid,
   Line,
@@ -27,8 +26,13 @@ interface DataPoint {
 }
 
 export function SupplyDemandExplorer() {
+  const [mounted, setMounted] = useState(false);
   const [demandShift, setDemandShift] = useState(0); // 절편 a 변화
   const [supplyShift, setSupplyShift] = useState(0); // 절편 b 변화
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const md = 1; // 수요 기울기 절댓값
   const ms = 1; // 공급 기울기
@@ -61,20 +65,24 @@ export function SupplyDemandExplorer() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="rounded-xl bg-zinc-50 dark:bg-zinc-800 p-4 aspect-square">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 16, right: 24, left: 0, bottom: 16 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(120,120,120,0.3)" />
-              <XAxis dataKey="q" label={{ value: '수량 Q', position: 'insideBottom', offset: -8 }} />
-              <YAxis label={{ value: '가격 P', angle: -90, position: 'insideLeft', offset: 12 }} domain={[0, 22]} />
-              <Tooltip />
-              <Line type="linear" dataKey="demand" stroke="#dc2626" strokeWidth={3} dot={false} name="수요 D" />
-              <Line type="linear" dataKey="supply" stroke="#2563eb" strokeWidth={3} dot={false} name="공급 S" />
-              {eqQ >= 0 && eqQ <= 20 && eqP >= 0 ? (
-                <ReferenceDot x={eqQ} y={eqP} r={6} fill="#f59e0b" stroke="#92400e" strokeWidth={2} />
-              ) : null}
-            </LineChart>
-          </ResponsiveContainer>
+        <div className="rounded-xl bg-zinc-50 dark:bg-zinc-800 p-4 h-[320px] sm:h-[360px]">
+          {mounted ? (
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+              <LineChart data={data} margin={{ top: 16, right: 24, left: 0, bottom: 16 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(120,120,120,0.3)" />
+                <XAxis dataKey="q" label={{ value: '수량 Q', position: 'insideBottom', offset: -8 }} />
+                <YAxis label={{ value: '가격 P', angle: -90, position: 'insideLeft', offset: 12 }} domain={[0, 22]} />
+                <Tooltip />
+                <Line type="linear" dataKey="demand" stroke="#dc2626" strokeWidth={3} dot={false} name="수요 D" />
+                <Line type="linear" dataKey="supply" stroke="#2563eb" strokeWidth={3} dot={false} name="공급 S" />
+                {eqQ >= 0 && eqQ <= 20 && eqP >= 0 ? (
+                  <ReferenceDot x={eqQ} y={eqP} r={6} fill="#f59e0b" stroke="#92400e" strokeWidth={2} />
+                ) : null}
+              </LineChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="h-full w-full rounded-lg bg-white/70 dark:bg-zinc-900/40" aria-hidden="true" />
+          )}
         </div>
 
         <div className="space-y-4">

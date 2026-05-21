@@ -16,7 +16,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  /* CUFA wiki 토큰 */
+  /* Light-first education UI tokens */
   --va-hero-bg: #ffffff;
   --va-hero-fg: #0a0a0a;
   --va-subtle: #6b7280;
@@ -55,7 +55,7 @@ input[type='range'] {
 }
 
 /* ========================================
-   CUFA wiki 카피 — Hero · Feature Grid · CTA · Disclaimer
+   Light education shell — Hero · Feature Grid · CTA · Disclaimer
    ======================================== */
 
 .va-hero {

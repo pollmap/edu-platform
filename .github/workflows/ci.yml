@@ -30,8 +30,14 @@ jobs:
       - name: Secret grep
         run: npm run secret-grep
 
+      - name: Security audit
+        run: npm run audit:security
+
       - name: Validate curriculum
         run: npm run validate
+
+      - name: Completion audit
+        run: npm run audit:completion
 
       - name: Unit tests
         run: npm test

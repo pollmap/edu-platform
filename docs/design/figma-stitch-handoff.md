@@ -2,12 +2,12 @@
 
 **Last Updated:** 2026-05-21
 
-이 문서는 첫 리디자인 스프린트의 기준 문서다. Google Stitch는 빠른 화면 시안과 변형 탐색용으로 쓰고, Figma를 최종 디자인 기준으로 둔다. 코드 반영은 Figma 링크, 화면 캡처, 토큰 export를 받은 뒤 진행한다. 현재 작업 환경에는 Figma 직접 커넥터/MCP를 사용하지 않는다.
+이 문서는 첫 리디자인 스프린트의 기준 문서다. 제품 UX 기준은 `docs/design/product-ux-foundation.md`이며, 기본 방향은 **Light-first 인터랙티브 학습 맵**이다. Google Stitch는 빠른 화면 시안과 변형 탐색용으로 쓰고, Figma를 최종 디자인 기준으로 둔다. 코드 반영은 Figma 링크, 화면 캡처, 토큰 export를 받은 뒤 진행한다. 현재 작업 환경에는 Figma 직접 커넥터/MCP를 사용하지 않는다.
 
 ## 1. 작업 순서
 
 1. **Stitch에서 초안 생성**
-   - 홈, 단원 상세, 검색 모달, 다크 모드의 시각 방향을 빠르게 만든다.
+   - 홈, 단원 상세, 검색 모달, 라이트 테마의 시각 방향을 빠르게 만든다.
    - Stitch 산출물은 최종 기준이 아니다. 화면 구조, 밀도, 색감 후보를 고르는 재료로만 사용한다.
 2. **Figma에서 최종 정리**
    - Stitch 결과를 Figma로 옮긴 뒤 auto layout, component, variable, mode를 정리한다.
@@ -20,14 +20,14 @@
 4. **검증**
    - 문서/정적 검증: `npm run lint:md`, `npm run validate`, `npm run tsc`
    - 기능 회귀: `npm test`, `npm run test:e2e`
-   - 수동 확인: 홈, 검색 모달, 파일럿 단원 `M9-CR-03`, 360px 모바일, 다크 모드
+   - 수동 확인: 홈, 검색 모달, 파일럿 단원 `M9-CR-03`, 360px 모바일, 라이트 기본 테마, 다크 보조 테마
 
 ## 2. 필수 입력물
 
 | 입력물 | 필수 여부 | 기준 |
 |--------|-----------|------|
 | Figma 링크 | 필수 | Dev Mode에서 inspect 가능한 file/frame 링크 |
-| 화면 캡처 | 필수 | desktop/mobile, light/dark 구분 |
+| 화면 캡처 | 필수 | desktop/mobile, light 필수, dark 보조 |
 | 토큰 export | 필수 | color, typography, spacing, radius의 Figma variable 또는 JSON/CSV |
 | Stitch 링크/캡처 | 선택 | 시안 출처 확인용. 최종 기준으로 사용하지 않음 |
 | 변경 설명 | 필수 | 변경할 surface, 유지할 behavior, 접근성 예외 여부 |
@@ -40,8 +40,10 @@
 4. `Unit / M9-CR-03 / Mobile-360 / Light`
 5. `SearchDialog / Desktop / Light`
 6. `SearchDialog / Mobile-360 / Light`
-7. `Home / Desktop / Dark`
-8. `Unit / M9-CR-03 / Desktop / Dark`
+7. `Progress / Desktop / Light`
+8. `RoadmapPreview / Desktop / Light`
+9. `Home / Desktop / Dark` (보조)
+10. `Unit / M9-CR-03 / Desktop / Dark` (보조)
 
 캡처 파일명은 `surface-viewport-mode-state.png` 형식을 쓴다. 예: `home-desktop-light-default.png`, `search-mobile360-dark-empty.png`.
 
@@ -94,11 +96,23 @@ Figma에서 먼저 확정해야 할 공통 surface다. 이 surface가 확정되�
 | Unit CTA | `UnitProgressControls.tsx`, unit page links | primary/secondary actions and 44px touch target |
 | Pilot unit | `app/(units)/grade-9/math/M9-CR-03/page.tsx` | graph/card/content balance at desktop and 360px |
 
+## 5.1 Product UX Surfaces
+
+Figma surface는 다음 제품 루프를 반영해야 한다.
+
+| UX surface | 목적 | Figma에서 확정할 것 |
+|------------|------|--------------------|
+| Personalized Home | 오늘 뭘 할지 고민하지 않게 함 | 추천 단원, 최근 학습, 즐겨찾기, 과목별 진도 |
+| Search Entry | 392개 단원의 핵심 진입로 | 단원명, 개념, ID, 과목/학년/상태 필터 |
+| Interactive Unit | See -> Touch -> Predict -> Explain -> Challenge | 캔버스, 조작 패널, 결과 패널, 미니 도전, 완료 CTA |
+| Roadmap Preview | 목록 대신 학습 지도 제공 | 선수·후속 단원 노드, 현재 위치, 다음 추천 |
+| Progress Dashboard | 반복 방문 동기 제공 | 완료율, 연속 학습일, 탐구 점수, 개념 배지 |
+
 ## 6. Token Bridge
 
 ### 1차 범위
 
-이번 handoff foundation의 1차 범위는 과목 색상, 배경/전경, border, card hover, typography, spacing이다. 인터랙티브 내부의 그래프 팔레트, chart 색상, 개별 hover 효과는 다음 스프린트에서 surface별로 분리한다.
+이번 handoff foundation의 1차 범위는 light background, light foreground, 과목 색상, card background, border, soft shadow, CTA, hover, success state, typography, spacing이다. Dark token은 보조 옵션으로만 유지한다. 인터랙티브 내부의 그래프 팔레트, chart 색상, 개별 hover 효과는 다음 스프린트에서 surface별로 분리한다.
 
 ### Code -> Figma 대응표
 
@@ -124,12 +138,25 @@ Figma에서 먼저 확정해야 할 공통 surface다. 이 surface가 확정되�
 | `.va-feature-card` padding | `32px 24px`, mobile `24px 20px` | `space/card/x`, `space/card/y` | responsive |
 | `.va-cta__link` padding | `20px 24px`, mobile `16px 20px` | `space/action/x`, `space/action/y` | responsive |
 
+### Light Education Tokens
+
+| Figma variable proposal | Purpose |
+|-------------------------|---------|
+| `surface/app/background` | 흰색/오프화이트 앱 배경 |
+| `surface/card/background` | 흰색 단원/진도 카드 |
+| `surface/lab/background` | 밝은 실험실형 인터랙티브 캔버스 |
+| `shadow/card/soft` | 카드가 살짝 떠 보이는 부드러운 그림자 |
+| `action/primary/background` | 시작하기/이어하기/완료하기 CTA |
+| `action/secondary/background` | 전체 탐색/저장/다시보기 |
+| `state/success/background` | 완료 저장, 정답, 이해 완료 피드백 |
+| `state/streak/background` | 연속 학습일, 오늘의 미션 |
+
 ### Token Naming Rules
 
 - Figma variable names use slash paths: `surface/background/default`, `subject/math`, `space/card/x`.
 - CSS custom properties keep kebab-case: `--va-card-hover`, `--color-math`.
 - If a Figma value maps to Tailwind utility only, record the utility in the handoff notes before adding a new CSS token.
-- Light/dark values live as Figma variable modes named `light` and `dark`; code values live in `:root` and `.dark`.
+- Light values are the default Figma variables and code `:root` values. Dark values live in the optional `dark` Figma mode and code `.dark`.
 - New tokens must be added to this table in the same change that edits `app/globals.css`.
 
 ## 7. Implementation Checklist
@@ -138,7 +165,8 @@ Before code changes:
 
 - [ ] Figma frame names match this document.
 - [ ] Required captures are attached or linked.
-- [ ] Token export includes light and dark values.
+- [ ] Token export includes Light-first values; dark values are optional unless the change affects theme tokens.
+- [ ] The change preserves the product loop: See -> Touch -> Predict -> Explain -> Challenge.
 - [ ] Behavior changes are explicitly listed; otherwise preserve existing behavior.
 - [ ] No mock/fake data is introduced as production content.
 
@@ -161,7 +189,8 @@ Verification:
 - [ ] Manual: home desktop/mobile
 - [ ] Manual: search modal desktop/mobile
 - [ ] Manual: `M9-CR-03` desktop/mobile
-- [ ] Manual: dark mode
+- [ ] Manual: default light mode
+- [ ] Manual: dark mode only when theme tokens or dark classes changed
 
 ## 8. Completion Criteria
 
@@ -178,3 +207,4 @@ Verification:
 - [Figma Dev Mode](https://www.figma.com/dev-mode/)
 - [Figma Code Connect UI](https://developers.figma.com/docs/code-connect/code-connect-ui-setup/)
 - [Google Stitch](https://stitch.withgoogle.com/)
+- [Product UX Foundation](product-ux-foundation.md)
