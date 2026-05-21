@@ -6,6 +6,12 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import {
+  applySelfCheck,
+  type ReviewQueueEntry,
+  type SelfCheckRating,
+  type StudyStreak,
+} from './learning';
 
 export type UnitStatus = 'unseen' | 'visited' | 'completed';
 
@@ -13,10 +19,14 @@ export interface ProgressState {
   visited: Record<string, number>;
   completed: Record<string, number>;
   favorites: Record<string, true>;
+  reviewQueue: Record<string, ReviewQueueEntry>;
+  streak: StudyStreak;
   markVisited: (unitId: string) => void;
   markCompleted: (unitId: string) => void;
   unmarkCompleted: (unitId: string) => void;
   toggleFavorite: (unitId: string) => void;
+  setSelfCheck: (unitId: string, rating: SelfCheckRating) => void;
+  clearReview: (unitId: string) => void;
   reset: () => void;
 }
 
@@ -26,6 +36,8 @@ export const useProgress = create<ProgressState>()(
       visited: {},
       completed: {},
       favorites: {},
+      reviewQueue: {},
+      streak: { current: 0 },
 
       markVisited: (unitId) =>
         set((s) => ({
@@ -33,10 +45,19 @@ export const useProgress = create<ProgressState>()(
         })),
 
       markCompleted: (unitId) =>
-        set((s) => ({
-          completed: { ...s.completed, [unitId]: Date.now() },
-          visited: { ...s.visited, [unitId]: s.visited[unitId] ?? Date.now() },
-        })),
+        set((s) =>
+          applySelfCheck(
+            {
+              visited: s.visited,
+              completed: s.completed,
+              favorites: s.favorites,
+              reviewQueue: s.reviewQueue ?? {},
+              streak: s.streak ?? { current: 0 },
+            },
+            unitId,
+            'understood',
+          ),
+        ),
 
       unmarkCompleted: (unitId) =>
         set((s) => {
@@ -53,7 +74,35 @@ export const useProgress = create<ProgressState>()(
           return { favorites: { ...s.favorites, [unitId]: true } };
         }),
 
-      reset: () => set({ visited: {}, completed: {}, favorites: {} }),
+      setSelfCheck: (unitId, rating) =>
+        set((s) =>
+          applySelfCheck(
+            {
+              visited: s.visited,
+              completed: s.completed,
+              favorites: s.favorites,
+              reviewQueue: s.reviewQueue ?? {},
+              streak: s.streak ?? { current: 0 },
+            },
+            unitId,
+            rating,
+          ),
+        ),
+
+      clearReview: (unitId) =>
+        set((s) => {
+          const { [unitId]: _, ...rest } = s.reviewQueue ?? {};
+          return { reviewQueue: rest };
+        }),
+
+      reset: () =>
+        set({
+          visited: {},
+          completed: {},
+          favorites: {},
+          reviewQueue: {},
+          streak: { current: 0 },
+        }),
     }),
     {
       name: 'edu-platform-progress',
@@ -72,10 +121,12 @@ export function totalCounts(s: ProgressState): {
   completed: number;
   visited: number;
   favorites: number;
+  reviews: number;
 } {
   return {
     completed: Object.keys(s.completed).length,
     visited: Object.keys(s.visited).length,
     favorites: Object.keys(s.favorites).length,
+    reviews: Object.keys(s.reviewQueue ?? {}).length,
   };
 }

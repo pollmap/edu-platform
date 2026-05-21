@@ -66,7 +66,7 @@ export function SiteHeader() {
             href="/"
             className="font-extrabold tracking-tight text-zinc-900 dark:text-white shrink-0 text-lg"
           >
-            Edu Wiki
+            개념지도
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">

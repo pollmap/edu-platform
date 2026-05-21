@@ -1,17 +1,42 @@
 import Link from 'next/link';
+import { TodayConceptQueue } from '@/components/learning/TodayConceptQueue';
 import { HomeProgress } from '@/components/primitives/HomeProgress';
-import { CURRICULUM, HIGHSCHOOL_UNITS } from '@/lib/curriculum';
+import type { LearningUnitSummary } from '@/lib/learning';
+import { CURRICULUM, GRADE_LABEL, HIGHSCHOOL_UNITS, isHighSchoolUnit, unitPath } from '@/lib/curriculum';
+import type { HighSchoolUnit, Unit } from '@/lib/types';
+
+function gradeLabelFor(unit: Unit | HighSchoolUnit): string {
+  if (isHighSchoolUnit(unit)) return unit.courseName || '고등';
+  if (unit.schoolLevel === 'cross-grade') return '공통';
+  return unit.grade ? GRADE_LABEL[unit.grade] : '공통';
+}
+
+function toLearningUnitSummary(unit: Unit | HighSchoolUnit): LearningUnitSummary {
+  return {
+    id: unit.id,
+    title: unit.title,
+    subject: unit.subject,
+    gradeLabel: gradeLabelFor(unit),
+    domain: unit.domain,
+    href: unitPath(unit),
+    priority: unit.priority,
+    interactiveTitle: unit.interactiveTitle,
+  };
+}
 
 export default function Home() {
   const totalUnits = CURRICULUM.length + HIGHSCHOOL_UNITS.length;
   const draftUnits = CURRICULUM.filter((u) => u.status !== 'planned').length +
     HIGHSCHOOL_UNITS.filter((u) => u.status !== 'planned').length;
+  const learningUnits = [...CURRICULUM, ...HIGHSCHOOL_UNITS]
+    .filter((u) => u.status !== 'planned')
+    .map(toLearningUnitSummary);
 
   return (
     <main className="container mx-auto max-w-6xl px-4 py-8">
       <section className="va-hero">
-        <h1 className="va-hero__title">Edu Wiki</h1>
-        <p className="va-hero__subtitle">초3부터 고3까지, 인터랙티브 학습의 모든 것</p>
+        <h1 className="va-hero__title">오늘의 개념 지도</h1>
+        <p className="va-hero__subtitle">초3부터 고3까지, 오늘 만질 개념을 바로 시작하세요</p>
         <div className="va-hero__stats">
           <div className="va-hero__stat">
             <div className="va-hero__stat-value">{totalUnits}</div>
@@ -19,7 +44,7 @@ export default function Home() {
           </div>
           <div className="va-hero__stat">
             <div className="va-hero__stat-value">{draftUnits}+</div>
-            <div className="va-hero__stat-label">인터랙티브</div>
+            <div className="va-hero__stat-label">조작 가능</div>
           </div>
           <div className="va-hero__stat">
             <div className="va-hero__stat-value">5</div>
@@ -31,6 +56,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TodayConceptQueue units={learningUnits} totalUnits={totalUnits} />
 
       <section className="va-feature-grid">
         <Link href="/grade-3" className="va-feature-card">

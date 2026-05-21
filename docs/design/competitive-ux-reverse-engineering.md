@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-05-21
 
-이 문서는 말해보카, 스픽, 듀오링고의 공개 UX 패턴을 K-12 인터랙티브 교육 플랫폼에 적용하기 위한 **디자인/UX 역기획 레퍼런스**다. 화면 우선순위, IA, 학습 루프, 카드/CTA/진도/검색 패턴을 Figma와 코드 디자인 판단의 기준으로 삼는다. 변동이 큰 앱 버전, 다운로드 수, 평점, 리뷰 수는 이 문서에 고정하지 않는다. 필요 시 공식 앱스토어, Play 스토어, 공식 블로그에서 다시 확인한다.
+이 문서는 말해보카, 스픽, 듀오링고, 26초의 공개 UX 패턴을 K-12 인터랙티브 교육 플랫폼에 적용하기 위한 **디자인/UX 역기획 레퍼런스**다. 화면 우선순위, IA, 학습 루프, 카드/CTA/진도/검색 패턴을 Figma와 코드 디자인 판단의 기준으로 삼는다. 변동이 큰 앱 버전, 다운로드 수, 평점, 리뷰 수는 이 문서에 고정하지 않는다. 필요 시 공식 앱스토어, Play 스토어, 공식 블로그에서 다시 확인한다.
 
 ## 1. One-Line Summary
 
@@ -11,6 +11,7 @@
 | 말해보카 | 한국형 개인화 드릴 + 자동 복습 + 가벼운 게임화 | 이어하기, 오늘의 복습, 약한 단원, 학습 통계, 즐겨찾기 |
 | 스픽 | AI 튜터 + 출력 중심 Learn-Practice-Apply | Learn -> Manipulate -> Check -> Review 단원 흐름 |
 | 듀오링고 | 경로형 진행 + 습관화 + 대규모 리텐션 시스템 | 과목/학년별 패스, 스트릭, 배지, 탐구 점수 |
+| 26초 | 오늘 분량 자동 큐 + 카드 집중 + 복습 압박 | 오늘의 개념 큐, 이해도 체크, 복습 큐, 학습량 선택 |
 
 ## 2. What To Adopt
 
@@ -23,6 +24,7 @@
 - 세 번째 영역: 과목 허브
 - 보조 영역: 최근 학습, 즐겨찾기, 추천 경로
 - 전역 검색: Ctrl+K와 모바일 검색 버튼을 핵심 내비게이션으로 승격
+- 26초식 큐: 오늘 할 개념 수, 복습 큐, 연속 탐구를 같은 표면에서 노출
 
 ### Search
 
@@ -73,6 +75,7 @@ Learn -> Manipulate -> Check -> Review
 | 리뷰/복습 블랙박스 | 왜 다시 보는지 설명되지 않으면 신뢰가 떨어진다. |
 | 완료와 복습의 혼합 | 완료는 한 번의 상태이고, 복습은 반복 큐다. |
 | 긴 설명문 중심 단원 | 이 앱의 차별점은 읽기가 아니라 조작이다. |
+| 하루 큐 완료 후 추가 학습 차단 | 학습량은 줄여도 탐색과 추가 학습 자유도는 열어둬야 한다. |
 
 ## 4. K-12 Product Translation
 
@@ -100,6 +103,7 @@ Learn -> Manipulate -> Check -> Review
 | Priority | Work | Reason |
 |----------|------|--------|
 | P0 | 홈의 첫 카드에 이어하기 고정 | 사용자는 탐색보다 재진입을 더 자주 한다. |
+| P0 | 오늘의 개념 큐와 이해도 체크 도입 | 전체 단원을 사용자가 직접 관리하지 않아도 된다. |
 | P0 | 검색 모달을 전역 핵심 내비게이션으로 승격 | 단원 규모가 커질수록 검색이 기본 경로가 된다. |
 | P0 | 단원 페이지를 Learn -> Manipulate -> Check -> Review로 통일 | 학습 문법이 통일되어야 392개 단원을 유지할 수 있다. |
 | P1 | 과목/학년별 국지 패스 도입 | 듀오링고식 경로의 장점만 가져온다. |
@@ -111,4 +115,7 @@ Learn -> Manipulate -> Check -> Review
 - [Speak: How Speak reinvents language learning](https://www.speak.com/blog/how-speak-reinvents-language-learning)
 - [Duolingo: Friend Streak](https://blog.duolingo.com/friend-streak/)
 - [Duolingo Method Whitepaper](https://duolingo-papers.s3.amazonaws.com/reports/duolingo-method-whitepaper.pdf)
+- [26초 App Store](https://apps.apple.com/kr/app/26%EC%B4%88-%EC%B4%88%EA%B3%A0%EC%86%8D-%EB%8B%A8%EC%96%B4-%EC%95%94%EA%B8%B0/id6738269475)
+- [26초 Google Play](https://play.google.com/store/apps/details?hl=ko&id=com.skimmify.toeic)
+- [26초 공식 홈페이지](https://skimmify.com/)
 - [NCIC 국가교육과정정보센터](https://ncic.re.kr/)

@@ -17,6 +17,7 @@
 | 말해보카 | 한국형 개인화 드릴, 자동 복습, 학습 통계, 즐겨찾기 | 이어하기, 오늘의 복습, 약한 단원, 과목별 진도, 보관함 |
 | 스픽 | Learn-Practice-Apply 행동 루프와 말하기 불안 완화 | 개념 보기, 조작하기, 실제 문제/상황에 적용, 즉시 피드백 |
 | 듀오링고 | 경로형 진행, 짧은 세션, XP, 스트릭, 배지 | 과목/학년별 국지 패스, 탐구 점수, 연속 학습일, 개념 배지 |
+| 26초 | 앱이 오늘 분량을 정하고 사용자는 카드만 빠르게 처리 | 오늘의 개념 큐, 이해도 체크, 복습 큐, 학습량 선택 |
 | NCIC | 교육과정 원문 기준 | 단원 ID, 성취기준, 과목/학교급 구조의 기준 |
 
 경쟁이나 랭킹은 기본 경험으로 강하게 넣지 않는다. 비영리·개인 학습용 앱이므로 완료감, 연속성, 저장, 복습, 개념 배지 중심이 우선이다.
@@ -77,14 +78,15 @@ Edu Platform
 
 홈은 마케팅 허브가 아니라 즉시 학습 진입 허브다.
 
-1. 이어하기
-2. 오늘의 복습
-3. 검색
-4. 과목 허브
-5. 추천 경로
-6. 최근 학습
-7. 즐겨찾기
-8. 출처/라이선스
+1. 오늘의 개념 큐
+2. 이어하기
+3. 오늘의 복습
+4. 검색
+5. 과목 허브
+6. 추천 경로
+7. 최근 학습
+8. 즐겨찾기
+9. 출처/라이선스
 
 첫 카드는 항상 사용자가 다시 들어왔을 때 할 다음 행동을 보여준다. 탐색은 중요하지만 재진입보다 앞서면 안 된다.
 
@@ -105,13 +107,14 @@ UnitPage
 ## 6. P0 UX Roadmap
 
 1. Home 개인화 대시보드
-2. Header + Ctrl+K 검색 모달
-3. UnitCard 상태 체계
-4. UnitPage 표준 레이아웃
-5. InteractiveModule 공통 UX 템플릿
-6. Progress Dashboard
-7. Roadmap Preview
-8. `M9-CR-03` 파일럿 단원 완성도 강화
+2. TodayConceptQueue + ReviewQueue + StreakChip
+3. Header + Ctrl+K 검색 모달
+4. UnitCard 상태 체계
+5. UnitPage 표준 레이아웃
+6. InteractiveModule 공통 UX 템플릿
+7. Progress Dashboard
+8. Roadmap Preview
+9. `M9-CR-03` 파일럿 단원 완성도 강화
 
 ## 7. Pilot Unit Standard
 
@@ -136,6 +139,9 @@ UnitPage
 - [Speak Method: Learn, Practice, Apply](https://www.speak.com/blog/how-speak-reinvents-language-learning)
 - [Duolingo Friend Streak](https://blog.duolingo.com/friend-streak/)
 - [Duolingo Method Whitepaper](https://duolingo-papers.s3.amazonaws.com/reports/duolingo-method-whitepaper.pdf)
+- [26초 App Store](https://apps.apple.com/kr/app/26%EC%B4%88-%EC%B4%88%EA%B3%A0%EC%86%8D-%EB%8B%A8%EC%96%B4-%EC%95%94%EA%B8%B0/id6738269475)
+- [26초 Google Play](https://play.google.com/store/apps/details?hl=ko&id=com.skimmify.toeic)
+- [26초 공식 홈페이지](https://skimmify.com/)
 - [NCIC 국가교육과정정보센터](https://ncic.re.kr/)
 
 ## 9. Data Caution
