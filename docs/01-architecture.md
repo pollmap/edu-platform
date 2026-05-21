@@ -90,12 +90,12 @@ edu-platform/
 
 - Tailwind CSS 4 CSS-first 구조
 - `@theme` token
-- `:root` light token
-- `.dark` dark token
+- `:root` Light-first token
+- `.dark` optional dark token
 - `va-*` utility/class family
 - subject color mapping은 `lib/types.ts`와 함께 확인
 
-Figma 연동은 `docs/design/figma-stitch-handoff.md` 기준으로 진행한다.
+기본 경험은 밝은 교육용 UI다. Figma 연동은 `docs/design/product-ux-foundation.md`와 `docs/design/figma-stitch-handoff.md` 기준으로 진행한다.
 
 ## 7. 검증 파이프라인
 

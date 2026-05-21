@@ -3,6 +3,16 @@
 > 2022 개정 교육과정 기반 5과목(국어·영어·수학·사회·과학) 인터랙티브 학습 웹앱.
 > 현재 저장소의 마스터 인덱스에 열거된 **392개 단원 ID가 모두 앱에 등록되어 있고, 392개 라우트가 모두 활성 인터랙티브 단원으로 연결**됩니다.
 
+## UX 방향
+
+이 앱은 전 과목 위키가 아니라 **초3~고3 개념을 손으로 만지는 인터랙티브 학습 맵**이다.
+
+- 홈은 말해보카처럼 개인화된 오늘의 학습 허브로 간다.
+- 단원은 스픽식 Learn-Practice-Apply를 개념 조작 루프로 바꾼다.
+- 전체 교육과정은 듀오링고처럼 선수·후속 개념 경로로 보여준다.
+- 기본 디자인은 다크 위키가 아니라 밝고 산뜻한 Light-first 교육용 UI다.
+- 핵심 루프는 `See -> Touch -> Predict -> Explain -> Challenge`다.
+
 ## 현재 상태
 
 | 항목 | 값 |
@@ -129,12 +139,15 @@ edu-platform/
 3. **본질 우선**: 장식보다 개념의 핵심이 보이는 시각화.
 4. **모바일 우선**: 360px 폭과 44px 이상 터치 타겟을 기본 기준으로 둡니다.
 5. **즉시 반응**: 입력 변경 후 결과가 100ms 안에 갱신되는 인터랙션을 지향합니다.
-6. **Figma 중심 핸드오프**: Google Stitch는 시안 탐색용이고, 최종 구현 기준은 Figma frame, capture, token export입니다.
+6. **Light-first 디자인**: 기본 경험은 밝은 배경, 선명한 카드, 부드러운 과목 색상, 명확한 CTA 중심입니다.
+7. **Figma 중심 핸드오프**: Google Stitch는 시안 탐색용이고, 최종 구현 기준은 Figma frame, capture, token export입니다.
 
 ## 주요 문서
 
 - 진행 현황: `docs/PROGRESS.md`
 - 완료 감사 기준: `docs/COMPLETION-AUDIT.md`
+- 제품 UX 기준: `docs/design/product-ux-foundation.md`
+- 경쟁앱 역기획 요약: `docs/design/competitive-ux-reverse-engineering.md`
 - 마스터 인덱스: `docs/00-MASTER-INDEX.md`
 - 제작 플레이북: `docs/03-claude-code-playbook.md`
 - Figma/Stitch 핸드오프: `docs/design/figma-stitch-handoff.md`

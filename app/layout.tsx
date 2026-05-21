@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     default: "한국 초3~고3 인터랙티브 교육 플랫폼",
     template: "%s | 한국 인터랙티브 교육",
   },
-  description: "2022 개정 교육과정 5과목 488 단원 인터랙티브 학습 자원",
+  description: "2022 개정 교육과정 5과목 개념을 손으로 만지는 인터랙티브 학습 맵",
   applicationName: "한국 인터랙티브 교육",
   authors: [{ name: "pollmap" }],
   keywords: ["교육", "초등", "중등", "고등", "수학", "과학", "국어", "영어", "사회", "인터랙티브"],

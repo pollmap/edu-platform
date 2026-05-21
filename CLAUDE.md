@@ -4,7 +4,7 @@
 
 ## 목적
 
-2022 개정 교육과정 기반 5과목(국어·영어·수학·사회·과학) 핵심 개념을 인터랙티브로 시각화한다. 현재 저장소 범위는 `docs/00-MASTER-INDEX.md`에 열거된 392개 단원 ID이며, 392개 모두 앱에 등록되어 라우트와 인터랙티브 컴포넌트로 연결된다.
+2022 개정 교육과정 기반 5과목(국어·영어·수학·사회·과학) 핵심 개념을 인터랙티브로 시각화한다. 이 앱은 전 과목 위키가 아니라 초3~고3 학생이 개념을 검색하고, 만지고, 실험하고, 저장하고, 다음 개념으로 이동하는 인터랙티브 학습 맵이다. 현재 저장소 범위는 `docs/00-MASTER-INDEX.md`에 열거된 392개 단원 ID이며, 392개 모두 앱에 등록되어 라우트와 인터랙티브 컴포넌트로 연결된다.
 
 ## 현재 완료 상태
 
@@ -24,7 +24,16 @@
 4. **모바일 우선**: 360px 폭에서 깨지지 않고, 터치 영역은 최소 44px.
 5. **즉시 반응**: 입력 변경 후 결과가 100ms 안에 갱신되는 인터랙션을 지향.
 6. **Next.js 16 패턴**: Next 관련 변경은 현재 설치 버전 기준으로 확인하고 작성.
-7. **Figma 중심 핸드오프**: Stitch는 시안 탐색 보조 도구이고, 최종 구현 기준은 Figma frame, capture, token export다.
+7. **Light-first 디자인**: 기본 경험은 밝은 교육용 UI다. 다크 모드는 보조 옵션으로만 유지한다.
+8. **Figma 중심 핸드오프**: Stitch는 시안 탐색 보조 도구이고, 최종 구현 기준은 Figma frame, capture, token export다.
+
+## 제품 UX 기준
+
+- 홈: 말해보카식 개인화 허브. 오늘의 추천, 최근 학습, 즐겨찾기, 과목별 진도를 우선한다.
+- 단원: 스픽식 Learn-Practice-Apply를 `See -> Touch -> Predict -> Explain -> Challenge`로 바꾼다.
+- 로드맵: 듀오링고식 경로형 학습을 교육과정 선수·후속 개념 맵으로 적용한다.
+- 진도: XP/스트릭/배지는 가볍게 쓰고, 강한 경쟁이나 리더보드는 추후 학급 모드로 분리한다.
+- 디자인: 밝은 배경, 선명한 카드, 부드러운 과목 색상, 밝은 실험실형 인터랙티브 캔버스, 명확한 CTA가 기본이다.
 
 ## 기술 스택
 
@@ -94,6 +103,7 @@ npm run test:e2e
 
 - 진행 현황: `docs/PROGRESS.md`
 - 완료 감사 기준: `docs/COMPLETION-AUDIT.md`
+- 제품 UX 기준: `docs/design/product-ux-foundation.md`
 - 제작 플레이북: `docs/03-claude-code-playbook.md`
 - Figma/Stitch 핸드오프: `docs/design/figma-stitch-handoff.md`
 - 모바일 검증: `docs/MOBILE-CHECKLIST.md`

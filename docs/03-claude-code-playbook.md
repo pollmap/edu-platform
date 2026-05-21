@@ -19,7 +19,8 @@
 2. NCIC 또는 저장소 출처 문서로 단원명과 성취기준을 재확인한다.
 3. `docs/02-component-catalog.md`의 20개 패턴 중 가장 가까운 패턴을 고른다.
 4. 기존 primitive와 subject별 컴포넌트 패턴을 먼저 재사용한다.
-5. Figma/Stitch 반영 작업이면 `docs/design/figma-stitch-handoff.md`의 handoff 입력물을 확인한다.
+5. 제품 UX 방향은 `docs/design/product-ux-foundation.md`와 `docs/design/competitive-ux-reverse-engineering.md`를 확인한다.
+6. Figma/Stitch 반영 작업이면 `docs/design/figma-stitch-handoff.md`의 handoff 입력물을 확인한다.
 
 ## 2. 단원 작업 표준 절차
 
@@ -64,6 +65,8 @@ app/(units)/highschool/math/calculus-1/M-CA1-03/page.tsx
 - `UnitHeader`, `Breadcrumb`, `SectionCard`, `PrerequisiteList`를 일관되게 사용한다.
 - 인터랙티브 영역은 `InteractiveErrorBoundary`로 감싼다.
 - 생성용 placeholder 문구를 남기지 않는다.
+- 단원 구조는 `Learn -> Manipulate -> Check -> Review` 흐름을 따른다.
+- 완료와 복습 큐는 분리한다.
 
 ### Step 4. 검증
 
