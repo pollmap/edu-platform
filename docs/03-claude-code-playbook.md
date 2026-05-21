@@ -12,15 +12,17 @@
 | planned 단원 | 0 |
 | 인터랙티브 export | 270 |
 | 완료 감사 | `npm run audit:completion` |
+| 콘텐츠 감사 | `npm run audit:content` |
 
 ## 1. 작업 전 확인
 
 1. `docs/00-MASTER-INDEX.md`에서 단원 ID와 인터랙티브 후보를 확인한다.
 2. NCIC 또는 저장소 출처 문서로 단원명과 성취기준을 재확인한다.
 3. `docs/02-component-catalog.md`의 20개 패턴 중 가장 가까운 패턴을 고른다.
-4. 기존 primitive와 subject별 컴포넌트 패턴을 먼저 재사용한다.
-5. 제품 UX 방향은 `docs/design/product-ux-foundation.md`와 `docs/design/competitive-ux-reverse-engineering.md`를 확인한다.
-6. Figma/Stitch 반영 작업이면 `docs/design/figma-stitch-handoff.md`의 handoff 입력물을 확인한다.
+4. `lib/unit-content/`에서 해당 단원의 sourceRefs와 세부 학습자료가 있는지 확인한다.
+5. 기존 primitive와 subject별 컴포넌트 패턴을 먼저 재사용한다.
+6. 제품 UX 방향은 `docs/design/product-ux-foundation.md`와 `docs/design/competitive-ux-reverse-engineering.md`를 확인한다.
+7. Figma/Stitch 반영 작업이면 `docs/design/figma-stitch-handoff.md`의 handoff 입력물을 확인한다.
 
 ## 2. 단원 작업 표준 절차
 
@@ -31,6 +33,15 @@
 - 단원 경로 생성: `unitPath(unit)`
 
 단원 상태를 바꿀 때는 `npm run audit:completion`이 통과해야 한다.
+
+### Step 1-1. UnitContent 확인
+
+- 세부 학습자료 진입점: `lib/unit-content/index.ts`
+- 과목별 콘텐츠 파일: `lib/unit-content/{math,science,korean,english,social}.ts`
+- 모든 단원은 sourceRefs, 쉬운/표준/심화 설명, 예시 2개 이상, 정확히 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 유효한 다음 단원 ID를 가져야 한다.
+- 추가 단원은 공식 출처 행이 확인되기 전까지 `lib/curriculum/`이나 `lib/unit-content/`에 넣지 않는다.
+
+세부 콘텐츠를 바꿀 때는 `npm run audit:content`가 통과해야 한다.
 
 ### Step 2. 인터랙티브 컴포넌트 작성
 
@@ -75,6 +86,7 @@ app/(units)/highschool/math/calculus-1/M-CA1-03/page.tsx
 ```bash
 npm run validate
 npm run audit:completion
+npm run audit:content
 npm run tsc
 npm test
 ```
@@ -85,6 +97,7 @@ npm test
 npm run lint:md
 npm run validate
 npm run audit:completion
+npm run audit:content
 npm run audit:security
 npm run tsc
 npm test
@@ -101,8 +114,11 @@ npm run secret-grep
 - [ ] 수식은 KaTeX로 렌더링한다.
 - [ ] 저작권 침해 자료, 문학 본문, 노래가사, 상표 IP를 사용하지 않는다.
 - [ ] 선수학습 링크가 실제 존재하는 단원으로 연결된다.
+- [ ] `nextUnitIds`가 실제 존재하는 단원으로 연결된다.
+- [ ] 세부 콘텐츠에는 출처 refs와 3문항 미니 문제가 있다.
 - [ ] 초등 대상 단원은 어려운 한자어를 풀어 쓴다.
 - [ ] `npm run audit:completion`에서 blocker가 0개다.
+- [ ] `npm run audit:content`에서 blocker가 0개다.
 
 ## 4. 프롬프트 템플릿
 
@@ -114,11 +130,13 @@ npm run secret-grep
 확인:
 - docs/00-MASTER-INDEX.md의 단원 정보
 - lib/curriculum/index.ts와 overrides.ts의 메타데이터
+- lib/unit-content/의 세부 학습자료
 - components/interactive/math/QuadraticFunctionExplorer.tsx
 - app/(units)/grade-9/math/M9-CR-03/page.tsx
 검증:
 - npm run validate
 - npm run audit:completion
+- npm run audit:content
 - npm run tsc
 - npm test
 ```
@@ -133,6 +151,7 @@ docs/design/figma-stitch-handoff.md의 capture/token checklist를 먼저 채운�
 - npm run lint:md
 - npm run validate
 - npm run audit:completion
+- npm run audit:content
 - npm run tsc
 - npm test
 - npm run test:e2e

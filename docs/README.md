@@ -13,6 +13,8 @@
 | generated stub page | 0 |
 | 인터랙티브 export | 270 |
 | 공통 학습자료 | 392/392 |
+| 세부 UnitContent | 392/392 |
+| 488 확장 후보 | 96 보류 |
 
 위 수치는 `npm run audit:completion`과 `npm run audit:content`로 검증한다.
 
@@ -26,6 +28,7 @@
 | `03-claude-code-playbook.md` | 새 단원이나 컴포넌트 작업 시 쓰는 제작 SOP |
 | `04-sample-interactives/quadratic-function.html` | 이차함수 인터랙티브 원형 샘플 |
 | `COMPLETION-AUDIT.md` | 저장소 완료 감사 기준과 명령 |
+| `UNIT-CONTENT-EXPANSION-CANDIDATES.md` | 488 확장 후보의 공식 출처 검증 보류 정책 |
 | `MOBILE-CHECKLIST.md` | 모바일 수동 검증 체크리스트 |
 | `PROGRESS.md` | 현재 커버리지와 품질 게이트 |
 | `design/product-ux-foundation.md` | Light-first 인터랙티브 학습 맵 디자인/UX 제품 기준 |
@@ -40,8 +43,9 @@
 2. **제품 UX와 디자인 판단은 인터랙티브 학습 맵 기준**이다. 자세한 기준은 `design/product-ux-foundation.md`, `design/competitive-ux-reverse-engineering.md`, `design/26seconds-ux-reference.md`를 따른다.
 3. **기본 디자인은 Light-first**다. 다크 모드는 선택 옵션으로만 유지한다.
 4. **코드 반영은 출처가 있는 입력물 기준**으로 한다. Figma 링크, 캡처, token export, NCIC/공식 출처를 우선한다.
-5. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 `npm run audit:completion`과 `npm run audit:content`를 통과해야 한다.
-6. **보안과 공개 저장소 기본 문서는 유지한다.** LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING, README가 누락되면 감사가 실패한다.
+5. **세부 학습자료는 `UnitContent`로 관리한다.** 모든 앱 단원은 sourceRefs, 설명 3단계, 예시, 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 다음 단원 연결을 가져야 한다.
+6. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 `npm run audit:completion`과 `npm run audit:content`를 통과해야 한다.
+7. **보안과 공개 저장소 기본 문서는 유지한다.** LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING, README가 누락되면 감사가 실패한다.
 
 ## 검증 명령
 

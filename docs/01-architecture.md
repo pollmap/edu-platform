@@ -19,6 +19,7 @@ edu-platform/
 ├── lib/
 │   ├── curriculum/              # 단원 메타데이터 분할 파일
 │   ├── data/                    # 출처 기반 정적 데이터 로더
+│   ├── unit-content/            # 단원별 세부 학습자료 데이터
 │   ├── metadata.ts
 │   ├── progress.ts
 │   └── search-index.ts
@@ -37,6 +38,13 @@ edu-platform/
 - `unitPath(unit)`: 단원 URL 생성
 - `findUnit(id)`: 단원 ID 조회
 
+단원별 세부 학습자료의 진입점은 `lib/unit-content/index.ts`다.
+
+- `UNIT_CONTENT`: 현재 공식 검증 범위 392개 단원의 상세 콘텐츠 레지스트리
+- `getUnitContent(id)`: 단원 ID별 상세 콘텐츠 조회
+- `OFFICIAL_VERIFIED_UNIT_TARGET`: 현재 감사 기준 목표 수
+- 과목별 파일: `math.ts`, `science.ts`, `korean.ts`, `english.ts`, `social.ts`
+
 현재 감사 기준:
 
 | 항목 | 값 |
@@ -46,6 +54,7 @@ edu-platform/
 | 활성 단원 | 392 |
 | planned 단원 | 0 |
 | generated stub page | 0 |
+| 세부 UnitContent | 392/392 |
 
 ## 3. 라우팅
 
@@ -105,6 +114,7 @@ edu-platform/
 npm run lint:md
 npm run validate
 npm run audit:completion
+npm run audit:content
 npm run audit:security
 npm run tsc
 npm test
@@ -114,3 +124,4 @@ npm run secret-grep
 ```
 
 `scripts/completion-audit.ts`는 마스터 인덱스 ID, 앱 등록, 라우트, stub, error boundary, component export, 공개 문서를 검사한다.
+`scripts/content-audit.ts`는 UnitContent 수, 출처 refs, 설명 3단계, 예시 2개 이상, 고정 3문항 미니 문제, 정답/해설 분리, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 검사한다.

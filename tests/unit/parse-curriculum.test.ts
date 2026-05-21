@@ -1,6 +1,6 @@
 /**
  * parse-curriculum.ts 의 분류 로직 단위 테스트.
- * 자동화 스크립트가 488개에 영향을 주므로 unit test 가 필수.
+ * 자동화 스크립트가 현재 검증 범위 392개와 향후 공식 확장 범위에 영향을 주므로 unit test 가 필수.
  */
 import { describe, expect, it } from 'vitest';
 import { COMMON_CROSS_GRADE_UNITS } from '@/lib/curriculum/common-cross-grade';

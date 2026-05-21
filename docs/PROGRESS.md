@@ -2,6 +2,7 @@
 
 **Last Updated:** 2026-05-21  
 **Repository Completion:** 392/392 active units · 0 planned · 0 generated stubs  
+**Detailed Content:** 392/392 verified UnitContent · 96 unverified expansion candidates blocked  
 **Audit Commands:** `npm run audit:completion` · `npm run audit:content`
 
 ---
@@ -17,6 +18,8 @@
 - 활성 단원 페이지가 `InteractiveErrorBoundary`를 사용함
 - 활성 단원의 `componentName`이 실제 인터랙티브 export와 연결됨
 - 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 학습목표, 5단계 조작 루프, 미니 도전, 오개념 교정, 적용 장면, 산출물, 3개 복습 질문을 제공함
+- 모든 단원이 `lib/unit-content/` 세부 콘텐츠를 가지며 출처 refs, 쉬운/표준/심화 설명, 2개 이상 예시, 정확히 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 유효한 다음 단원 ID를 제공함
+- 488개 목표 중 추가 96개는 공식 출처 행이 검증될 때까지 앱 데이터에 추가하지 않음
 
 ---
 
@@ -31,6 +34,8 @@
 | generated stub page | 0 |
 | 인터랙티브 export | 270 |
 | 공통 학습자료 | 392/392 |
+| 세부 UnitContent | 392/392 |
+| 488 확장 후보 | 96 보류 |
 | 차단 이슈 | 0 |
 
 ---
@@ -90,6 +95,9 @@
 - README, CLAUDE.md, docs README, architecture/playbook 문서를 현재 구조와 수치에 맞게 최신화했다.
 - 모든 단원 페이지가 공유하는 `UnitLearningMaterial` 패널을 추가해 핵심질문·목표·조작루프·미니도전·오개념·적용·산출물·복습질문을 392개 단원 전체에 제공한다.
 - `scripts/content-audit.ts`를 추가하고 CI에 연결해 교육자료 필수 섹션 누락을 차단한다.
+- `lib/unit-content/` 데이터층을 추가해 392개 단원에 출처 refs, 쉬운/표준/심화 설명, 예시, 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 다음 단원 연결을 제공한다.
+- `scripts/content-audit.ts`를 강화해 UnitContent 누락, 출처 누락, 예시 부족, 미니 문제 수 불일치, 깨진 `nextUnitIds`, 검증 목표 수 불일치를 차단한다.
+- 488개 확장 중 미검증 96개는 `docs/UNIT-CONTENT-EXPANSION-CANDIDATES.md`에 보류 상태로 분리했다.
 
 ---
 
