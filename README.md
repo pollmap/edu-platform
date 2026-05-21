@@ -99,10 +99,18 @@ edu-platform/
 3. **본질 우선**: 화려함보다 개념의 핵심이 보이는 시각화
 4. **모바일 우선**: 슬라이더 터치 영역 최소 44px
 5. **즉시 반응**: 입력 → 결과 100ms 이내
+6. **Figma 중심 핸드오프**: Google Stitch는 시안 탐색용으로만 쓰고, 최종 프론트엔드 구현 기준은 Figma frame, capture, token export로 둔다. 현재 환경에서는 Figma 직접 커넥터 없이 `docs/design/figma-stitch-handoff.md` 기준으로 링크/캡처/토큰을 받아 반영한다.
 
 ## 양산 가이드
 
 `docs/03-claude-code-playbook.md` 참조.
+
+## 디자인 핸드오프
+
+- Figma/Stitch 프론트엔드 기준: `docs/design/figma-stitch-handoff.md`
+- 1차 필수 surface: 홈, 헤더, 검색 모달, 단원 헤더, 단원 카드/진도/CTA, 파일럿 단원 `M9-CR-03`
+- 1차 필수 token: 과목 색상, light/dark 배경·전경, border, card hover, typography, spacing
+- 검증 기준: `npm run lint:md`, `npm run validate`, `npm run tsc`, `npm test`, `npm run test:e2e`
 
 ## 라이선스
 

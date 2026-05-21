@@ -1,6 +1,6 @@
 # 콘텐츠 진척 현황
 
-**Last Updated:** 2026-05-04
+**Last Updated:** 2026-05-21
 **Overall Completion:** 148/392 units (61.6%) · 98/? components
 
 ---
@@ -92,22 +92,29 @@
 
 ## 3. 다음 우선순위 (Round 13+)
 
-### P0: Stub 양산 가속
+### P0: Figma/Stitch 핸드오프 기반
+- **목표:** Figma 중심, Stitch 보조 프론트엔드 개발 원칙 확정
+- **완료:** `docs/design/figma-stitch-handoff.md` 추가
+- **범위:** 홈, 헤더, 검색 모달, 단원 헤더, 단원 카드/진도/CTA, 파일럿 단원 `M9-CR-03`
+- **토큰:** `app/globals.css`의 `@theme`, `:root`, `.dark`, `va-*`를 Figma 변수 후보와 매핑
+- **운영:** Figma 직접 커넥터 없이 Figma 링크/캡처/token export 기반으로 구현
+
+### P1: Stub 양산 가속
 - **목표:** 244 stub → 148 done (현황) → 100 stub 이하 (50% 초과)
 - **속도:** Wave 4–6 병렬 에이전트, 32 단원/wave
 - **전략:** 동일 패턴 재사용 (Pattern 1, 12, 13, 14 = 55% 커버)
 
-### P1: 과학·사회 집중
+### P2: 과학·사회 집중
 - 현재 25.0%, 24.0% → 목표 40% 이상
 - 과학: 입자·생명계·지구 3개 메트라 병렬
 - 사회: 지리·역사 시각화 (Pattern 7, 8) 표준화
 
-### P2: 컴포넌트 테스트 자동화
+### P3: 컴포넌트 테스트 자동화
 - vitest + Playwright E2E
 - 반응성 (360px 모바일) 검증
 - 접근성 (WCAG 2.1 AA) 검증
 
-### P3: NCIC 추가 메타 통합
+### P4: NCIC 추가 메타 통합
 - achievementStandards 100% 매핑
 - prerequisites 자동 검증
 - 선수 개념 단원 링크
