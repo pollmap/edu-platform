@@ -23,11 +23,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "한국 초3~고3 인터랙티브 교육 플랫폼",
-    template: "%s | 한국 인터랙티브 교육",
+    default: "하루배움",
+    template: "%s | 하루배움",
   },
-  description: "2022 개정 교육과정 5과목 개념을 손으로 만지는 인터랙티브 학습 맵",
-  applicationName: "한국 인터랙티브 교육",
+  description: "2022 개정 교육과정 5과목 개념을 하루 큐로 만지는 인터랙티브 학습 맵",
+  applicationName: "하루배움",
   authors: [{ name: "pollmap" }],
   keywords: ["교육", "초등", "중등", "고등", "수학", "과학", "국어", "영어", "사회", "인터랙티브"],
   robots: { index: true, follow: true },

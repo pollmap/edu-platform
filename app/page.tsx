@@ -35,6 +35,9 @@ export default function Home() {
   return (
     <main className="container mx-auto max-w-6xl px-4 py-8">
       <section className="va-hero">
+        <div className="va-hero__brand">
+          <img src="/brand/harubaeum-logo.png" alt="하루배움" />
+        </div>
         <h1 className="va-hero__title">오늘의 개념 지도</h1>
         <p className="va-hero__subtitle">초3부터 고3까지, 오늘 만질 개념을 바로 시작하세요</p>
         <div className="va-hero__stats">

@@ -4,6 +4,8 @@
 
 이 문서는 첫 리디자인 스프린트의 기준 문서다. 제품 UX 기준은 `docs/design/product-ux-foundation.md`이며, 기본 방향은 **Light-first 인터랙티브 학습 맵**이다. Google Stitch는 빠른 화면 시안과 변형 탐색용으로 쓰고, Figma를 최종 디자인 기준으로 둔다. 코드 반영은 Figma 링크, 화면 캡처, 토큰 export를 받은 뒤 진행한다. 현재 작업 환경에는 Figma 직접 커넥터/MCP를 사용하지 않는다.
 
+브랜드 비주얼은 `하루배움` 로고와 캐릭터 세트를 기준으로 한다. 사용 가능한 파일과 용도는 `docs/design/brand-assets.md`를 따른다.
+
 ## 1. 작업 순서
 
 1. **Stitch에서 초안 생성**
@@ -208,3 +210,4 @@ Verification:
 - [Figma Code Connect UI](https://developers.figma.com/docs/code-connect/code-connect-ui-setup/)
 - [Google Stitch](https://stitch.withgoogle.com/)
 - [Product UX Foundation](product-ux-foundation.md)
+- [Brand Assets](brand-assets.md)

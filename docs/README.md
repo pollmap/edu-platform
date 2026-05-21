@@ -30,6 +30,7 @@
 | `design/product-ux-foundation.md` | Light-first 인터랙티브 학습 맵 디자인/UX 제품 기준 |
 | `design/competitive-ux-reverse-engineering.md` | 말해보카·스픽·듀오링고 디자인/UX 역기획 레퍼런스 |
 | `design/26seconds-ux-reference.md` | 26초식 오늘 큐·카드 집중·복습 큐 디자인/UX 레퍼런스 |
+| `design/brand-assets.md` | 하루배움 로고·캐릭터 브랜드 자산 사용 기준 |
 | `design/figma-stitch-handoff.md` | Figma 중심, Stitch 보조 프론트엔드 핸드오프 기준 |
 
 ## 운영 원칙

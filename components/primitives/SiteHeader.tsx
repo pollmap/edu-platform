@@ -64,9 +64,15 @@ export function SiteHeader() {
         <div className="container mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
           <Link
             href="/"
-            className="font-extrabold tracking-tight text-zinc-900 dark:text-white shrink-0 text-lg"
+            className="flex shrink-0 items-center gap-2 font-extrabold tracking-tight text-zinc-900 dark:text-white text-lg"
           >
-            개념지도
+            <img
+              src="/brand/mascot-calendar.png"
+              alt=""
+              className="h-9 w-9 rounded-lg object-cover"
+              aria-hidden="true"
+            />
+            <span>하루배움</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">

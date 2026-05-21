@@ -62,9 +62,22 @@ input[type='range'] {
   background: var(--va-hero-bg);
   color: var(--va-hero-fg);
   margin-bottom: 48px;
-  padding: 80px 48px;
+  padding: 56px 48px 72px;
   text-align: center;
   border: 1px solid var(--va-border);
+}
+
+.va-hero__brand {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.va-hero__brand img {
+  aspect-ratio: 1 / 1;
+  height: 144px;
+  object-fit: contain;
+  width: 144px;
 }
 
 .va-hero__title {
@@ -248,8 +261,12 @@ input[type='range'] {
     grid-template-columns: 1fr;
   }
   .va-hero {
-    padding: 48px 24px;
+    padding: 40px 24px 48px;
     margin-bottom: 32px;
+  }
+  .va-hero__brand img {
+    height: 108px;
+    width: 108px;
   }
   .va-hero__subtitle {
     margin-bottom: 32px;

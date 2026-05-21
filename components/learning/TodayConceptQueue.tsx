@@ -83,6 +83,20 @@ export function TodayConceptQueue({ units, totalUnits }: TodayConceptQueueProps)
         </div>
 
         <div className="space-y-4 p-5">
+          <div className="flex items-center gap-3 rounded-xl bg-blue-50 p-3 ring-1 ring-blue-100 dark:bg-blue-950/20 dark:ring-blue-900/50">
+            <img
+              src="/brand/mascot-reader.png"
+              alt=""
+              aria-hidden="true"
+              className="h-16 w-16 shrink-0 rounded-xl object-cover"
+            />
+            <div>
+              <div className="text-sm font-bold text-blue-950 dark:text-blue-100">하루 하나만 해도 전진</div>
+              <div className="mt-1 text-xs leading-relaxed text-blue-800 dark:text-blue-200">
+                오늘 큐를 끝내도 추가 학습은 언제든 열려 있어요.
+              </div>
+            </div>
+          </div>
           <StudyAmountSelector value={studyAmount} onChange={setStudyAmount} />
           <div className="grid grid-cols-3 gap-2">
             <Metric label="복습 큐" value={`${dueReviewCount}`} />
