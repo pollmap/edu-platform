@@ -146,8 +146,8 @@ edu-platform/
 
 - 진행 현황: `docs/PROGRESS.md`
 - 완료 감사 기준: `docs/COMPLETION-AUDIT.md`
-- 제품 UX 기준: `docs/design/product-ux-foundation.md`
-- 경쟁앱 역기획 요약: `docs/design/competitive-ux-reverse-engineering.md`
+- 디자인/UX 제품 기준: `docs/design/product-ux-foundation.md`
+- 디자인/UX 경쟁앱 역기획 레퍼런스: `docs/design/competitive-ux-reverse-engineering.md`
 - 마스터 인덱스: `docs/00-MASTER-INDEX.md`
 - 제작 플레이북: `docs/03-claude-code-playbook.md`
 - Figma/Stitch 핸드오프: `docs/design/figma-stitch-handoff.md`

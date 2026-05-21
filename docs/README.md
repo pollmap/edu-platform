@@ -27,14 +27,14 @@
 | `COMPLETION-AUDIT.md` | 저장소 완료 감사 기준과 명령 |
 | `MOBILE-CHECKLIST.md` | 모바일 수동 검증 체크리스트 |
 | `PROGRESS.md` | 현재 커버리지와 품질 게이트 |
-| `design/product-ux-foundation.md` | Light-first 인터랙티브 학습 맵 제품 UX 기준 |
-| `design/competitive-ux-reverse-engineering.md` | 말해보카·스픽·듀오링고 역기획 적용 요약 |
+| `design/product-ux-foundation.md` | Light-first 인터랙티브 학습 맵 디자인/UX 제품 기준 |
+| `design/competitive-ux-reverse-engineering.md` | 말해보카·스픽·듀오링고 디자인/UX 역기획 레퍼런스 |
 | `design/figma-stitch-handoff.md` | Figma 중심, Stitch 보조 프론트엔드 핸드오프 기준 |
 
 ## 운영 원칙
 
 1. **Figma가 최종 디자인 기준**이다. Stitch는 초안 생성과 변형 탐색에만 사용한다.
-2. **제품 UX는 인터랙티브 학습 맵 기준**이다. 자세한 기준은 `design/product-ux-foundation.md`를 따른다.
+2. **제품 UX와 디자인 판단은 인터랙티브 학습 맵 기준**이다. 자세한 기준은 `design/product-ux-foundation.md`와 `design/competitive-ux-reverse-engineering.md`를 따른다.
 3. **기본 디자인은 Light-first**다. 다크 모드는 선택 옵션으로만 유지한다.
 4. **코드 반영은 출처가 있는 입력물 기준**으로 한다. Figma 링크, 캡처, token export, NCIC/공식 출처를 우선한다.
 5. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 `npm run audit:completion`을 통과해야 한다.
