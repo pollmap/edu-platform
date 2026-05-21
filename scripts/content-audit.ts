@@ -32,6 +32,9 @@ for (const unit of allUnits) {
     if (!hasUsefulText(step.description, 18)) blockers.push(`${unit.id}: weak loop step ${step.label}`);
   }
   if (!hasUsefulText(material.miniChallenge, 30)) blockers.push(`${unit.id}: missing mini challenge`);
+  if (!hasUsefulText(material.misconception, 30)) blockers.push(`${unit.id}: missing misconception guidance`);
+  if (!hasUsefulText(material.application, 30)) blockers.push(`${unit.id}: missing application guidance`);
+  if (!hasUsefulText(material.studentOutput, 24)) blockers.push(`${unit.id}: missing student output`);
   if (material.reviewQuestions.length !== 3) blockers.push(`${unit.id}: review question count is not 3`);
   for (const [index, question] of material.reviewQuestions.entries()) {
     if (!hasUsefulText(question, 15)) blockers.push(`${unit.id}: weak review question ${index + 1}`);
@@ -51,7 +54,7 @@ for (const unit of allUnits) {
 
 console.log('[content-audit] unit learning material coverage');
 console.log(`[content-audit] units checked: ${allUnits.length}`);
-console.log('[content-audit] required sections: core question, quick summary, 3 goals, 5-step loop, mini challenge, 3 review questions');
+console.log('[content-audit] required sections: core question, quick summary, 3 goals, 5-step loop, mini challenge, misconception, application, student output, 3 review questions');
 console.log(`[content-audit] blockers: ${blockers.length}`);
 
 for (const blocker of blockers.slice(0, 50)) {

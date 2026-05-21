@@ -88,6 +88,27 @@ export function UnitLearningMaterial({ unit }: UnitLearningMaterialProps) {
         </div>
       </div>
 
+      <div className="mt-4 grid gap-3 md:grid-cols-3">
+        <div className="rounded-lg bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900/80 dark:ring-zinc-800">
+          <div className="text-sm font-bold text-zinc-950 dark:text-zinc-50">오개념 바로잡기</div>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {material.misconception}
+          </p>
+        </div>
+        <div className="rounded-lg bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900/80 dark:ring-zinc-800">
+          <div className="text-sm font-bold text-zinc-950 dark:text-zinc-50">적용 장면</div>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {material.application}
+          </p>
+        </div>
+        <div className="rounded-lg bg-white p-4 ring-1 ring-zinc-200 dark:bg-zinc-900/80 dark:ring-zinc-800">
+          <div className="text-sm font-bold text-zinc-950 dark:text-zinc-50">남길 산출물</div>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {material.studentOutput}
+          </p>
+        </div>
+      </div>
+
       <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">{material.sourceNote}</p>
     </section>
   );

@@ -20,6 +20,9 @@ describe('buildUnitLearningMaterial', () => {
       'Challenge',
     ]);
     expect(material.miniChallenge).toContain('이차함수');
+    expect(material.misconception).toContain('이차함수');
+    expect(material.application).toContain('이차함수');
+    expect(material.studentOutput).toContain('이차함수');
     expect(material.reviewQuestions).toHaveLength(3);
     expect(material.sourceNote).toContain('M9-CR-03');
   });
@@ -35,6 +38,9 @@ describe('buildUnitLearningMaterial', () => {
       expect(material.learningGoals, `${unit.id} goals`).toHaveLength(3);
       expect(material.loopSteps, `${unit.id} loopSteps`).toHaveLength(5);
       expect(material.miniChallenge.length, `${unit.id} miniChallenge`).toBeGreaterThan(30);
+      expect(material.misconception.length, `${unit.id} misconception`).toBeGreaterThan(30);
+      expect(material.application.length, `${unit.id} application`).toBeGreaterThan(30);
+      expect(material.studentOutput.length, `${unit.id} studentOutput`).toBeGreaterThan(24);
       expect(material.reviewQuestions, `${unit.id} reviewQuestions`).toHaveLength(3);
     }
   });

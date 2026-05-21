@@ -16,6 +16,8 @@ test.describe('pilot M9-CR-03', () => {
     await expect(page.getByRole('heading', { level: 2, name: '3분 학습 루프' })).toBeVisible();
     await expect(page.getByText('이차함수에서 변하는 양과 변하지 않는 규칙은 무엇일까?')).toBeVisible();
     await expect(page.getByText('미니 도전')).toBeVisible();
+    await expect(page.getByText('오개념 바로잡기')).toBeVisible();
+    await expect(page.getByText('남길 산출물')).toBeVisible();
     await expect(page.getByText('a (이차항 계수)')).toBeVisible();
     await expect(page.getByText('b (일차항 계수)')).toBeVisible();
     await expect(page.getByText('c (상수항)')).toBeVisible();

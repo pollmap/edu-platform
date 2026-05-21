@@ -16,7 +16,7 @@
 - 자동 생성 placeholder/stub 문구가 남아 있지 않음
 - 활성 단원 페이지가 `InteractiveErrorBoundary`를 사용함
 - 활성 단원의 `componentName`이 실제 인터랙티브 export와 연결됨
-- 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 학습목표, 5단계 조작 루프, 미니 도전, 3개 복습 질문을 제공함
+- 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 학습목표, 5단계 조작 루프, 미니 도전, 오개념 교정, 적용 장면, 산출물, 3개 복습 질문을 제공함
 
 ---
 
@@ -88,7 +88,7 @@
 - Dependabot 설정을 추가했다.
 - Next.js를 16.2.6으로 올리고 Next 내부 PostCSS override를 적용해 `npm audit --audit-level=moderate` 기준 취약점 0개 상태로 정리했다.
 - README, CLAUDE.md, docs README, architecture/playbook 문서를 현재 구조와 수치에 맞게 최신화했다.
-- 모든 단원 페이지가 공유하는 `UnitLearningMaterial` 패널을 추가해 핵심질문·목표·조작루프·미니도전·복습질문을 392개 단원 전체에 제공한다.
+- 모든 단원 페이지가 공유하는 `UnitLearningMaterial` 패널을 추가해 핵심질문·목표·조작루프·미니도전·오개념·적용·산출물·복습질문을 392개 단원 전체에 제공한다.
 - `scripts/content-audit.ts`를 추가하고 CI에 연결해 교육자료 필수 섹션 누락을 차단한다.
 
 ---

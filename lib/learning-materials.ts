@@ -12,6 +12,9 @@ export interface UnitLearningMaterial {
     description: string;
   }>;
   miniChallenge: string;
+  misconception: string;
+  application: string;
+  studentOutput: string;
   reviewQuestions: string[];
   sourceNote: string;
 }
@@ -33,6 +36,9 @@ const SUBJECT_FRAME: Record<
     predict: (title: string) => string;
     explain: (title: string) => string;
     challenge: (title: string, interactiveTitle: string) => string;
+    misconception: (title: string) => string;
+    application: (title: string, domain: string) => string;
+    output: (title: string) => string;
     review: (title: string, domain: string) => string[];
   }
 > = {
@@ -49,6 +55,11 @@ const SUBJECT_FRAME: Record<
     explain: (title) => `관찰한 변화를 식, 단위, 그래프, 표 중 하나와 연결해 ${title}의 규칙을 설명합니다.`,
     challenge: (title, interactiveTitle) =>
       `${title} 활동에서 ${interactiveTitle}을 사용해 조건을 하나 정한 뒤, 원하는 결과가 나오도록 값을 조절하고 왜 그렇게 되는지 말해 보세요.`,
+    misconception: (title) =>
+      `${title}은 공식을 외우는 단원이 아니라, 수·식·그림이 같은 규칙을 말한다는 점을 확인하는 단원입니다.`,
+    application: (title, domain) =>
+      `${domain} 문제를 풀 때 ${title}의 규칙을 표, 그래프, 식 중 가장 잘 보이는 표현으로 바꾸면 풀이가 짧아집니다.`,
+    output: (title) => `${title}의 규칙을 예시 1개, 그림 1개, 설명 문장 1개로 남깁니다.`,
     review: (title, domain) => [
       `${title}에서 반드시 기억해야 할 양이나 기호는 무엇인가?`,
       `그 양이 커지거나 작아질 때 결과는 어떤 방향으로 변하는가?`,
@@ -68,6 +79,11 @@ const SUBJECT_FRAME: Record<
     explain: (title) => `눈에 보이는 변화 뒤에 있는 원인을 찾아 ${title}의 현상을 원리 문장으로 정리합니다.`,
     challenge: (title, interactiveTitle) =>
       `${title} 활동에서 ${interactiveTitle}의 변수를 하나씩만 바꾸며, 가장 큰 변화가 나타나는 조건을 찾아 근거를 적어 보세요.`,
+    misconception: (title) =>
+      `${title}은 용어 암기가 아니라 조건을 바꾸었을 때 나타나는 결과를 근거로 설명하는 학습입니다.`,
+    application: (title, domain) =>
+      `${domain} 탐구에서는 ${title}의 변수를 하나씩만 바꾸어야 원인과 결과를 분명하게 말할 수 있습니다.`,
+    output: (title) => `${title}에서 바꾼 조건, 관찰한 변화, 그렇게 생각한 까닭을 세 줄 실험 기록으로 남깁니다.`,
     review: (title, domain) => [
       `${title}에서 조작한 독립변수는 무엇인가?`,
       `관찰한 종속변수는 어떤 방향으로 변했는가?`,
@@ -87,6 +103,11 @@ const SUBJECT_FRAME: Record<
     explain: (title) => `선택한 단서가 독자나 청자에게 어떤 효과를 만드는지 ${title}의 개념어로 설명합니다.`,
     challenge: (title, interactiveTitle) =>
       `${title} 활동에서 ${interactiveTitle}의 가장 중요한 단서를 하나 고르고, 그 단서가 빠지면 해석이 어떻게 달라지는지 말해 보세요.`,
+    misconception: (title) =>
+      `${title}은 느낌을 맞히는 활동이 아니라, 말과 글 안의 단서를 근거로 판단하는 활동입니다.`,
+    application: (title, domain) =>
+      `${domain} 과제에서는 ${title}의 개념을 써서 주장, 근거, 표현 효과를 분리하면 답안이 분명해집니다.`,
+    output: (title) => `${title}에 맞는 근거 문장 2개와 나의 해석 1문장을 짝지어 남깁니다.`,
     review: (title, domain) => [
       `${title}을 판단할 때 먼저 확인할 단서는 무엇인가?`,
       `근거가 충분한 해석과 느낌만 있는 해석은 어떻게 다른가?`,
@@ -106,6 +127,11 @@ const SUBJECT_FRAME: Record<
     explain: (title) => `바뀐 영어 표현이 시간, 태도, 대상, 조건 중 무엇을 나타내는지 ${title}의 규칙으로 설명합니다.`,
     challenge: (title, interactiveTitle) =>
       `${title} 활동에서 ${interactiveTitle}의 예문 하나를 고른 뒤, 상황을 바꿔 같은 패턴의 새 문장을 만들어 보세요.`,
+    misconception: (title) =>
+      `${title}은 한국어 뜻을 단어별로 바꾸는 일이 아니라, 영어식 형태와 상황을 함께 고르는 일입니다.`,
+    application: (title, domain) =>
+      `${domain || '영어'} 과제에서는 ${title}의 패턴을 먼저 정하고, 주어·동사·시간·조건을 바꾸면 새 문장을 만들 수 있습니다.`,
+    output: (title) => `${title} 패턴으로 기본 예문 1개와 내가 바꾼 예문 1개를 나란히 남깁니다.`,
     review: (title, domain) => [
       `${title}에서 가장 자주 쓰는 형태는 무엇인가?`,
       `그 형태가 문장 의미를 어떻게 바꾸는가?`,
@@ -125,6 +151,11 @@ const SUBJECT_FRAME: Record<
     explain: (title) => `자료 속 변화가 나타난 까닭을 원인, 과정, 결과 순서로 묶어 ${title}을 설명합니다.`,
     challenge: (title, interactiveTitle) =>
       `${title} 활동에서 ${interactiveTitle}의 두 사례를 비교하고, 공통점 1개와 차이점 1개를 근거와 함께 정리해 보세요.`,
+    misconception: (title) =>
+      `${title}은 사건이나 제도를 나열하는 단원이 아니라, 원인·과정·결과와 이해관계를 연결하는 단원입니다.`,
+    application: (title, domain) =>
+      `${domain} 자료를 읽을 때 ${title}의 관점으로 누가 영향을 받는지, 어떤 자료가 근거인지 먼저 표시합니다.`,
+    output: (title) => `${title}의 원인 1개, 결과 1개, 오늘 생활과 이어지는 예 1개를 표로 남깁니다.`,
     review: (title, domain) => [
       `${title}에서 비교해야 할 대상은 무엇인가?`,
       `원인과 결과를 구분할 수 있는 근거 자료는 무엇인가?`,
@@ -189,6 +220,9 @@ export function buildUnitLearningMaterial(unit: Unit | HighSchoolUnit): UnitLear
       },
     ],
     miniChallenge: frame.challenge(unit.title, interactiveTitle),
+    misconception: frame.misconception(unit.title),
+    application: frame.application(unit.title, domain),
+    studentOutput: frame.output(unit.title),
     reviewQuestions: frame.review(unit.title, domain),
     sourceNote: `단원 기준: ${gradeLabel(unit)} ${SUBJECT_LABELS[unit.subject]} · ${domain} · ${unit.id}`,
   };
