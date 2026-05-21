@@ -19,6 +19,27 @@ import type { HighSchoolUnit, Unit } from '../types';
 type Override = Partial<Omit<Unit, 'id'>> & Partial<Omit<HighSchoolUnit, 'id'>>;
 
 export const UNIT_OVERRIDES: Record<string, Override> = {
+  'S-LE1-01': {
+    status: 'draft',
+    prerequisites: [],
+    achievementStandards: [],
+    componentName: 'UnitSLE101Explorer',
+    patternIds: [7, 14],
+  },
+  'S-LE1-02': {
+    status: 'draft',
+    prerequisites: [],
+    achievementStandards: [],
+    componentName: 'UnitSLE102Explorer',
+    patternIds: [1, 14],
+  },
+  'S-LE2-01': {
+    status: 'draft',
+    prerequisites: [],
+    achievementStandards: [],
+    componentName: 'UnitSLE201Explorer',
+    patternIds: [14],
+  },
   'M9-CR-03': {
     status: 'draft',
     prerequisites: ['M8-CR-04', 'M9-CR-01'],

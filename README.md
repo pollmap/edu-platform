@@ -1,53 +1,75 @@
 # 한국 초3~고3 인터랙티브 교육 플랫폼
 
-> 2022 개정 교육과정 기준 5과목(국·영·수·사·과) 488 단원 / 약 800 인터랙티브 학습 자원.
-> 단일 Next.js 16 웹앱. 비영리·개인 학습용.
+> 2022 개정 교육과정 기반 5과목(국어·영어·수학·사회·과학) 인터랙티브 학습 웹앱.
+> 현재 저장소의 마스터 인덱스에 열거된 **392개 단원 ID가 모두 앱에 등록되어 있고, 392개 라우트가 모두 활성 인터랙티브 단원으로 연결**됩니다.
 
-## 진행 현황
+## 현재 상태
 
 | 항목 | 값 |
 |------|-----|
-| 단원 메타 등록 | **392 / 488** (NCIC 마스터 인덱스 기반) |
-| 인터랙티브 콘텐츠 작성 | **148+ 단원** (Wave 1–3 병렬 에이전트 완료) |
-| 콘텐츠 완료율 | **61.6%** (244 stub → 148 done) |
-| 인터랙티브 컴포넌트 | **98개** (components/interactive/) |
-| 풀텍스트 검색 | fuse.js 392 docs · Ctrl+K 단축키 |
-| 진도 트래커 | zustand + localStorage (단원별 완료/즐겨찾기) |
-| SEO | sitemap.xml (428 URL) + robots.txt + 동적 metadata |
-| 외부 학습 자료 | 위키백과 ko **60+ 항목** (한국사 15 시대 + 5 인물 + 17 시·도 + 8 행성 + 5 생물계 + 10 동물, CC BY-SA 3.0) |
-| 디자인 시스템 | CUFA 위키 다크테마 포팅 (Pretendard + JetBrains Mono) |
+| 마스터 인덱스 ID | **392 / 392** 앱 등록 |
+| 단원 라우트 | **392 / 392** 생성 |
+| 활성 단원 | **392 / 392** (`draft`) |
+| planned/stub 단원 | **0** |
+| 인터랙티브 export | **270개** (`components/interactive/`) |
+| 검색 | fuse.js 392 docs · Ctrl+K 검색 모달 |
+| 진도 트래커 | zustand + localStorage 단원 완료/즐겨찾기 |
+| SEO | sitemap.xml + robots.txt + 단원별 metadata |
+| 보안 감사 | `npm audit --audit-level=moderate` 0 vulnerabilities |
+| 자동 검증 | CI에서 typecheck, markdown lint, secret grep, curriculum validation, completion audit, tests, build, e2e 실행 |
 
-### 과목별 진척 현황
+### 과목별 커버리지
 
-| 과목 | 완료 단원 | 전체 라우트 | 완료율 |
-|------|---------|----------|--------|
-| 수학 (Math) | 60+ | 138 | 43.5% |
-| 국어 (Korean) | 24+ | 41 | 58.5% |
-| 영어 (English) | 22+ | 34 | 64.7% |
-| 과학 (Science) | 26+ | 104 | 25.0% |
-| 사회 (Social) | 18+ | 75 | 24.0% |
+| 과목 | 활성 단원 | 전체 단원 | planned |
+|------|----------|----------|---------|
+| 수학 (Math) | 138 | 138 | 0 |
+| 과학 (Science) | 104 | 104 | 0 |
+| 사회 (Social) | 75 | 75 | 0 |
+| 국어 (Korean) | 41 | 41 | 0 |
+| 영어 (English) | 34 | 34 | 0 |
+| **합계** | **392** | **392** | **0** |
 
-**최근 완성 (Wave 3, 2026-05-04):** +32 units
-- 초3·4 도형/그래프 (8), 중1 사회/수학 (7), 중2·3 함수/도형 (9), 고등 영·사 (8)
+### 학교급별 커버리지
 
-**선행 완성 사례 (Wave 1–2):**
-- M3-NA-01 (세 자리 수), M5-NA-04 (분수 덧셈), M6-CR-02 (비례식)
-- H5-HI-01 (한국사 타임라인), S5-LI-01 (생물 분류)
-- E-GR-04 (영어 시제), E-VOC-01 (알파벳 파닉스)
-- K-RD-01 (글의 구조), S7-MA-01 (입자 모형)
+| 범위 | 활성 단원 | 전체 단원 |
+|------|----------|----------|
+| 초등 | 96 | 96 |
+| 중등 | 71 | 71 |
+| 초·중 공통 | 38 | 38 |
+| 고등 공통 | 62 | 62 |
+| 고등 일반선택 | 58 | 58 |
+| 고등 진로선택 | 47 | 47 |
+| 고등 융합선택 | 20 | 20 |
+
+## 완료 기준
+
+이 저장소에서 “완료”는 자동으로 검증 가능한 다음 기준을 의미합니다.
+
+- `docs/00-MASTER-INDEX.md`의 모든 단원 ID가 앱 메타데이터에 등록됨
+- 모든 등록 단원에 `app/(units)/.../page.tsx` 라우트가 존재함
+- 생성용 placeholder/stub 문구가 남아 있지 않음
+- 활성 단원 페이지가 `InteractiveErrorBoundary`로 인터랙티브 영역을 감쌈
+- 활성 단원의 `componentName`이 `components/interactive`에서 export됨
+- README, LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING이 존재함
+
+검증:
+
+```bash
+npm run audit:completion
+```
 
 ## 기술 스택
 
 - Next.js 16.2 (App Router, Turbopack, Route Groups)
 - React 19.2 + TypeScript 5
-- Tailwind CSS 4 (CSS-first, OKLCH 토큰, `@custom-variant dark`)
-- next-themes (다크 모드)
-- zustand v5 + persist (진도 트래커)
-- fuse.js v7 (가중치 풀텍스트 검색)
-- KaTeX + react-katex (수식)
-- recharts (그래프)
-- vitest + Playwright (테스트)
-- Pretendard 가변 폰트 (SIL OFL)
+- Tailwind CSS 4 (CSS-first, OKLCH token, `@custom-variant dark`)
+- next-themes
+- zustand v5 + persist
+- fuse.js v7
+- KaTeX + react-katex
+- recharts
+- vitest + Playwright
+- Pretendard variable font (SIL OFL)
 
 ## 시작하기
 
@@ -64,59 +86,65 @@ npm run build
 npm start
 ```
 
-타입 검사:
+전체 검증:
 
 ```bash
-npx tsc --noEmit
+npm run lint:md
+npm run validate
+npm run audit:completion
+npm run audit:security
+npm run tsc
+npm test
+npm run test:e2e
 ```
 
 ## 디렉토리
 
-```
+```text
 edu-platform/
 ├── app/                   # Next.js App Router
-│   ├── (units)/           # 단원 라우트 그룹
-│   ├── error.tsx
-│   ├── not-found.tsx
-│   ├── loading.tsx
-│   ├── layout.tsx         # 루트 레이아웃 (lang="ko")
+│   ├── (units)/           # 392개 단원 라우트
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   ├── layout.tsx
 │   └── page.tsx           # 홈
 ├── components/
-│   ├── primitives/        # 공용 빌딩 블록
-│   └── interactive/       # 단원별 인터랙티브 컴포넌트
+│   ├── primitives/        # 공용 UI 빌딩 블록
+│   └── interactive/       # 과목별 인터랙티브 컴포넌트
 ├── lib/
-│   ├── types.ts           # 타입 + 라벨
-│   ├── curriculum/        # 단원 메타데이터 (분할)
-│   └── metadata.ts        # makeUnitMetadata helper
-├── docs/                  # 양산 매뉴얼 (488 단원 인덱스 / 20 패턴 / playbook)
-└── public/
+│   ├── curriculum/        # 분할 단원 메타데이터 + overrides
+│   ├── data/              # 출처 기반 정적 데이터 로더
+│   ├── metadata.ts
+│   ├── progress.ts
+│   └── search-index.ts
+├── docs/                  # 마스터 인덱스, 아키텍처, 제작 플레이북, 디자인 핸드오프
+├── scripts/               # 생성, 검증, 감사 스크립트
+└── tests/                 # e2e 테스트
 ```
 
 ## 핵심 원칙
 
-1. **데이터 정직성**: 단원 정보는 NCIC(`https://ncic.re.kr`) 원문 기준
-2. **저작권 안전**: 디즈니/지브리/마블/문학 본문 인용 금지
-3. **본질 우선**: 화려함보다 개념의 핵심이 보이는 시각화
-4. **모바일 우선**: 슬라이더 터치 영역 최소 44px
-5. **즉시 반응**: 입력 → 결과 100ms 이내
-6. **Figma 중심 핸드오프**: Google Stitch는 시안 탐색용으로만 쓰고, 최종 프론트엔드 구현 기준은 Figma frame, capture, token export로 둔다. 현재 환경에서는 Figma 직접 커넥터 없이 `docs/design/figma-stitch-handoff.md` 기준으로 링크/캡처/토큰을 받아 반영한다.
+1. **데이터 정직성**: 단원 정보는 NCIC와 저장소의 출처 문서 기준으로만 다룹니다.
+2. **저작권 안전**: 디즈니/픽사/지브리/마블/노래가사/문학 본문 인용 금지.
+3. **본질 우선**: 장식보다 개념의 핵심이 보이는 시각화.
+4. **모바일 우선**: 360px 폭과 44px 이상 터치 타겟을 기본 기준으로 둡니다.
+5. **즉시 반응**: 입력 변경 후 결과가 100ms 안에 갱신되는 인터랙션을 지향합니다.
+6. **Figma 중심 핸드오프**: Google Stitch는 시안 탐색용이고, 최종 구현 기준은 Figma frame, capture, token export입니다.
 
-## 양산 가이드
+## 주요 문서
 
-`docs/03-claude-code-playbook.md` 참조.
-
-## 디자인 핸드오프
-
-- Figma/Stitch 프론트엔드 기준: `docs/design/figma-stitch-handoff.md`
-- 1차 필수 surface: 홈, 헤더, 검색 모달, 단원 헤더, 단원 카드/진도/CTA, 파일럿 단원 `M9-CR-03`
-- 1차 필수 token: 과목 색상, light/dark 배경·전경, border, card hover, typography, spacing
-- 검증 기준: `npm run lint:md`, `npm run validate`, `npm run tsc`, `npm test`, `npm run test:e2e`
+- 진행 현황: `docs/PROGRESS.md`
+- 완료 감사 기준: `docs/COMPLETION-AUDIT.md`
+- 마스터 인덱스: `docs/00-MASTER-INDEX.md`
+- 제작 플레이북: `docs/03-claude-code-playbook.md`
+- Figma/Stitch 핸드오프: `docs/design/figma-stitch-handoff.md`
+- 모바일 검증: `docs/MOBILE-CHECKLIST.md`
 
 ## 라이선스
 
 - **코드**: MIT (`LICENSE`)
-- **콘텐츠**: CC BY-NC 4.0 (`docs/LICENSE-CONTENT.md`, 작성 예정)
-- **교육과정 메타데이터 출처**: NCIC 2022 개정 교육과정
+- **콘텐츠**: CC BY-NC 4.0 (`LICENSE-CONTENT.md`)
+- **교육과정 메타데이터 출처**: NCIC 2022 개정 교육과정 및 저장소 출처 문서
 
 ## 보안
 

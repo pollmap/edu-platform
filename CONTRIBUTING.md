@@ -2,7 +2,7 @@
 
 ## 양산 매뉴얼
 
-이 프로젝트의 단원 양산 표준은 `docs/03-claude-code-playbook.md` 와 플랜 v2 문서를 따릅니다.
+이 프로젝트의 단원 양산 표준은 `docs/03-claude-code-playbook.md`, `docs/COMPLETION-AUDIT.md`, `docs/design/figma-stitch-handoff.md`를 따릅니다.
 
 ## 단원 1개 작업 표준 절차 (요약)
 
@@ -18,7 +18,9 @@
    - `export const metadata = makeUnitMetadata(UNIT)`
 5. **수식**: `<MathFormula tex="..." />` 사용 (KaTeX)
 6. **검증**:
-   - `npx tsc --noEmit` 0 에러
+   - `npm run validate` 성공
+   - `npm run audit:completion` blocker 0개
+   - `npm run tsc` 0 에러
    - `npm run build` 성공
    - 모바일 360px 가로 스크롤 X (DevTools)
    - 터치 타겟 44px+
@@ -51,7 +53,7 @@ feat(<scope>): <ID> <단원명>
 ## Quality Gate
 
 - 단원 단위: 위 §6 검증 항목
-- 스프린트 단위: CI green / 빌드 시간 +20% 이내 / 라우트별 First Load JS < 200KB / 무작위 5 단원 NCIC 대조
+- 스프린트 단위: CI green / `audit:completion` blocker 0개 / `audit:security` 취약점 0개 / 빌드 시간 +20% 이내 / 무작위 5 단원 NCIC 대조
 
 ## 행동 강령
 
