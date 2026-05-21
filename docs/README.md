@@ -12,6 +12,7 @@
 | `02-component-catalog.md` | 20가지 인터랙티브 패턴 카탈로그 (초·중 14개 + 고등 신규 6개) |
 | `03-claude-code-playbook.md` | Claude Code 양산 매뉴얼·프롬프트 템플릿 4종 |
 | `04-sample-interactives/quadratic-function.html` | 이차함수 인터랙티브 샘플 (즉시 실행 가능) |
+| `design/figma-stitch-handoff.md` | Figma 중심, Stitch 보조 프론트엔드 핸드오프 기준 |
 
 ## 산출물 규모 (예상)
 
@@ -42,6 +43,13 @@
 1. **데이터 정직성**: 단원 정보는 NCIC 원문 기준. 추측·할루시네이션 금지.
 2. **저작권 안전**: 디즈니/픽사/지브리/마블/만화/노래가사·문학 작품 본문 인용 금지.
 3. **본질 우선**: 화려함보다 개념의 핵심이 보이는 시각화.
+
+## 프론트엔드 핸드오프 원칙
+
+- Figma를 최종 디자인 기준으로 둔다.
+- Google Stitch는 초안 생성과 변형 탐색에만 사용한다.
+- 코드 반영은 Figma 링크, 캡처, token export가 함께 들어온 경우에 진행한다.
+- 현재 환경에서는 Figma 직접 커넥터를 쓰지 않고 `design/figma-stitch-handoff.md`의 수동 handoff 절차를 따른다.
 
 ## 우선순위 (전체)
 
