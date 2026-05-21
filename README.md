@@ -20,6 +20,7 @@
 | 마스터 인덱스 ID | **392 / 392** 앱 등록 |
 | 단원 라우트 | **392 / 392** 생성 |
 | 활성 단원 | **392 / 392** (`draft`) |
+| 공통 학습자료 | **392 / 392** 핵심질문·목표·조작루프·미니도전·복습질문 생성 |
 | planned/stub 단원 | **0** |
 | 인터랙티브 export | **270개** (`components/interactive/`) |
 | 검색 | fuse.js 392 docs · Ctrl+K 검색 모달 |
@@ -60,12 +61,14 @@
 - 생성용 placeholder/stub 문구가 남아 있지 않음
 - 활성 단원 페이지가 `InteractiveErrorBoundary`로 인터랙티브 영역을 감쌈
 - 활성 단원의 `componentName`이 `components/interactive`에서 export됨
+- 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 목표, 5단계 조작 루프, 미니 도전, 3개 복습 질문을 제공함
 - README, LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING이 존재함
 
 검증:
 
 ```bash
 npm run audit:completion
+npm run audit:content
 ```
 
 ## 기술 스택
@@ -102,6 +105,7 @@ npm start
 npm run lint:md
 npm run validate
 npm run audit:completion
+npm run audit:content
 npm run audit:security
 npm run tsc
 npm test

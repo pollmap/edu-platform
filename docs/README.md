@@ -12,8 +12,9 @@
 | planned 단원 | 0 |
 | generated stub page | 0 |
 | 인터랙티브 export | 270 |
+| 공통 학습자료 | 392/392 |
 
-위 수치는 `npm run audit:completion`으로 검증한다.
+위 수치는 `npm run audit:completion`과 `npm run audit:content`로 검증한다.
 
 ## 문서 구성
 
@@ -39,7 +40,7 @@
 2. **제품 UX와 디자인 판단은 인터랙티브 학습 맵 기준**이다. 자세한 기준은 `design/product-ux-foundation.md`, `design/competitive-ux-reverse-engineering.md`, `design/26seconds-ux-reference.md`를 따른다.
 3. **기본 디자인은 Light-first**다. 다크 모드는 선택 옵션으로만 유지한다.
 4. **코드 반영은 출처가 있는 입력물 기준**으로 한다. Figma 링크, 캡처, token export, NCIC/공식 출처를 우선한다.
-5. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 `npm run audit:completion`을 통과해야 한다.
+5. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 `npm run audit:completion`과 `npm run audit:content`를 통과해야 한다.
 6. **보안과 공개 저장소 기본 문서는 유지한다.** LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING, README가 누락되면 감사가 실패한다.
 
 ## 검증 명령
@@ -48,6 +49,7 @@
 npm run lint:md
 npm run validate
 npm run audit:completion
+npm run audit:content
 npm run audit:security
 npm run tsc
 npm test

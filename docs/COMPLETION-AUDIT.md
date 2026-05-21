@@ -14,6 +14,7 @@
 | planned 단원 | 0 |
 | generated stub page | 0 |
 | 인터랙티브 export | 270 |
+| 공통 학습자료 | 392/392 |
 | 차단 이슈 | 0 |
 
 ## 검사 항목
@@ -27,10 +28,19 @@
 - 모든 활성 단원의 `componentName`이 `components/interactive`에서 export되는지 확인
 - 공개 저장소 기본 문서가 존재하는지 확인
 
+`npm run audit:content`는 교육자료 필수 구성을 별도로 검사한다.
+
+- 모든 등록 단원에 핵심질문이 있는지 확인
+- 모든 등록 단원에 3개 학습목표가 있는지 확인
+- 모든 등록 단원에 `See -> Touch -> Predict -> Explain -> Challenge` 5단계 루프가 있는지 확인
+- 모든 등록 단원에 미니 도전과 3개 복습 질문이 있는지 확인
+- 모든 단원 페이지가 공통 학습자료 표면을 렌더링하는지 확인
+
 ## 실행
 
 ```bash
 npm run audit:completion
+npm run audit:content
 ```
 
 JSON 결과가 필요하면:

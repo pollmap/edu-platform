@@ -14,7 +14,9 @@
 - planned 단원: 0
 - generated stub page: 0
 - 인터랙티브 export: 270
+- 공통 학습자료: 392/392
 - 완료 감사: `npm run audit:completion`
+- 교육자료 감사: `npm run audit:content`
 
 ## 핵심 원칙
 
@@ -33,6 +35,7 @@
 - 단원: 스픽식 Learn-Practice-Apply를 `See -> Touch -> Predict -> Explain -> Challenge`로 바꾼다.
 - 로드맵: 듀오링고식 경로형 학습을 교육과정 선수·후속 개념 맵으로 적용한다.
 - 오늘 큐: 26초식 마찰 제거를 개념 학습으로 변환한다. 홈에는 오늘의 개념 큐, 복습 큐, 학습량 선택, 연속 탐구를 둔다.
+- 교육자료: 모든 단원은 핵심질문, 3개 목표, See-Touch-Predict-Explain-Challenge 루프, 미니 도전, 3개 복습 질문을 제공해야 한다.
 - 진도: XP/스트릭/배지는 가볍게 쓰고, 강한 경쟁이나 리더보드는 추후 학급 모드로 분리한다.
 - 디자인: 밝은 배경, 선명한 카드, 부드러운 과목 색상, 밝은 실험실형 인터랙티브 캔버스, 명확한 CTA가 기본이다.
 - 브랜드: `하루배움` 로고와 캐릭터 자산은 `docs/design/brand-assets.md` 기준으로 사용한다.

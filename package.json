@@ -16,6 +16,7 @@
     "gen:pages:apply": "tsx scripts/generate-pages.ts --apply",
     "validate": "tsx scripts/validate.ts",
     "audit:completion": "tsx scripts/completion-audit.ts",
+    "audit:content": "tsx scripts/content-audit.ts",
     "audit:security": "npm audit --audit-level=moderate",
     "lint:md": "tsx scripts/markdown-lint.ts",
     "secret-grep": "tsx scripts/secret-grep.ts"
