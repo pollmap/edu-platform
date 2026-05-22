@@ -1,8 +1,8 @@
 # Figma/Stitch 프론트엔드 핸드오프
 
-**Last Updated:** 2026-05-21
+**Last Updated:** 2026-05-22
 
-이 문서는 첫 리디자인 스프린트의 기준 문서다. 제품 UX 기준은 `docs/design/product-ux-foundation.md`이며, 기본 방향은 **Light-first 인터랙티브 학습 맵**이다. Google Stitch는 빠른 화면 시안과 변형 탐색용으로 쓰고, Figma를 최종 디자인 기준으로 둔다. 코드 반영은 Figma 링크, 화면 캡처, 토큰 export를 받은 뒤 진행한다. 현재 작업 환경에는 Figma 직접 커넥터/MCP를 사용하지 않는다.
+이 문서는 첫 리디자인 스프린트의 기준 문서다. 제품 UX 기준은 `docs/design/product-ux-foundation.md`이며, 기본 방향은 **Light-first 인터랙티브 학습 맵**이다. Google Stitch는 빠른 화면 시안과 변형 탐색용으로 쓰고, Figma를 최종 디자인 기준으로 둔다. 코드 반영은 Figma 링크, Dev Mode inspect 정보, 화면 캡처, token export를 받은 뒤 진행한다. 현재 작업 환경에는 Figma 직접 커넥터/MCP가 연결되어 있지 않으므로, 실제 Figma 파일이 제공되기 전에는 이 문서와 `figma-development-readiness.md`의 체크리스트로 handoff를 검증한다.
 
 브랜드 비주얼은 `하루배움` 로고와 캐릭터 세트를 기준으로 한다. 사용 가능한 파일과 용도는 `docs/design/brand-assets.md`를 따른다.
 
@@ -15,22 +15,29 @@
    - Stitch 결과를 Figma로 옮긴 뒤 auto layout, component, variable, mode를 정리한다.
    - Figma frame과 component 이름은 아래 naming 규칙을 따른다.
    - Dev Mode에서 spacing, typography, color token 값을 확인할 수 있어야 한다.
+   - 배포 대상 frame/component는 Ready for dev 상태로 표시하고 Development/Interaction/Accessibility/Content annotation을 남긴다.
 3. **코드 반영**
    - Figma 링크, 캡처, token export, 변경 범위를 이 문서 체크리스트에 맞춰 확인한다.
    - `app/globals.css`의 `@theme`, `:root`, `.dark`, `va-*` 토큰을 먼저 갱신한다.
    - 이후 `components/primitives/*`와 해당 화면의 page 컴포넌트를 최소 범위로 수정한다.
+   - Code Connect가 연결되어 있으면 Dev Mode의 실제 code component mapping을 우선하고, raw generated CSS는 보조 정보로만 사용한다.
 4. **검증**
    - 문서/정적 검증: `npm run lint:md`, `npm run validate`, `npm run tsc`
    - 기능 회귀: `npm test`, `npm run test:e2e`
-   - 수동 확인: 홈, 검색 모달, 파일럿 단원 `M9-CR-03`, 360px 모바일, 라이트 기본 테마, 다크 보조 테마
+   - 수동 확인: 홈, 검색 모달, slider-graph 대표 단원 `M9-CR-03`, 360px 모바일, 라이트 기본 테마, 다크 보조 테마
+   - 배포 직전 Figma 적합성 검토는 `docs/design/figma-development-readiness.md`를 따른다.
 
 ## 2. 필수 입력물
 
 | 입력물 | 필수 여부 | 기준 |
 |--------|-----------|------|
 | Figma 링크 | 필수 | Dev Mode에서 inspect 가능한 file/frame 링크 |
+| Ready for dev 상태 | 필수 | 구현 대상 frame/component가 Ready for dev로 표시됨 |
+| Dev Mode annotation | 필수 | Development, Interaction, Accessibility, Content 기준 설명 |
 | 화면 캡처 | 필수 | desktop/mobile, light 필수, dark 보조 |
 | 토큰 export | 필수 | color, typography, spacing, radius의 Figma variable 또는 JSON/CSV |
+| 변수 mode/alias 확인 | 필수 | light/dark mode와 alias chain 확인 |
+| Code Connect mapping | 권장 | primitives부터 code component 연결 |
 | Stitch 링크/캡처 | 선택 | 시안 출처 확인용. 최종 기준으로 사용하지 않음 |
 | 변경 설명 | 필수 | 변경할 surface, 유지할 behavior, 접근성 예외 여부 |
 
@@ -96,7 +103,8 @@ Figma에서 먼저 확정해야 할 공통 surface다. 이 surface가 확정되�
 | Unit progress | `components/primitives/UnitProgressBadge.tsx`, `UnitProgressControls.tsx` | completed/visited/unseen/favorite states, touch target |
 | Unit content sections | `components/primitives/SectionCard.tsx` | section rhythm, text width, heading hierarchy |
 | Unit CTA | `UnitProgressControls.tsx`, unit page links | primary/secondary actions and 44px touch target |
-| Pilot unit | `app/(units)/grade-9/math/M9-CR-03/page.tsx` | graph/card/content balance at desktop and 360px |
+| Slider-graph representative unit | `app/(units)/grade-9/math/M9-CR-03/page.tsx` | graph/card/content balance at desktop and 360px |
+| Pattern engine shell | `components/interactive/pattern-engines/PatternEngineScaffold.tsx` | control density, result panel, reset affordance, mobile stacking |
 
 ## 5.1 Product UX Surfaces
 
@@ -166,8 +174,12 @@ Figma surface는 다음 제품 루프를 반영해야 한다.
 Before code changes:
 
 - [ ] Figma frame names match this document.
+- [ ] Target frames/components are marked Ready for dev.
+- [ ] Dev Mode annotations cover development, interaction, accessibility, and content notes.
+- [ ] If a frame was already implemented, Dev Mode compare changes was checked.
 - [ ] Required captures are attached or linked.
 - [ ] Token export includes Light-first values; dark values are optional unless the change affects theme tokens.
+- [ ] Variable mode/alias chain is understood before copying values.
 - [ ] The change preserves the product loop: See -> Touch -> Predict -> Explain -> Challenge.
 - [ ] Behavior changes are explicitly listed; otherwise preserve existing behavior.
 - [ ] No mock/fake data is introduced as production content.
@@ -177,6 +189,7 @@ During implementation:
 - [ ] Update `app/globals.css` tokens before component styling.
 - [ ] Keep common changes in `components/primitives/*`.
 - [ ] Keep unit-specific changes scoped to the target unit page/component.
+- [ ] Prefer Code Connect mapped primitives over raw generated snippets when available.
 - [ ] Preserve keyboard behavior in `SearchDialog` (`Esc`, arrows, `Enter`).
 - [ ] Preserve progress storage behavior in `lib/progress.ts`.
 - [ ] Maintain 44px minimum touch target for CTA/progress controls.
@@ -201,13 +214,19 @@ Verification:
 - Figma/Stitch 작업 순서와 입력물 기준이 문서화되어 있다.
 - 공통 UI surface inventory가 코드 파일명과 연결되어 있다.
 - `app/globals.css`의 현재 token이 Figma 변수 후보와 대응된다.
+- Ready for dev, annotation, variable mode, Code Connect 사용 기준이 문서화되어 있다.
 - README와 progress 문서가 "Figma 중심, Stitch 보조" 원칙을 가리킨다.
 - 모든 자동 검증이 통과한다.
 
 ## 9. External References
 
 - [Figma Dev Mode](https://www.figma.com/dev-mode/)
+- [Figma Dev Mode Guide](https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode)
+- [Figma Variables in Dev Mode](https://help.figma.com/hc/en-us/articles/27882809912471-Variables-in-Dev-Mode)
+- [Figma Ready for Dev View](https://help.figma.com/hc/en-us/articles/23918228264855-Dev-Mode-ready-for-dev-view)
 - [Figma Code Connect UI](https://developers.figma.com/docs/code-connect/code-connect-ui-setup/)
+- [Figma MCP Server Guide](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server)
+- [Figma Development Readiness](figma-development-readiness.md)
 - [Google Stitch](https://stitch.withgoogle.com/)
 - [Product UX Foundation](product-ux-foundation.md)
 - [Brand Assets](brand-assets.md)

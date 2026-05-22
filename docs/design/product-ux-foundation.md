@@ -116,11 +116,11 @@ UnitPage
 6. InteractiveModule 공통 UX 템플릿
 7. Progress Dashboard
 8. Roadmap Preview
-9. `M9-CR-03` 파일럿 단원 완성도 강화
+9. `M9-CR-03` slider-graph 대표 단원 완성도 강화
 
 ## 7. Pilot Unit Standard
 
-`M9-CR-03`은 전체 앱의 UX 문법을 확정하는 파일럿이다.
+`M9-CR-03`은 20개 pattern engine 중 `slider-graph` UX 문법을 확인하는 대표 단원이다.
 
 확정할 것:
 

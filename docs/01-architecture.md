@@ -126,16 +126,19 @@ npm run secret-grep
 ```
 
 `scripts/completion-audit.ts`는 마스터 인덱스 ID, 앱 등록, 라우트, stub, error boundary, component export, 공개 문서를 검사한다.
-`scripts/content-audit.ts`는 UnitContent 수, 출처 refs, 설명 3단계, 예시 2개 이상, 고정 3문항 미니 문제, 정답/해설 분리, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 검사한다.
+`scripts/content-audit.ts`는 UnitContent 수, 출처 refs, 설명 3단계, 예시 3개, 고정 3문항 미니 문제, 정답/해설 분리, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 검사한다.
+`scripts/blueprint-audit.ts`는 공식 출처 URL, 문서명, 문서 날짜, locator, evidence text, authored content 상태를 검사한다.
+`scripts/interaction-audit.ts`는 20개 pattern engine 파일, registry 매핑, engineData, representative e2e, 360px mobile readiness를 검사한다.
 ## 8. UnitBlueprint Layer
 
-`lib/unit-blueprints/` is the compatibility layer for the 488-unit expansion plan.
+`lib/unit-blueprints/` is the source/content/interaction contract for the verified unit registry.
 
 - `UNIT_BLUEPRINTS` currently covers the 392 officially verified app units only.
-- Each blueprint adapts existing `UnitContent` into `content`, adds source locators, and defines `interaction` metadata.
+- Each blueprint adapts authored `UnitContent` into `content`, keeps source provenance, and defines `interaction` metadata.
 - `PATTERN_ENGINE_CATALOG` fixes the 20 pattern engine IDs from `docs/02-component-catalog.md`.
-- `UnitInteractiveRenderer` is the migration surface for pattern engines. `M9-CR-03` is the pilot `slider-graph` engine; other units remain marked as `legacy-component` until their pages are migrated.
+- `UnitInteractiveRenderer` resolves every active unit through `components/interactive/pattern-engines/registry.tsx`; normal rendering has 0 `legacy-component` fallbacks.
+- `ENGINE_REPRESENTATIVE_UNITS` maps one representative unit to each of the 20 pattern engines, and Playwright covers those representatives on desktop and mobile 360px.
 - `audit:blueprint` verifies source locators, 1200+ character content, 3 examples, 3 mini problems, answers, mistakes, applications, and valid next-unit links.
 - `audit:interaction` verifies engine IDs, variables, initial state, feedback rules, misconception responses, acceptance criteria, 44px touch targets, and 360px mobile readiness.
 
-The 96 remaining units toward the 488 target stay out of `lib/curriculum/`, `lib/unit-content/`, and `lib/unit-blueprints/` until a traceable official row is recorded.
+The 96 remaining units toward the 488 target stay out of `lib/curriculum/`, `lib/unit-content/`, and `lib/unit-blueprints/` until a traceable official row is recorded in `docs/unit-source-ledger.md`.

@@ -1,9 +1,10 @@
 # 콘텐츠 진척 현황
 
-**Last Updated:** 2026-05-21  
+**Last Updated:** 2026-05-22  
 **Repository Completion:** 392/392 active units · 0 planned · 0 generated stubs  
 **Detailed Content:** 392/392 verified UnitContent · 96 unverified expansion candidates blocked  
-**Audit Commands:** `npm run audit:completion` · `npm run audit:content`
+**Blueprint/Interaction:** 392/392 UnitBlueprints · 20/20 pattern engines · 0 legacy renderers  
+**Audit Commands:** `npm run audit:completion` · `npm run audit:content` · `npm run audit:blueprint` · `npm run audit:interaction`
 
 ---
 
@@ -16,9 +17,11 @@
 - 모든 등록 단원이 `draft` 이상 상태이며 `planned`가 남아 있지 않음
 - 자동 생성 placeholder/stub 문구가 남아 있지 않음
 - 활성 단원 페이지가 `InteractiveErrorBoundary`를 사용함
-- 활성 단원의 `componentName`이 실제 인터랙티브 export와 연결됨
+- 활성 단원의 `engineId`가 실제 pattern engine registry와 연결됨
 - 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 학습목표, 5단계 조작 루프, 미니 도전, 오개념 교정, 적용 장면, 산출물, 3개 복습 질문을 제공함
-- 모든 단원이 `lib/unit-content/` 세부 콘텐츠를 가지며 출처 refs, 쉬운/표준/심화 설명, 2개 이상 예시, 정확히 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 유효한 다음 단원 ID를 제공함
+- 모든 단원이 `lib/unit-content/` 세부 콘텐츠를 가지며 출처 refs, 쉬운/표준/심화 설명, 예시 3개, 정확히 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 유효한 다음 단원 ID를 제공함
+- 모든 단원이 `UnitBlueprint + UnitLearningMaterial + UnitInteractiveRenderer` 경로로 렌더링됨
+- 20개 pattern engine이 registry에 등록되어 있고 정상 경로 legacy renderer가 0개임
 - 488개 목표 중 추가 96개는 공식 출처 행이 검증될 때까지 앱 데이터에 추가하지 않음
 
 ---
@@ -32,9 +35,11 @@
 | 활성 단원 | 392 |
 | planned 단원 | 0 |
 | generated stub page | 0 |
-| 인터랙티브 export | 270 |
+| 패턴엔진 | 20/20 |
+| legacy renderer | 0 |
 | 공통 학습자료 | 392/392 |
 | 세부 UnitContent | 392/392 |
+| UnitBlueprint | 392/392 |
 | 488 확장 후보 | 96 보류 |
 | 차단 이슈 | 0 |
 
@@ -76,6 +81,8 @@
 | 커리큘럼/라우트 검증 | CI 포함 | `npm run validate` |
 | 완료 감사 | CI 포함 | `npm run audit:completion` |
 | 교육자료 감사 | CI 포함 | `npm run audit:content` |
+| Blueprint 감사 | CI 포함 | `npm run audit:blueprint` |
+| Interaction 감사 | CI 포함 | `npm run audit:interaction` |
 | 의존성 보안 감사 | CI 포함 | `npm run audit:security` |
 | TypeScript | CI 포함 | `npm run tsc` |
 | Unit tests | CI 포함 | `npm test` |
@@ -87,6 +94,14 @@
 
 ## 6. 최근 정리 내역
 
+- `UnitBlueprint` 계약을 source/content/interaction 중심으로 확장하고 392개 활성 단원에 authored content와 engineData를 연결했다.
+- `components/interactive/pattern-engines/`에 20개 실제 React renderer와 registry를 추가하고, 각 엔진 대표 단원을 Playwright desktop/mobile-360 E2E에 등록했다.
+- `UnitInteractiveRenderer`의 정상 경로 fallback을 제거해 registry 누락이 즉시 실패하도록 했다.
+- 모든 단원 페이지를 `UnitHeader + UnitLearningMaterial + UnitInteractiveRenderer` 학습 화면으로 재생성했다.
+- `docs/unit-source-ledger.md`를 추가해 392 verified rows와 96 blocked rows를 분리했다.
+- `docs/PRODUCT-STRATEGY.md`에 제품 가치, 전체 범위, 운영 전략, 한계를 도식화해 정리했다.
+- Figma Dev Mode, variables, Ready for dev, annotations, Code Connect, MCP 공식 문서 기준으로 `docs/design/figma-development-readiness.md`를 추가했다.
+- `docs/design/figma-stitch-handoff.md`를 배포 직전 Figma 개발 workflow에 맞춰 Ready for dev, annotation, variable mode, Code Connect 기준까지 확장했다.
 - `S-LE1-01`, `S-LE1-02`, `S-LE2-01`을 실제 페이지/컴포넌트 상태에 맞춰 `draft`로 승격했다.
 - `scripts/completion-audit.ts`를 추가해 마스터 인덱스 ID, 앱 등록, 라우트, stub, error boundary, component export, 공개 문서 존재 여부를 한 번에 감사한다.
 - CI에 `audit:completion`과 `audit:security`를 추가했다.
