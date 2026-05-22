@@ -5,6 +5,7 @@ import {
   UNIT_CONTENT,
 } from '@/lib/unit-content';
 import {
+  ENGINE_REPRESENTATIVE_UNITS,
   PATTERN_ENGINE_CATALOG,
   UNIT_BLUEPRINTS,
   getUnitBlueprint,
@@ -70,11 +71,20 @@ describe('unit blueprint registry', () => {
       expect(blueprint.content.unitId).toBe(unit.id);
       expect(sourceRefs.length, `${unit.id} sourceRefs`).toBeGreaterThanOrEqual(2);
       expect(
-        sourceRefs.every((ref) => ref.title.trim() && (ref.document || ref.url) && ref.locator.trim()),
-        `${unit.id} sourceRefs must include title, location, and locator`,
+        sourceRefs.every((ref) =>
+          ref.sourceType &&
+          ref.documentTitle.trim() &&
+          ref.documentDate.trim() &&
+          ref.locator.trim() &&
+          ref.evidenceText.trim() &&
+          ref.retrievedAt.trim() &&
+          ref.verificationStatus === 'verified' &&
+          (ref.officialUrl || ref.document)
+        ),
+        `${unit.id} sourceRefs must include full provenance fields`,
       ).toBe(true);
       expect(
-        sourceRefs.some((ref) => ref.url?.includes('ncic.re.kr')),
+        sourceRefs.some((ref) => ref.officialUrl?.includes('ncic.re.kr')),
         `${unit.id} must retain NCIC provenance`,
       ).toBe(true);
 
@@ -114,6 +124,8 @@ describe('unit interaction blueprints', () => {
       expect(interaction.feedbackRules.length, `${unit.id} feedback`).toBeGreaterThanOrEqual(2);
       expect(interaction.misconceptionResponses.length, `${unit.id} misconception response`).toBeGreaterThanOrEqual(1);
       expect(interaction.acceptanceCriteria.length, `${unit.id} acceptance`).toBeGreaterThanOrEqual(3);
+      expect(interaction.engineData, `${unit.id} engineData`).toBeDefined();
+      expect(Object.keys(interaction.engineData).length, `${unit.id} engineData keys`).toBeGreaterThan(0);
       expect(
         interaction.acceptanceCriteria.some((criterion) => criterion.viewport === 'mobile' || criterion.viewport === 'both'),
         `${unit.id} mobile acceptance`,
@@ -131,6 +143,16 @@ describe('unit interaction blueprints', () => {
     expect(blueprint.interaction.variables.map((variable) => variable.id)).toEqual(['a', 'b', 'c']);
     expect(blueprint.implementationStatus.renderer).toBe('pattern-engine');
   });
+
+  it('maps at least one verified unit to every concrete pattern engine', () => {
+    expect(ENGINE_REPRESENTATIVE_UNITS).toHaveLength(20);
+    expect(new Set(ENGINE_REPRESENTATIVE_UNITS.map((item) => item.engineId)).size).toBe(20);
+
+    for (const item of ENGINE_REPRESENTATIVE_UNITS) {
+      expect(allUnitIds.has(item.unitId), `${item.unitId} representative unit`).toBe(true);
+      expect(getUnitBlueprint(item.unitId)?.interaction.engineId, item.unitId).toBe(item.engineId);
+    }
+  });
 });
 
 describe('unit blueprint audits', () => {
@@ -141,7 +163,7 @@ describe('unit blueprint audits', () => {
 });
 
 describe('unit interactive render plan', () => {
-  it('uses the pattern engine for the M9-CR-03 pilot and legacy components elsewhere', () => {
+  it('uses pattern engines for every verified unit with no legacy renderer fallback', () => {
     expect(getUnitInteractiveRenderPlan('M9-CR-03')).toMatchObject({
       unitId: 'M9-CR-03',
       engineId: 'slider-graph',
@@ -149,6 +171,12 @@ describe('unit interactive render plan', () => {
       legacyComponentName: 'QuadraticFunctionExplorer',
     });
 
-    expect(getUnitInteractiveRenderPlan('K-GR-01')?.mode).toBe('legacy-component');
+    for (const unit of allUnits) {
+      const plan = getUnitInteractiveRenderPlan(unit.id);
+      const blueprint = getUnitBlueprint(unit.id)!;
+      expect(plan?.mode, unit.id).toBe('pattern-engine');
+      expect(blueprint.implementationStatus.content, unit.id).toBe('authored-blueprint');
+      expect(blueprint.implementationStatus.renderer, unit.id).toBe('pattern-engine');
+    }
   });
 });

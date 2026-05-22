@@ -1,15 +1,15 @@
+// AUTO-GENERATED unified unit page. Edit scripts/generate-pages.ts, then regenerate.
 import { notFound } from 'next/navigation';
-import { HangulSystemExplorer } from '@/components/interactive/korean/HangulSystemExplorer';
+import { UnitInteractiveRenderer } from '@/components/interactive/UnitInteractiveRenderer';
+import { UnitLearningMaterial } from '@/components/learning/UnitLearningMaterial';
 import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErrorBoundary';
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
-import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
 import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
-import { SUBJECT_LABEL } from '@/lib/types';
 
-const UNIT_ID = 'K-GR-01';
+const UNIT_ID = "K-GR-01";
 
 export function generateMetadata() {
   const unit = findUnit(UNIT_ID);
@@ -19,37 +19,37 @@ export function generateMetadata() {
 export default function Page() {
   const unit = findUnit(UNIT_ID);
   if (!unit) notFound();
-
   return (
     <main className="container mx-auto max-w-5xl px-4 py-8">
       <UnitHeader
         unit={unit}
         breadcrumb={[
-          { label: '홈', href: '/' },
-          { label: `학년 공통 / ${SUBJECT_LABEL[unit.subject]}`, href: `/common/${unit.subject}` },
+          { label: 'Home', href: '/' },
           { label: unit.title },
         ]}
       />
       <UnitProgressControls unitId={UNIT_ID} />
-      <SectionCard title="한마디로">
-        <p>
-          한글은 1443년 세종이 창제한 글자예요. <strong>자음(닿소리)</strong>은 발음할 때 입·혀 모양에서, <strong>모음(홀소리)</strong>은 하늘(·)·땅(ㅡ)·사람(ㅣ)에서 따왔어요.
-        </p>
-      </SectionCard>
-      <SectionCard title="왜 과학적이라고 할까?">
-        <p>
-          전 세계 글자 중 한글처럼 <strong>만든 사람·만든 해·만든 원리</strong>가 모두 기록된 글자는 거의 없어요(《훈민정음 해례본》).
-          기본자에 획을 더해 글자를 늘리는(가획) 방식, 자음 + 모음 결합으로 음절을 만드는 모듈식 구조가 매우 합리적이라 평가받아요.
-        </p>
-      </SectionCard>
-      <SectionCard>
+
+      <UnitLearningMaterial unit={unit} />
+
+      <section
+        aria-labelledby={`interactive-${UNIT_ID}`}
+        className="mb-5 rounded-lg border border-blue-100 bg-white p-4 shadow-sm dark:border-blue-900/60 dark:bg-zinc-950"
+      >
+        <div className="mb-3">
+          <div className="text-xs font-bold uppercase text-blue-700 dark:text-blue-300">Interactive practice</div>
+          <h2 id={`interactive-${UNIT_ID}`} className="mt-1 text-2xl font-extrabold text-zinc-950 dark:text-zinc-50">
+            조작 영역
+          </h2>
+        </div>
         <InteractiveErrorBoundary unitId={UNIT_ID}>
-          <HangulSystemExplorer />
+          <UnitInteractiveRenderer unitId={UNIT_ID} />
         </InteractiveErrorBoundary>
-      </SectionCard>
-      <SectionCard>
+      </section>
+
+      <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
         <PrerequisiteList ids={unit.prerequisites} achievementStandards={unit.achievementStandards} />
-      </SectionCard>
+      </section>
     </main>
   );
 }

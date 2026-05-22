@@ -8,7 +8,7 @@ const report = auditUnitInteractions();
 console.log('[interaction-audit] UnitBlueprint interaction coverage');
 console.log(`[interaction-audit] units checked: ${report.checked}`);
 console.log(`[interaction-audit] pattern engines: ${PATTERN_ENGINE_CATALOG.length}`);
-console.log('[interaction-audit] required sections: engineId, variables, initialState, feedbackRules, misconception responses, acceptance criteria, mobile 360px readiness');
+console.log('[interaction-audit] required sections: 20 engine files, renderer registry, representative e2e suite, engineId, variables, initialState, engineData, feedbackRules, misconception responses, acceptance criteria, mobile 360px readiness');
 console.log(`[interaction-audit] blockers: ${report.blockers.length}`);
 
 for (const blocker of report.blockers.slice(0, 50)) {

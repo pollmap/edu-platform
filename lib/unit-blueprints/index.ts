@@ -61,6 +61,13 @@ export interface UnitBlueprintContent {
   nextUnitIds: string[];
 }
 
+export interface UnitInteractionContentHints {
+  overview: string;
+  observe: string;
+  tryThis: string;
+  reflect: string;
+}
+
 export type UnitInteractionControl =
   | 'slider'
   | 'stepper'
@@ -101,6 +108,8 @@ export interface UnitBlueprintInteraction {
   componentName: string;
   variables: UnitInteractionVariable[];
   initialState: Record<string, string | number | boolean>;
+  contentHints: UnitInteractionContentHints;
+  engineData: Record<string, unknown>;
   uiState: {
     layout: 'split-panel' | 'single-panel' | 'stacked';
     minTouchTargetPx: number;
@@ -124,8 +133,8 @@ export interface UnitBlueprint {
   interaction: UnitBlueprintInteraction;
   implementationStatus: {
     sourceVerification: 'official-verified' | 'official-verified-with-local-evidence';
-    content: 'unit-content-adapter';
-    renderer: 'pattern-engine' | 'legacy-component';
+    content: 'authored-blueprint';
+    renderer: 'pattern-engine';
   };
 }
 
@@ -156,10 +165,50 @@ const PATTERN_ENGINES = Object.fromEntries(
   PATTERN_ENGINE_CATALOG.map((engine) => [engine.patternId, engine]),
 ) as Record<PatternId, PatternEngineDefinition>;
 
+export const ENGINE_REPRESENTATIVE_UNITS: Array<{
+  engineId: PatternEngineId;
+  unitId: string;
+}> = [
+  { engineId: 'slider-graph', unitId: 'M9-CR-03' },
+  { engineId: 'step-animation', unitId: 'M5-NA-01' },
+  { engineId: 'classification-sort', unitId: 'M6-NA-02' },
+  { engineId: 'particle-simulation', unitId: 'S7-MA-01' },
+  { engineId: 'solid-3d', unitId: 'M6-GM-01' },
+  { engineId: 'geometry-construction', unitId: 'M3-GM-01' },
+  { engineId: 'timeline', unitId: 'H4-HI-01' },
+  { engineId: 'map-explorer', unitId: 'H4-GE-01' },
+  { engineId: 'network-builder', unitId: 'H7-SO-01' },
+  { engineId: 'probability-simulation', unitId: 'M5-DP-01' },
+  { engineId: 'matching-quiz', unitId: 'E-GR-01' },
+  { engineId: 'transformation-converter', unitId: 'M3-NA-01' },
+  { engineId: 'tree-builder', unitId: 'S3-LI-01' },
+  { engineId: 'data-visualization', unitId: 'M4-DP-01' },
+  { engineId: 'calculus-visualization', unitId: 'M-CA1-01' },
+  { engineId: 'molecular-3d', unitId: 'S-CHE-04' },
+  { engineId: 'astronomy-simulation', unitId: 'S5-EU-01' },
+  { engineId: 'vector-matrix', unitId: 'M-AM-04' },
+  { engineId: 'biology-mechanism', unitId: 'S-BIO-03' },
+  { engineId: 'economics-finance', unitId: 'H-FE' },
+];
+
+const REPRESENTATIVE_ENGINE_BY_UNIT = new Map(
+  ENGINE_REPRESENTATIVE_UNITS.map((item) => [item.unitId, item.engineId]),
+);
+
+const ENGINE_BY_ID = Object.fromEntries(
+  PATTERN_ENGINE_CATALOG.map((engine) => [engine.engineId, engine]),
+) as Record<PatternEngineId, PatternEngineDefinition>;
+
 const allUnits: AnyUnit[] = [...CURRICULUM, ...HIGHSCHOOL_UNITS];
 
 function patternIdFor(unit: AnyUnit): PatternId {
   return unit.patternIds?.[0] ?? 1;
+}
+
+function engineFor(unit: AnyUnit): PatternEngineDefinition {
+  const representativeEngineId = REPRESENTATIVE_ENGINE_BY_UNIT.get(unit.id);
+  if (representativeEngineId) return ENGINE_BY_ID[representativeEngineId];
+  return PATTERN_ENGINES[patternIdFor(unit)];
 }
 
 function sourceLocator(unit: AnyUnit, ref: UnitContentSourceRef): string {
@@ -181,7 +230,7 @@ function sourceLocator(unit: AnyUnit, ref: UnitContentSourceRef): string {
 function blueprintSourceRefs(unit: AnyUnit, content: UnitContent): UnitBlueprintSourceRef[] {
   return content.sourceRefs.map((ref) => ({
     ...ref,
-    locator: sourceLocator(unit, ref),
+    locator: ref.locator || sourceLocator(unit, ref),
   }));
 }
 
@@ -262,6 +311,68 @@ function feedbackRulesFor(unit: AnyUnit): UnitInteractionFeedbackRule[] {
   ];
 }
 
+function contentHintsFor(unit: AnyUnit, content: UnitContent): UnitInteractionContentHints {
+  return {
+    overview: content.explanations.easy,
+    observe: `${unit.title}: change one control and compare the visible result before writing the rule.`,
+    tryThis: content.examples[0]?.takeaway ?? `Use ${unit.title} to test one case and one counter-case.`,
+    reflect: content.miniQuiz[2]?.question ?? `What evidence supports your answer for ${unit.id}?`,
+  };
+}
+
+function engineDataFor(unit: AnyUnit, engineId: PatternEngineId): Record<string, unknown> {
+  const title = unit.title;
+  const domain = unit.domain || ('courseName' in unit ? unit.courseName ?? unit.course : unit.subject);
+  const basePoints = [
+    { label: 'start', value: 20 },
+    { label: 'compare', value: 45 },
+    { label: 'explain', value: 72 },
+    { label: 'transfer', value: 88 },
+  ];
+
+  return {
+    engineId,
+    subject: unit.subject,
+    unitTitle: title,
+    domain,
+    steps: [
+      `Name the ${domain} situation.`,
+      'Change one variable or choice.',
+      'Compare the displayed result.',
+      `Explain the result using ${title}.`,
+    ],
+    categories: [
+      { id: 'condition', label: 'Condition', items: ['input', 'setting', 'constraint'] },
+      { id: 'evidence', label: 'Evidence', items: ['diagram', 'source clue', 'measurement'] },
+      { id: 'result', label: 'Result', items: ['pattern', 'claim', 'transfer'] },
+    ],
+    particles: Array.from({ length: 18 }, (_, index) => ({
+      x: 10 + ((index * 17) % 80),
+      y: 15 + ((index * 23) % 70),
+      r: 2 + (index % 4),
+    })),
+    points: basePoints,
+    timeline: [
+      { label: 'Before', value: 10 },
+      { label: 'Change', value: 42 },
+      { label: 'Result', value: 74 },
+      { label: 'Transfer', value: 96 },
+    ],
+    nodes: [
+      { id: 'source', label: 'Source' },
+      { id: 'action', label: 'Action' },
+      { id: 'result', label: 'Result' },
+      { id: 'reason', label: 'Reason' },
+    ],
+    links: [
+      ['source', 'action'],
+      ['action', 'result'],
+      ['result', 'reason'],
+    ],
+    formula: unit.id === 'M9-CR-03' ? 'y = ax^2 + bx + c' : `${title} model`,
+  };
+}
+
 function acceptanceCriteriaFor(engineId: PatternEngineId): UnitInteractionAcceptanceCriterion[] {
   return [
     {
@@ -288,8 +399,8 @@ function makeBlueprint(unit: AnyUnit): UnitBlueprint {
     throw new Error(`${unit.id}: missing UnitContent for UnitBlueprint`);
   }
 
-  const patternId = patternIdFor(unit);
-  const engine = PATTERN_ENGINES[patternId];
+  const engine = engineFor(unit);
+  const patternId = engine.patternId;
   const variables = controlsFor(unit, engine.engineId);
 
   return {
@@ -316,6 +427,8 @@ function makeBlueprint(unit: AnyUnit): UnitBlueprint {
       componentName: unit.componentName,
       variables,
       initialState: initialStateFor(variables),
+      contentHints: contentHintsFor(unit, content),
+      engineData: engineDataFor(unit, engine.engineId),
       uiState: {
         layout: variables.length > 1 ? 'split-panel' : 'single-panel',
         minTouchTargetPx: 44,
@@ -335,8 +448,8 @@ function makeBlueprint(unit: AnyUnit): UnitBlueprint {
       sourceVerification: content.sourceRefs.some((ref) => ref.document)
         ? 'official-verified-with-local-evidence'
         : 'official-verified',
-      content: 'unit-content-adapter',
-      renderer: unit.id === 'M9-CR-03' ? 'pattern-engine' : 'legacy-component',
+      content: 'authored-blueprint',
+      renderer: 'pattern-engine',
     },
   };
 }

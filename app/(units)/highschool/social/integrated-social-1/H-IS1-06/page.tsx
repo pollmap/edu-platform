@@ -1,14 +1,15 @@
+// AUTO-GENERATED unified unit page. Edit scripts/generate-pages.ts, then regenerate.
 import { notFound } from 'next/navigation';
-import { SupplyDemandExplorer } from '@/components/interactive/social/SupplyDemandExplorer';
+import { UnitInteractiveRenderer } from '@/components/interactive/UnitInteractiveRenderer';
+import { UnitLearningMaterial } from '@/components/learning/UnitLearningMaterial';
 import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErrorBoundary';
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
-import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
 import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
 import { makeUnitMetadata } from '@/lib/metadata';
 
-const UNIT_ID = 'H-IS1-06';
+const UNIT_ID = "H-IS1-06";
 
 export function generateMetadata() {
   const unit = findUnit(UNIT_ID);
@@ -18,52 +19,37 @@ export function generateMetadata() {
 export default function Page() {
   const unit = findUnit(UNIT_ID);
   if (!unit) notFound();
-
   return (
     <main className="container mx-auto max-w-5xl px-4 py-8">
       <UnitHeader
         unit={unit}
         breadcrumb={[
-          { label: '홈', href: '/' },
-          { label: '고등학교', href: '/highschool' },
+          { label: 'Home', href: '/' },
           { label: unit.title },
         ]}
       />
       <UnitProgressControls unitId={UNIT_ID} />
-      <SectionCard title="한마디로">
-        <p>
-          시장경제는 <strong>가격이라는 신호</strong>로 자원을 배분해요. 그 출발점이 수요·공급 곡선이에요.
-          금융 상품(예금·주식·채권·보험)도 같은 원리로 가격이 형성돼요. 통합사회 경제 단원의 도구상자.
-        </p>
-      </SectionCard>
-      <SectionCard title="핵심 — 균형과 외부 충격">
-        <p>
-          <strong>수요</strong>는 가격이 오르면 줄고, <strong>공급</strong>은 가격이 오르면 늘어요. 두 곡선이 만나는 점이 균형(P*, Q*).
-          소득·기호·기술·날씨 같은 요인은 곡선 자체를 좌우로 이동시켜 균형을 옮겨요. 정부가 가격 상한·하한을 둘 때
-          어떤 부작용이 생기는지(품귀·잉여)도 같은 그래프로 설명돼요.
-        </p>
-      </SectionCard>
-      <SectionCard title="흔한 오개념">
-        <p>
-          ❌ "수요가 늘면 가격이 무조건 오른다" — 공급이 같이 늘면 가격은 그대로일 수도.
-          ❌ "정부가 가격을 누르면 무조건 좋다" — 균형 가격보다 낮은 상한은 만성 품귀를 만들어요.
-          ❌ "주식·예금은 완전히 다르다" — 위험·수익 비율은 다르지만, 가격 결정 원리는 같은 수요·공급 틀 안.
-        </p>
-      </SectionCard>
-      <SectionCard title="실생활·시험 응용">
-        <p>
-          농산물 가격 급등, 유가 변동, 부동산 정책, 금리 변경 — 한 그래프로 분석돼요.
-          수능 사회탐구 경제·통합사회의 단골 출제 주제. 아래 슬라이더로 곡선을 직접 움직여 보세요.
-        </p>
-      </SectionCard>
-      <SectionCard>
+
+      <UnitLearningMaterial unit={unit} />
+
+      <section
+        aria-labelledby={`interactive-${UNIT_ID}`}
+        className="mb-5 rounded-lg border border-blue-100 bg-white p-4 shadow-sm dark:border-blue-900/60 dark:bg-zinc-950"
+      >
+        <div className="mb-3">
+          <div className="text-xs font-bold uppercase text-blue-700 dark:text-blue-300">Interactive practice</div>
+          <h2 id={`interactive-${UNIT_ID}`} className="mt-1 text-2xl font-extrabold text-zinc-950 dark:text-zinc-50">
+            조작 영역
+          </h2>
+        </div>
         <InteractiveErrorBoundary unitId={UNIT_ID}>
-          <SupplyDemandExplorer />
+          <UnitInteractiveRenderer unitId={UNIT_ID} />
         </InteractiveErrorBoundary>
-      </SectionCard>
-      <SectionCard>
+      </section>
+
+      <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
         <PrerequisiteList ids={unit.prerequisites} achievementStandards={unit.achievementStandards} />
-      </SectionCard>
+      </section>
     </main>
   );
 }

@@ -1,9 +1,17 @@
 import type { HighSchoolUnit, Subject, Unit } from '../types';
 
 export type UnitContentSourceRef = {
+  sourceType: 'official-primary' | 'official-secondary' | 'local-ledger' | 'local-metadata';
   title: string;
   document?: string;
   url?: string;
+  officialUrl?: string;
+  documentTitle: string;
+  documentDate: string;
+  locator: string;
+  evidenceText: string;
+  retrievedAt: string;
+  verificationStatus: 'verified' | 'blocked' | 'needs-review';
   note: string;
 };
 
