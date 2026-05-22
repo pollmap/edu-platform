@@ -24,6 +24,37 @@ function hasUsefulText(value: string, minLength = 12): boolean {
   return value.trim().length >= minLength && !/작성 예정|TODO|TBD/i.test(value);
 }
 
+function hasGenericPlaceholder(value: string): boolean {
+  return /TODO|TBD|placeholder|generic subject frame|작성 예정|묒꽦 ?덉젙/i.test(value);
+}
+
+function authoredContentLength(content: NonNullable<ReturnType<typeof getUnitContent>>): number {
+  return [
+    content.explanations.easy,
+    content.explanations.standard,
+    content.explanations.advanced,
+    ...content.examples.flatMap((example) => [
+      example.title,
+      example.setup,
+      example.walkthrough,
+      example.takeaway,
+    ]),
+    ...content.miniQuiz.flatMap((quiz) => [
+      quiz.question,
+      quiz.answer,
+      quiz.explanation,
+    ]),
+    ...content.commonMistakes.flatMap((mistake) => [
+      mistake.mistake,
+      mistake.correction,
+    ]),
+    ...content.realLifeApplications.flatMap((application) => [
+      application.context,
+      application.description,
+    ]),
+  ].join('').trim().length;
+}
+
 const blockers: string[] = [];
 
 if (allUnits.length !== OFFICIAL_VERIFIED_UNIT_TARGET) {
@@ -53,7 +84,11 @@ for (const unit of allUnits) {
     if (!hasUsefulText(content.explanations.easy, 24)) blockers.push(`${unit.id}: missing easy explanation`);
     if (!hasUsefulText(content.explanations.standard, 40)) blockers.push(`${unit.id}: missing standard explanation`);
     if (!hasUsefulText(content.explanations.advanced, 40)) blockers.push(`${unit.id}: missing advanced explanation`);
-    if (content.examples.length < 2) blockers.push(`${unit.id}: UnitContent examples must be at least 2`);
+    if (hasGenericPlaceholder(`${content.explanations.easy} ${content.explanations.standard} ${content.explanations.advanced}`)) {
+      blockers.push(`${unit.id}: UnitContent contains placeholder or generic marker`);
+    }
+    if (authoredContentLength(content) < 1200) blockers.push(`${unit.id}: UnitContent is under 1200 characters`);
+    if (content.examples.length < 3) blockers.push(`${unit.id}: UnitContent examples must be at least 3`);
     if (content.miniQuiz.length !== 3) blockers.push(`${unit.id}: miniQuiz count is not 3`);
     const expectedKinds = ['concept-check', 'application', 'mistake-or-transfer'];
     for (const [index, quiz] of content.miniQuiz.entries()) {
@@ -105,7 +140,7 @@ console.log('[content-audit] unit learning material coverage');
 console.log(`[content-audit] units checked: ${allUnits.length}`);
 console.log(`[content-audit] verified target: ${OFFICIAL_VERIFIED_UNIT_TARGET}`);
 console.log(`[content-audit] UnitContent checked: ${contentUnitIds.length}`);
-console.log('[content-audit] required sections: UnitContent sourceRefs, easy/standard/advanced explanations, 2+ examples, fixed 3-question miniQuiz, common mistakes, real-life applications, valid nextUnitIds, legacy learning surface');
+console.log('[content-audit] required sections: UnitContent sourceRefs, 1200+ chars, easy/standard/advanced explanations, 3+ examples, fixed 3-question miniQuiz, common mistakes, real-life applications, valid nextUnitIds, legacy learning surface');
 console.log(`[content-audit] blockers: ${blockers.length}`);
 
 for (const blocker of blockers.slice(0, 50)) {

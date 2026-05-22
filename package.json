@@ -17,6 +17,8 @@
     "validate": "tsx scripts/validate.ts",
     "audit:completion": "tsx scripts/completion-audit.ts",
     "audit:content": "tsx scripts/content-audit.ts",
+    "audit:blueprint": "tsx scripts/blueprint-audit.ts",
+    "audit:interaction": "tsx scripts/interaction-audit.ts",
     "audit:security": "npm audit --audit-level=moderate",
     "lint:md": "tsx scripts/markdown-lint.ts",
     "secret-grep": "tsx scripts/secret-grep.ts"

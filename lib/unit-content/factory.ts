@@ -38,7 +38,7 @@ function sourceRefsFor(unit: AnyUnit): UnitContentSourceRef[] {
   if (isHighSchoolUnit(unit)) {
     refs.push({
       title: '고교학점제 지원센터',
-      url: 'https://hscredit.kr',
+      url: 'https://www.hscredit.net/',
       note: 'Used for high-school credit-system course naming and category context.',
     });
   }

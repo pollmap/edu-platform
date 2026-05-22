@@ -1,5 +1,6 @@
 import type { HighSchoolUnit, Subject, Unit } from './types';
 import { getUnitContent, type UnitContent } from './unit-content';
+import { getUnitBlueprint, type UnitBlueprint } from './unit-blueprints';
 
 export interface UnitLearningMaterial {
   gradeLabel: string;
@@ -19,6 +20,7 @@ export interface UnitLearningMaterial {
   reviewQuestions: string[];
   sourceNote: string;
   unitContent?: UnitContent;
+  unitBlueprint?: UnitBlueprint;
 }
 
 const SUBJECT_LABELS: Record<Subject, string> = {
@@ -188,6 +190,7 @@ export function buildUnitLearningMaterial(unit: Unit | HighSchoolUnit): UnitLear
   const domain = domainLabel(unit);
   const interactiveTitle = unit.interactiveTitle || `${unit.title} 조작`;
   const unitContent = getUnitContent(unit.id);
+  const unitBlueprint = getUnitBlueprint(unit.id);
 
   return {
     gradeLabel: gradeLabel(unit),
@@ -235,5 +238,6 @@ export function buildUnitLearningMaterial(unit: Unit | HighSchoolUnit): UnitLear
       ? `세부 콘텐츠 출처: ${unitContent.sourceRefs.map((ref) => ref.title).join(' · ')} · ${unit.id}`
       : `단원 기준: ${gradeLabel(unit)} ${SUBJECT_LABELS[unit.subject]} · ${domain} · ${unit.id}`,
     unitContent,
+    unitBlueprint,
   };
 }

@@ -54,6 +54,8 @@
 ```bash
 npm run audit:completion
 npm run audit:content
+npm run audit:blueprint
+npm run audit:interaction
 ```
 
 JSON 결과가 필요하면:
@@ -65,6 +67,14 @@ npm run audit:completion -- --json
 ## CI 연동
 
 완료 감사는 GitHub Actions의 `CI` workflow에 포함되어 있다. 단원 ID, 라우트, 상태, 컴포넌트 export, 공개 문서 중 하나라도 어긋나면 PR이 실패한다.
+
+## UnitBlueprint Audits
+
+`npm run audit:blueprint` checks the generated `UnitBlueprint` registry for the 392 verified units. It fails if a unit is missing blueprint data, source locators, 1200+ characters of authored material, 3 examples, 3 mini problems, answer explanations, common mistakes, real-life applications, or valid `nextUnitIds`.
+
+`npm run audit:interaction` checks the pattern-engine contract. It fails if a unit lacks a known engine ID, variables, initial state, feedback rules, misconception responses, acceptance criteria, 44px touch targets, or 360px mobile readiness.
+
+The 96 remaining units toward the 488 target remain blocked until official per-unit source rows are recorded.
 
 ## 범위
 

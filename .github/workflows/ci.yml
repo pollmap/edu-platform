@@ -45,6 +45,12 @@ jobs:
       - name: Content audit
         run: npm run audit:content
 
+      - name: Blueprint audit
+        run: npm run audit:blueprint
+
+      - name: Interaction audit
+        run: npm run audit:interaction
+
       - name: Unit tests
         run: npm test
 

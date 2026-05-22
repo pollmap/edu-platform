@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { QuadraticFunctionExplorer } from '@/components/interactive/math/QuadraticFunctionExplorer';
+import { UnitInteractiveRenderer } from '@/components/interactive/UnitInteractiveRenderer';
 import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErrorBoundary';
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
 import { SectionCard } from '@/components/primitives/SectionCard';
@@ -68,7 +68,7 @@ export default function Page() {
 
       <SectionCard>
         <InteractiveErrorBoundary unitId={UNIT_ID}>
-          <QuadraticFunctionExplorer />
+          <UnitInteractiveRenderer unitId={UNIT_ID} />
         </InteractiveErrorBoundary>
       </SectionCard>
 

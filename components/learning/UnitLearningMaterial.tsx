@@ -11,6 +11,7 @@ interface UnitLearningMaterialProps {
 export function UnitLearningMaterial({ unit }: UnitLearningMaterialProps) {
   const material = buildUnitLearningMaterial(unit);
   const content = material.unitContent;
+  const sourceRefs = material.unitBlueprint?.sourceRefs ?? content?.sourceRefs ?? [];
   const headingId = `learning-material-${unit.id}`;
 
   if (!content) {
@@ -160,11 +161,12 @@ export function UnitLearningMaterial({ unit }: UnitLearningMaterialProps) {
         <div className="border-t border-zinc-200 p-4 dark:border-zinc-800 md:border-t-0">
           <SectionTitle>출처</SectionTitle>
           <ul className="mt-2 space-y-1 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-            {content.sourceRefs.map((source) => (
+            {sourceRefs.map((source) => (
               <li key={`${source.title}-${source.document ?? source.url}`}>
                 {source.title}
                 {source.document ? ` · ${source.document}` : ''}
                 {source.url ? ` · ${source.url}` : ''}
+                {'locator' in source && source.locator ? ` · ${source.locator}` : ''}
               </li>
             ))}
           </ul>

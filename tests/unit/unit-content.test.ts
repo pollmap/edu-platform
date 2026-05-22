@@ -9,6 +9,34 @@ import {
 const allUnits = [...CURRICULUM, ...HIGHSCHOOL_UNITS];
 const allUnitIds = new Set(allUnits.map((unit) => unit.id));
 
+function authoredContentLength(unitId: string): number {
+  const content = UNIT_CONTENT[unitId];
+  return [
+    content.explanations.easy,
+    content.explanations.standard,
+    content.explanations.advanced,
+    ...content.examples.flatMap((example) => [
+      example.title,
+      example.setup,
+      example.walkthrough,
+      example.takeaway,
+    ]),
+    ...content.miniQuiz.flatMap((quiz) => [
+      quiz.question,
+      quiz.answer,
+      quiz.explanation,
+    ]),
+    ...content.commonMistakes.flatMap((mistake) => [
+      mistake.mistake,
+      mistake.correction,
+    ]),
+    ...content.realLifeApplications.flatMap((application) => [
+      application.context,
+      application.description,
+    ]),
+  ].join('').trim().length;
+}
+
 describe('unit content registry', () => {
   it('has detailed content for every officially verified registered unit', () => {
     expect(allUnits).toHaveLength(OFFICIAL_VERIFIED_UNIT_TARGET);
@@ -31,7 +59,8 @@ describe('unit content registry', () => {
       expect(content!.explanations.easy.length, `${unit.id} easy`).toBeGreaterThan(24);
       expect(content!.explanations.standard.length, `${unit.id} standard`).toBeGreaterThan(40);
       expect(content!.explanations.advanced.length, `${unit.id} advanced`).toBeGreaterThan(40);
-      expect(content!.examples.length, `${unit.id} examples`).toBeGreaterThanOrEqual(2);
+      expect(authoredContentLength(unit.id), `${unit.id} content length`).toBeGreaterThanOrEqual(1200);
+      expect(content!.examples.length, `${unit.id} examples`).toBeGreaterThanOrEqual(3);
       expect(content!.commonMistakes.length, `${unit.id} mistakes`).toBeGreaterThanOrEqual(1);
       expect(content!.realLifeApplications.length, `${unit.id} applications`).toBeGreaterThanOrEqual(1);
     }
