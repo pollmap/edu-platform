@@ -51,9 +51,17 @@ export function HomeProgress({ totalUnits }: HomeProgressProps) {
     <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 space-y-4">
       <div className="flex items-baseline justify-between">
         <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">내 학습 진도</h3>
-        <span className="text-xs text-zinc-500 font-mono">
-          완료 {counts.completed} · 방문 {counts.visited} · 즐겨찾기 {counts.favorites}
-        </span>
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <span className="text-xs text-zinc-500 font-mono">
+            완료 {counts.completed} · 방문 {counts.visited} · 즐겨찾기 {counts.favorites}
+          </span>
+          <Link
+            href="/progress"
+            className="rounded-md border border-zinc-200 px-2 py-1 text-xs font-semibold text-zinc-700 transition hover:border-blue-300 hover:bg-blue-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+          >
+            전체 진도 보기
+          </Link>
+        </div>
       </div>
       <div className="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
         <div

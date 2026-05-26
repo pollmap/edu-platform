@@ -45,6 +45,7 @@ NCIC/공식 출처
 | 패턴엔진 | **20 / 20** 실제 React renderer + registry 매핑 + 대표 E2E |
 | legacy renderer | **0** 정상 경로 fallback 없음 |
 | Roadmap Preview | 실제 `prerequisites` + `nextUnitIds` 기반 선수·현재·후속 단원 미리보기 |
+| Progress Dashboard | `/progress`에서 완료·방문·복습 큐·즐겨찾기·과목별 진도 확인 |
 | 출처 원장 | `docs/unit-source-ledger.md`에 392 verified rows + 96 blocked rows |
 | 488 확장 후보 | **96개 보류** · 공식 출처 행 검증 전 앱 데이터 추가 금지 |
 | planned/stub 단원 | **0** |
@@ -92,6 +93,7 @@ NCIC/공식 출처
 - 모든 단원이 `lib/unit-content/`의 authored `UnitContent`를 가지며 sourceRefs, 쉬운/표준/심화 설명, 예시 3개, 정확히 3문항 미니 문제, 정답과 해설, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 제공함
 - 모든 출처 ref가 `sourceType`, `officialUrl`, `documentTitle`, `documentDate`, `locator`, `evidenceText`, `retrievedAt`, `verificationStatus`를 제공함
 - 20개 패턴엔진 파일과 registry 매핑, 대표 단원 E2E가 모두 존재함
+- `/progress`가 기존 `edu-platform-progress` localStorage schema를 유지하며 복습 큐, 즐겨찾기, 과목별 진도를 표시함
 - 추가 96개 단원은 NCIC, `www.hscredit.net`, 교육부/교육청 등 공식 출처에서 단원명·과목·학교급·영역·출처를 검증하기 전까지 앱 데이터에 넣지 않음
 - README, LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING이 존재함
 
@@ -154,6 +156,7 @@ npm run test:e2e
 edu-platform/
 ├── app/                   # Next.js App Router
 │   ├── (units)/           # 392개 단원 라우트
+│   ├── progress/          # localStorage 기반 학습 현황 대시보드
 │   ├── robots.ts
 │   ├── sitemap.ts
 │   ├── layout.tsx

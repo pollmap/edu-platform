@@ -2,36 +2,14 @@ import Link from 'next/link';
 import { TodayConceptQueue } from '@/components/learning/TodayConceptQueue';
 import { HomeProgress } from '@/components/primitives/HomeProgress';
 import { RoadmapPreview } from '@/components/primitives/RoadmapPreview';
-import type { LearningUnitSummary } from '@/lib/learning';
-import { CURRICULUM, GRADE_LABEL, HIGHSCHOOL_UNITS, findUnit, isHighSchoolUnit, unitPath } from '@/lib/curriculum';
-import type { HighSchoolUnit, Unit } from '@/lib/types';
-
-function gradeLabelFor(unit: Unit | HighSchoolUnit): string {
-  if (isHighSchoolUnit(unit)) return unit.courseName || '고등';
-  if (unit.schoolLevel === 'cross-grade') return '공통';
-  return unit.grade ? GRADE_LABEL[unit.grade] : '공통';
-}
-
-function toLearningUnitSummary(unit: Unit | HighSchoolUnit): LearningUnitSummary {
-  return {
-    id: unit.id,
-    title: unit.title,
-    subject: unit.subject,
-    gradeLabel: gradeLabelFor(unit),
-    domain: unit.domain,
-    href: unitPath(unit),
-    priority: unit.priority,
-    interactiveTitle: unit.interactiveTitle,
-  };
-}
+import { CURRICULUM, HIGHSCHOOL_UNITS, findUnit } from '@/lib/curriculum';
+import { getLearningUnits, getTotalUnitCount } from '@/lib/learning-units';
 
 export default function Home() {
-  const totalUnits = CURRICULUM.length + HIGHSCHOOL_UNITS.length;
+  const totalUnits = getTotalUnitCount();
   const draftUnits = CURRICULUM.filter((u) => u.status !== 'planned').length +
     HIGHSCHOOL_UNITS.filter((u) => u.status !== 'planned').length;
-  const learningUnits = [...CURRICULUM, ...HIGHSCHOOL_UNITS]
-    .filter((u) => u.status !== 'planned')
-    .map(toLearningUnitSummary);
+  const learningUnits = getLearningUnits();
   const roadmapUnit = findUnit('M9-CR-03');
 
   return (
@@ -123,6 +101,9 @@ export default function Home() {
       <div className="va-cta">
         <Link href="/grade-3" className="va-cta__link va-cta__link--primary">
           학습 시작하기 →
+        </Link>
+        <Link href="/progress" className="va-cta__link va-cta__link--ghost">
+          내 진도 보기
         </Link>
         <Link href="/grade-9/math/M9-CR-03" className="va-cta__link va-cta__link--ghost">
           파일럿 — 이차함수

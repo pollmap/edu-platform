@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/primitives/ThemeProvider";
 import { SiteHeader } from "@/components/primitives/SiteHeader";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -18,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { CURRICULUM, HIGHSCHOOL_UNITS, unitPath } from '@/lib/curriculum';
+import { getSiteUrl } from '@/lib/site-url';
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const BASE = getSiteUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const root: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${BASE}/progress`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
   ];
 
   const indexes: MetadataRoute.Sitemap = grades.flatMap((g) =>

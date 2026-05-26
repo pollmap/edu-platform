@@ -37,6 +37,10 @@ const NAV_ITEMS: { label: string; href: string; subItems?: { label: string; href
       { label: '영어', href: '/common/english' },
     ],
   },
+  {
+    label: '진도',
+    href: '/progress',
+  },
 ];
 
 export function SiteHeader() {
