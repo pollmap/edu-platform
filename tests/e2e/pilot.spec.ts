@@ -2,13 +2,19 @@ import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 async function setSlider(page: Page, index: number, value: number) {
-  await page.getByRole('slider').nth(index).evaluate((element, nextValue) => {
-    const input = element as HTMLInputElement;
-    const setValue = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
-    setValue?.call(input, String(nextValue));
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
-  }, value);
+  const slider = page.getByRole('slider').nth(index);
+  await slider.focus();
+
+  const current = Number(await slider.inputValue());
+  const step = Number(await slider.getAttribute('step')) || 1;
+  const key = value >= current ? 'ArrowRight' : 'ArrowLeft';
+  const presses = Math.round(Math.abs(value - current) / step);
+
+  for (let press = 0; press < presses; press += 1) {
+    await page.keyboard.press(key);
+  }
+
+  await expect(slider).toHaveValue(String(value));
 }
 
 test.describe('pilot M9-CR-03', () => {

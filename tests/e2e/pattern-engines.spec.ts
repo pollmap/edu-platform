@@ -6,16 +6,8 @@ import { ENGINE_REPRESENTATIVE_UNITS } from '../../lib/unit-blueprints';
 async function moveFirstControl(surface: Locator) {
   const slider = surface.getByRole('slider').first();
   if (await slider.count()) {
-    await slider.evaluate((element) => {
-      const input = element as HTMLInputElement;
-      const min = Number(input.min || 0);
-      const max = Number(input.max || 10);
-      const nextValue = String(min + (max - min) * 0.65);
-      const setValue = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
-      setValue?.call(input, nextValue);
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    });
+    await slider.focus();
+    await slider.press('ArrowRight');
     return;
   }
 
