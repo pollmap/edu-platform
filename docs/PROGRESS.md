@@ -4,6 +4,7 @@
 **Repository Completion:** 392/392 active units · 0 planned · 0 generated stubs  
 **Detailed Content:** 392/392 verified UnitContent · 96 unverified expansion candidates blocked  
 **Blueprint/Interaction:** 392/392 UnitBlueprints · 20/20 pattern engines · 0 legacy renderers  
+**UX Readiness:** Search/progress/roadmap regression coverage · Figma implementation gated until canonical frames/tokens arrive
 **Audit Commands:** `npm run audit:completion` · `npm run audit:content` · `npm run audit:blueprint` · `npm run audit:interaction`
 
 ---
@@ -40,6 +41,7 @@
 | 공통 학습자료 | 392/392 |
 | 세부 UnitContent | 392/392 |
 | UnitBlueprint | 392/392 |
+| Roadmap Preview | real prerequisites + nextUnitIds |
 | 488 확장 후보 | 96 보류 |
 | 차단 이슈 | 0 |
 
@@ -102,6 +104,8 @@
 - `docs/PRODUCT-STRATEGY.md`에 제품 가치, 전체 범위, 운영 전략, 한계를 도식화해 정리했다.
 - Figma Dev Mode, variables, Ready for dev, annotations, Code Connect, MCP 공식 문서 기준으로 `docs/design/figma-development-readiness.md`를 추가했다.
 - `docs/design/figma-stitch-handoff.md`를 배포 직전 Figma 개발 workflow에 맞춰 Ready for dev, annotation, variable mode, Code Connect 기준까지 확장했다.
+- `RoadmapPreview`를 추가해 기존 `prerequisites`와 `nextUnitIds`만으로 선수·현재·후속 단원 경로를 보여주고 누락 ID를 숨기지 않게 했다.
+- SearchDialog 키보드 진입, progress localStorage 상태, self-check review queue, roadmap preview를 Playwright UX readiness 회귀 테스트로 고정했다.
 - `S-LE1-01`, `S-LE1-02`, `S-LE2-01`을 실제 페이지/컴포넌트 상태에 맞춰 `draft`로 승격했다.
 - `scripts/completion-audit.ts`를 추가해 마스터 인덱스 ID, 앱 등록, 라우트, stub, error boundary, component export, 공개 문서 존재 여부를 한 번에 감사한다.
 - CI에 `audit:completion`과 `audit:security`를 추가했다.
@@ -121,4 +125,5 @@
 - 최종 디자인 기준은 Figma다.
 - Google Stitch는 초안 생성과 변형 탐색에만 사용한다.
 - 현재 환경에는 Figma 직접 커넥터가 없으므로 Figma 링크, 캡처, token export 기반으로 구현한다.
+- Home, SearchDialog, Progress, RoadmapPreview, `M9-CR-03` Unit의 Figma frame/capture/token export가 오기 전에는 대규모 리디자인을 진행하지 않는다.
 - 상세 절차는 `docs/design/figma-stitch-handoff.md`를 기준으로 한다.

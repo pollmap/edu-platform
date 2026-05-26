@@ -83,6 +83,7 @@ Component 이름은 코드의 공용 primitive와 맞춘다.
 | `Unit/UnitHeader` | `components/primitives/UnitHeader.tsx` | breadcrumb, badge, title, subtitle |
 | `Unit/ProgressBadge` | `components/primitives/UnitProgressBadge.tsx` | unseen/visited/completed/favorite |
 | `Unit/ProgressControls` | `components/primitives/UnitProgressControls.tsx` | completed on/off, favorite on/off |
+| `Roadmap/RoadmapPreview` | `components/primitives/RoadmapPreview.tsx` | 선수·현재·후속 단원 경로 |
 | `Content/SectionCard` | `components/primitives/SectionCard.tsx` | 단원 본문 섹션 |
 | `Marketing/FeatureCard` | `app/page.tsx` + `.va-feature-card` | 홈 과목 카드 |
 | `Marketing/CTA` | `app/page.tsx` + `.va-cta` | 홈 CTA 링크 묶음 |
@@ -117,6 +118,8 @@ Figma surface는 다음 제품 루프를 반영해야 한다.
 | Interactive Unit | See -> Touch -> Predict -> Explain -> Challenge | 캔버스, 조작 패널, 결과 패널, 미니 도전, 완료 CTA |
 | Roadmap Preview | 목록 대신 학습 지도 제공 | 선수·후속 단원 노드, 현재 위치, 다음 추천 |
 | Progress Dashboard | 반복 방문 동기 제공 | 완료율, 연속 학습일, 탐구 점수, 개념 배지 |
+
+현재 `RoadmapPreview`는 Figma 부재 상태에서도 구현 가능한 최소 surface로, 앱에 이미 검증된 `prerequisites`와 UnitContent `nextUnitIds`만 사용한다. Figma가 도착하면 시각 밀도와 노드 배치만 조정하고, 검증되지 않은 추천 단원이나 임의 경로 데이터는 추가하지 않는다.
 
 ## 6. Token Bridge
 

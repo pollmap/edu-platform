@@ -44,6 +44,7 @@ NCIC/공식 출처
 | UnitBlueprint | **392 / 392** 출처 provenance·authored content·interaction metadata 연결 |
 | 패턴엔진 | **20 / 20** 실제 React renderer + registry 매핑 + 대표 E2E |
 | legacy renderer | **0** 정상 경로 fallback 없음 |
+| Roadmap Preview | 실제 `prerequisites` + `nextUnitIds` 기반 선수·현재·후속 단원 미리보기 |
 | 출처 원장 | `docs/unit-source-ledger.md`에 392 verified rows + 96 blocked rows |
 | 488 확장 후보 | **96개 보류** · 공식 출처 행 검증 전 앱 데이터 추가 금지 |
 | planned/stub 단원 | **0** |
@@ -86,6 +87,7 @@ NCIC/공식 출처
 - 활성 단원 페이지가 `UnitHeader`, `UnitLearningMaterial`, `InteractiveErrorBoundary`, `UnitInteractiveRenderer`를 같은 순서로 렌더링함
 - 활성 단원의 `UnitInteractiveRenderer`가 `components/interactive/pattern-engines/registry.tsx`의 실제 renderer로 연결됨
 - 정상 경로에서 `legacy-component` renderer fallback이 0개임
+- Roadmap Preview가 실제 단원 메타데이터와 UnitContent의 연결만 사용하며, 누락된 연결 ID를 숨기지 않고 표시함
 - 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 목표, 5단계 조작 루프, 미니 도전, 오개념, 적용 장면, 산출물, 3개 복습 질문을 제공함
 - 모든 단원이 `lib/unit-content/`의 authored `UnitContent`를 가지며 sourceRefs, 쉬운/표준/심화 설명, 예시 3개, 정확히 3문항 미니 문제, 정답과 해설, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 제공함
 - 모든 출처 ref가 `sourceType`, `officialUrl`, `documentTitle`, `documentDate`, `locator`, `evidenceText`, `retrievedAt`, `verificationStatus`를 제공함

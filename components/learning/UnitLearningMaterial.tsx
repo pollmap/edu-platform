@@ -3,6 +3,7 @@ import { findUnit, unitPath } from '@/lib/curriculum';
 import { buildUnitLearningMaterial } from '@/lib/learning-materials';
 import type { HighSchoolUnit, Unit } from '@/lib/types';
 import type { UnitContent } from '@/lib/unit-content';
+import { RoadmapPreview } from '@/components/primitives/RoadmapPreview';
 
 interface UnitLearningMaterialProps {
   unit: Unit | HighSchoolUnit;
@@ -19,10 +20,11 @@ export function UnitLearningMaterial({ unit }: UnitLearningMaterialProps) {
   }
 
   return (
-    <section
-      aria-labelledby={headingId}
-      className="mb-5 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm dark:border-blue-900/60 dark:bg-zinc-950"
-    >
+    <>
+      <section
+        aria-labelledby={headingId}
+        className="mb-5 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm dark:border-blue-900/60 dark:bg-zinc-950"
+      >
       <div className="bg-blue-50 px-4 py-4 dark:bg-blue-950/30">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
@@ -172,7 +174,10 @@ export function UnitLearningMaterial({ unit }: UnitLearningMaterialProps) {
           </ul>
         </div>
       </div>
-    </section>
+      </section>
+
+      <RoadmapPreview unit={unit} nextUnitIds={content.nextUnitIds} />
+    </>
   );
 }
 
