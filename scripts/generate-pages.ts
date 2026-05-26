@@ -41,11 +41,12 @@ function pagePath(u: Unit | HighSchoolUnit): string {
 }
 
 function template(u: Unit | HighSchoolUnit): string {
-  return `// AUTO-GENERATED stub. Sprint 4+ 단원 작성 시 실제 콘텐츠로 교체.
-// TODO: pattern={pattern_id} interactive 추가
+  return `// AUTO-GENERATED unified unit page. Edit scripts/generate-pages.ts, then regenerate.
 import { notFound } from 'next/navigation';
+import { UnitInteractiveRenderer } from '@/components/interactive/UnitInteractiveRenderer';
+import { UnitLearningMaterial } from '@/components/learning/UnitLearningMaterial';
+import { InteractiveErrorBoundary } from '@/components/primitives/InteractiveErrorBoundary';
 import { PrerequisiteList } from '@/components/primitives/PrerequisiteList';
-import { SectionCard } from '@/components/primitives/SectionCard';
 import { UnitHeader } from '@/components/primitives/UnitHeader';
 import { UnitProgressControls } from '@/components/primitives/UnitProgressControls';
 import { findUnit } from '@/lib/curriculum';
@@ -66,17 +67,32 @@ export default function Page() {
       <UnitHeader
         unit={unit}
         breadcrumb={[
-          { label: '홈', href: '/' },
+          { label: 'Home', href: '/' },
           { label: unit.title },
         ]}
       />
       <UnitProgressControls unitId={UNIT_ID} />
-      <SectionCard title="개념 (작성 예정)">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">이 단원은 아직 콘텐츠가 채워지지 않았어요.</p>
-      </SectionCard>
-      <SectionCard>
+
+      <UnitLearningMaterial unit={unit} />
+
+      <section
+        aria-labelledby={\`interactive-\${UNIT_ID}\`}
+        className="mb-5 rounded-lg border border-blue-100 bg-white p-4 shadow-sm dark:border-blue-900/60 dark:bg-zinc-950"
+      >
+        <div className="mb-3">
+          <div className="text-xs font-bold uppercase text-blue-700 dark:text-blue-300">Interactive practice</div>
+          <h2 id={\`interactive-\${UNIT_ID}\`} className="mt-1 text-2xl font-extrabold text-zinc-950 dark:text-zinc-50">
+            조작 영역
+          </h2>
+        </div>
+        <InteractiveErrorBoundary unitId={UNIT_ID}>
+          <UnitInteractiveRenderer unitId={UNIT_ID} />
+        </InteractiveErrorBoundary>
+      </section>
+
+      <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
         <PrerequisiteList ids={unit.prerequisites} achievementStandards={unit.achievementStandards} />
-      </SectionCard>
+      </section>
     </main>
   );
 }
@@ -98,8 +114,8 @@ function main(): void {
     const full = resolve(outputBase, rel);
     if (existsSync(full)) {
       const isStub = readFileSync(full, 'utf8').startsWith('// AUTO-GENERATED stub');
-      if (!isStub) {
-        // 사람이 작성한 콘텐츠 — --force 라도 덮어쓰지 않음 (안전장치).
+      if (!isStub && !args.force) {
+        // Preserve hand-authored content unless an explicit --force regeneration was requested.
         preserved++;
         continue;
       }

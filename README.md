@@ -1,7 +1,26 @@
 # 한국 초3~고3 인터랙티브 교육 플랫폼
 
 > 2022 개정 교육과정 기반 5과목(국어·영어·수학·사회·과학) 인터랙티브 학습 웹앱.
-> 현재 저장소의 마스터 인덱스에 열거된 **392개 단원 ID가 모두 앱에 등록되어 있고, 392개 라우트가 모두 활성 인터랙티브 단원으로 연결**됩니다. 488개 확장은 공식 출처로 확인된 항목만 앱 데이터에 추가합니다.
+> 현재 저장소의 마스터 인덱스에 열거된 **392개 단원 ID가 모두 앱에 등록되어 있고, 392개 라우트가 모두 `UnitBlueprint + UnitLearningMaterial + UnitInteractiveRenderer` 학습 화면으로 연결**됩니다. 488개 확장은 공식 출처로 확인된 항목만 앱 데이터에 추가합니다.
+
+**Last verified:** 2026-05-22  
+**Current data stance:** 392개 공식 검증 활성 단원, 96개 확장 후보 보류
+
+## 이게 왜 가치가 있나
+
+이 프로젝트의 가치는 “페이지 수”가 아니라 **공식 출처 기반 단원 데이터를, 반복 가능한 학습 화면과 20개 인터랙션 엔진으로 운영할 수 있는 구조**를 만든 데 있다.
+
+```text
+NCIC/공식 출처
+  -> source ledger
+  -> UnitContent
+  -> UnitBlueprint
+  -> Pattern engine registry
+  -> 392개 통합 단원 화면
+  -> audits + tests + e2e
+```
+
+자세한 제품 가치, 전체 범위, 전략, 한계는 `docs/PRODUCT-STRATEGY.md`에 정리되어 있다.
 
 ## UX 방향
 
@@ -20,16 +39,20 @@
 | 마스터 인덱스 ID | **392 / 392** 앱 등록 |
 | 단원 라우트 | **392 / 392** 생성 |
 | 활성 단원 | **392 / 392** (`draft`) |
-| 공통 학습자료 | **392 / 392** 핵심질문·목표·조작루프·미니도전·오개념·적용·산출물·복습질문 생성 |
-| 세부 UnitContent | **392 / 392** 출처 refs·쉬운/표준/심화 설명·예시·3문항 미니 문제·정답/해설·흔한 실수·실생활 적용·다음 단원 |
+| 공통 학습 화면 | **392 / 392** `UnitHeader` + `UnitLearningMaterial` + `UnitInteractiveRenderer` |
+| 세부 UnitContent | **392 / 392** 출처 refs·쉬운/표준/심화 설명·예시 3개·3문항 미니 문제·정답/해설·흔한 실수·실생활 적용·다음 단원 |
+| UnitBlueprint | **392 / 392** 출처 provenance·authored content·interaction metadata 연결 |
+| 패턴엔진 | **20 / 20** 실제 React renderer + registry 매핑 + 대표 E2E |
+| legacy renderer | **0** 정상 경로 fallback 없음 |
+| Roadmap Preview | 실제 `prerequisites` + `nextUnitIds` 기반 선수·현재·후속 단원 미리보기 |
+| 출처 원장 | `docs/unit-source-ledger.md`에 392 verified rows + 96 blocked rows |
 | 488 확장 후보 | **96개 보류** · 공식 출처 행 검증 전 앱 데이터 추가 금지 |
 | planned/stub 단원 | **0** |
-| 인터랙티브 export | **270개** (`components/interactive/`) |
 | 검색 | fuse.js 392 docs · Ctrl+K 검색 모달 |
 | 진도 트래커 | zustand + localStorage 단원 완료/즐겨찾기 |
 | SEO | sitemap.xml + robots.txt + 단원별 metadata |
 | 보안 감사 | `npm audit --audit-level=moderate` 0 vulnerabilities |
-| 자동 검증 | CI에서 typecheck, markdown lint, secret grep, curriculum validation, completion audit, tests, build, e2e 실행 |
+| 자동 검증 | CI에서 typecheck, markdown lint, secret grep, curriculum validation, completion/content/blueprint/interaction audits, tests, build, e2e 실행 |
 
 ### 과목별 커버리지
 
@@ -61,11 +84,15 @@
 - `docs/00-MASTER-INDEX.md`의 모든 단원 ID가 앱 메타데이터에 등록됨
 - 모든 등록 단원에 `app/(units)/.../page.tsx` 라우트가 존재함
 - 생성용 placeholder/stub 문구가 남아 있지 않음
-- 활성 단원 페이지가 `InteractiveErrorBoundary`로 인터랙티브 영역을 감쌈
-- 활성 단원의 `componentName`이 `components/interactive`에서 export됨
+- 활성 단원 페이지가 `UnitHeader`, `UnitLearningMaterial`, `InteractiveErrorBoundary`, `UnitInteractiveRenderer`를 같은 순서로 렌더링함
+- 활성 단원의 `UnitInteractiveRenderer`가 `components/interactive/pattern-engines/registry.tsx`의 실제 renderer로 연결됨
+- 정상 경로에서 `legacy-component` renderer fallback이 0개임
+- Roadmap Preview가 실제 단원 메타데이터와 UnitContent의 연결만 사용하며, 누락된 연결 ID를 숨기지 않고 표시함
 - 모든 단원이 공통 학습자료 패널에서 핵심질문, 3개 목표, 5단계 조작 루프, 미니 도전, 오개념, 적용 장면, 산출물, 3개 복습 질문을 제공함
-- 모든 단원이 `lib/unit-content/`의 `UnitContent`를 가지며 sourceRefs, 쉬운/표준/심화 설명, 2개 이상 예시, 정확히 3문항 미니 문제, 정답과 해설, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 제공함
-- 추가 96개 단원은 NCIC, 고교학점제 지원센터 등 공식 출처에서 단원명·과목·학교급·영역·출처를 검증하기 전까지 앱 데이터에 넣지 않음
+- 모든 단원이 `lib/unit-content/`의 authored `UnitContent`를 가지며 sourceRefs, 쉬운/표준/심화 설명, 예시 3개, 정확히 3문항 미니 문제, 정답과 해설, 흔한 실수, 실생활 적용, 유효한 `nextUnitIds`를 제공함
+- 모든 출처 ref가 `sourceType`, `officialUrl`, `documentTitle`, `documentDate`, `locator`, `evidenceText`, `retrievedAt`, `verificationStatus`를 제공함
+- 20개 패턴엔진 파일과 registry 매핑, 대표 단원 E2E가 모두 존재함
+- 추가 96개 단원은 NCIC, `www.hscredit.net`, 교육부/교육청 등 공식 출처에서 단원명·과목·학교급·영역·출처를 검증하기 전까지 앱 데이터에 넣지 않음
 - README, LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING이 존재함
 
 검증:
@@ -73,6 +100,8 @@
 ```bash
 npm run audit:completion
 npm run audit:content
+npm run audit:blueprint
+npm run audit:interaction
 ```
 
 ## 기술 스택
@@ -85,6 +114,7 @@ npm run audit:content
 - fuse.js v7
 - KaTeX + react-katex
 - recharts
+- SVG/canvas 기반 pattern engines
 - vitest + Playwright
 - Pretendard variable font (SIL OFL)
 
@@ -110,6 +140,8 @@ npm run lint:md
 npm run validate
 npm run audit:completion
 npm run audit:content
+npm run audit:blueprint
+npm run audit:interaction
 npm run audit:security
 npm run tsc
 npm test
@@ -128,17 +160,18 @@ edu-platform/
 │   └── page.tsx           # 홈
 ├── components/
 │   ├── primitives/        # 공용 UI 빌딩 블록
-│   └── interactive/       # 과목별 인터랙티브 컴포넌트
+│   └── interactive/       # 공용 renderer + 20개 pattern engine
 ├── lib/
 │   ├── curriculum/        # 분할 단원 메타데이터 + overrides
 │   ├── data/              # 출처 기반 정적 데이터 로더
 │   ├── unit-content/      # 출처 기반 단원별 세부 학습자료
+│   ├── unit-blueprints/   # 단원 source/content/interaction contract
 │   ├── metadata.ts
 │   ├── progress.ts
 │   └── search-index.ts
-├── docs/                  # 마스터 인덱스, 아키텍처, 제작 플레이북, 디자인 핸드오프
+├── docs/                  # 마스터 인덱스, source ledger, 아키텍처, 제작 플레이북, 디자인 핸드오프
 ├── scripts/               # 생성, 검증, 감사 스크립트
-└── tests/                 # e2e 테스트
+└── tests/                 # unit + e2e 테스트
 ```
 
 ## 핵심 원칙
@@ -156,11 +189,15 @@ edu-platform/
 
 - 진행 현황: `docs/PROGRESS.md`
 - 완료 감사 기준: `docs/COMPLETION-AUDIT.md`
+- 제품/전략 설명: `docs/PRODUCT-STRATEGY.md`
+- 출처 원장: `docs/unit-source-ledger.md`
+- Figma 개발 적합성 검토: `docs/design/figma-development-readiness.md`
 - 디자인/UX 제품 기준: `docs/design/product-ux-foundation.md`
 - 디자인/UX 경쟁앱 역기획 레퍼런스: `docs/design/competitive-ux-reverse-engineering.md`
 - 26초식 오늘 큐/복습 큐 레퍼런스: `docs/design/26seconds-ux-reference.md`
 - 하루배움 브랜드 자산 기준: `docs/design/brand-assets.md`
 - 마스터 인덱스: `docs/00-MASTER-INDEX.md`
+- 패턴엔진 카탈로그: `docs/02-component-catalog.md`
 - 488 확장 후보 정책: `docs/UNIT-CONTENT-EXPANSION-CANDIDATES.md`
 - 제작 플레이북: `docs/03-claude-code-playbook.md`
 - Figma/Stitch 핸드오프: `docs/design/figma-stitch-handoff.md`
@@ -170,7 +207,7 @@ edu-platform/
 
 - **코드**: MIT (`LICENSE`)
 - **콘텐츠**: CC BY-NC 4.0 (`LICENSE-CONTENT.md`)
-- **교육과정 메타데이터 출처**: NCIC 2022 개정 교육과정 및 저장소 출처 문서
+- **교육과정 메타데이터 출처**: [NCIC](https://www.ncic.re.kr/) 2022 개정 교육과정 및 저장소 출처 문서
 
 ## 보안
 

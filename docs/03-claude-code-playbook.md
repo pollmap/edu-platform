@@ -10,9 +10,12 @@
 | 앱 등록 단원 | 392 |
 | 활성 단원 | 392 |
 | planned 단원 | 0 |
-| 인터랙티브 export | 270 |
+| 패턴엔진 | 20/20 |
+| legacy renderer | 0 |
 | 완료 감사 | `npm run audit:completion` |
 | 콘텐츠 감사 | `npm run audit:content` |
+| Blueprint 감사 | `npm run audit:blueprint` |
+| Interaction 감사 | `npm run audit:interaction` |
 
 ## 1. 작업 전 확인
 
@@ -20,9 +23,10 @@
 2. NCIC 또는 저장소 출처 문서로 단원명과 성취기준을 재확인한다.
 3. `docs/02-component-catalog.md`의 20개 패턴 중 가장 가까운 패턴을 고른다.
 4. `lib/unit-content/`에서 해당 단원의 sourceRefs와 세부 학습자료가 있는지 확인한다.
-5. 기존 primitive와 subject별 컴포넌트 패턴을 먼저 재사용한다.
-6. 제품 UX 방향은 `docs/design/product-ux-foundation.md`와 `docs/design/competitive-ux-reverse-engineering.md`를 확인한다.
-7. Figma/Stitch 반영 작업이면 `docs/design/figma-stitch-handoff.md`의 handoff 입력물을 확인한다.
+5. `lib/unit-blueprints/`에서 engineId, engineData, contentHints가 연결되는지 확인한다.
+6. 기존 primitive와 pattern engine 패턴을 먼저 재사용한다.
+7. 제품 UX 방향은 `docs/design/product-ux-foundation.md`와 `docs/design/competitive-ux-reverse-engineering.md`를 확인한다.
+8. Figma/Stitch 반영 작업이면 `docs/design/figma-stitch-handoff.md`의 handoff 입력물을 확인한다.
 
 ## 2. 단원 작업 표준 절차
 
@@ -37,28 +41,43 @@
 ### Step 1-1. UnitContent 확인
 
 - 세부 학습자료 진입점: `lib/unit-content/index.ts`
-- 과목별 콘텐츠 파일: `lib/unit-content/{math,science,korean,english,social}.ts`
-- 모든 단원은 sourceRefs, 쉬운/표준/심화 설명, 예시 2개 이상, 정확히 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 유효한 다음 단원 ID를 가져야 한다.
+- authored 콘텐츠 builder: `lib/unit-content/authored.ts`
+- 모든 단원은 sourceRefs, 쉬운/표준/심화 설명, 예시 3개, 정확히 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 유효한 다음 단원 ID를 가져야 한다.
 - 추가 단원은 공식 출처 행이 확인되기 전까지 `lib/curriculum/`이나 `lib/unit-content/`에 넣지 않는다.
 
 세부 콘텐츠를 바꿀 때는 `npm run audit:content`가 통과해야 한다.
 
-### Step 2. 인터랙티브 컴포넌트 작성
+### Step 1-2. UnitBlueprint 확인
+
+- Blueprint 진입점: `lib/unit-blueprints/index.ts`
+- Audit 진입점: `lib/unit-blueprints/audits.ts`
+- 모든 active unit은 source/content/interaction/contentHints/engineData를 가져야 한다.
+- `implementationStatus.content`는 `authored-blueprint`, `implementationStatus.renderer`는 `pattern-engine`이어야 한다.
+- 출처 ref는 `sourceType`, `officialUrl`, `documentTitle`, `documentDate`, `locator`, `evidenceText`, `retrievedAt`, `verificationStatus`를 가져야 한다.
+
+Blueprint를 바꿀 때는 `npm run audit:blueprint`가 통과해야 한다.
+
+### Step 2. Pattern engine 연결
 
 파일 위치:
 
 ```text
-components/interactive/{subject}/{ComponentName}.tsx
-components/interactive/{subject}/highschool/{ComponentName}.tsx
+components/interactive/pattern-engines/{EngineName}PatternEngine.tsx
+components/interactive/pattern-engines/registry.tsx
+components/interactive/UnitInteractiveRenderer.tsx
 ```
 
 기준:
 
 - client interaction이 있으면 `'use client'`를 사용한다.
-- named export를 제공한다.
-- `componentName`과 export 이름을 일치시킨다.
+- `PatternEngineProps`를 받는다.
+- registry에 engineId -> component 매핑을 추가한다.
+- 정상 경로에서 fallback UI를 추가하지 않는다. 누락은 감사나 렌더 오류로 드러나야 한다.
 - 공용 입력 UI는 `SliderRow`, `PresetBar`, `MathFormula` 등 primitive를 우선 사용한다.
 - 수식은 이미지가 아니라 KaTeX로 렌더링한다.
+- 대표 단원을 `ENGINE_REPRESENTATIVE_UNITS`와 Playwright E2E에 연결한다.
+
+Interaction을 바꿀 때는 `npm run audit:interaction`과 `npm run test:e2e`가 통과해야 한다.
 
 ### Step 3. 단원 페이지 작성
 
@@ -73,8 +92,7 @@ app/(units)/highschool/math/calculus-1/M-CA1-03/page.tsx
 기준:
 
 - `makeUnitMetadata(UNIT)`로 metadata를 만든다.
-- `UnitHeader`, `Breadcrumb`, `SectionCard`, `PrerequisiteList`를 일관되게 사용한다.
-- 인터랙티브 영역은 `InteractiveErrorBoundary`로 감싼다.
+- `UnitHeader`, `UnitProgressControls`, `UnitLearningMaterial`, `InteractiveErrorBoundary`, `UnitInteractiveRenderer`, `PrerequisiteList`를 일관되게 사용한다.
 - 생성용 placeholder 문구를 남기지 않는다.
 - 단원 구조는 `Learn -> Manipulate -> Check -> Review` 흐름을 따른다.
 - 완료와 복습 큐는 분리한다.
@@ -87,6 +105,8 @@ app/(units)/highschool/math/calculus-1/M-CA1-03/page.tsx
 npm run validate
 npm run audit:completion
 npm run audit:content
+npm run audit:blueprint
+npm run audit:interaction
 npm run tsc
 npm test
 ```
@@ -98,6 +118,8 @@ npm run lint:md
 npm run validate
 npm run audit:completion
 npm run audit:content
+npm run audit:blueprint
+npm run audit:interaction
 npm run audit:security
 npm run tsc
 npm test
@@ -116,9 +138,13 @@ npm run secret-grep
 - [ ] 선수학습 링크가 실제 존재하는 단원으로 연결된다.
 - [ ] `nextUnitIds`가 실제 존재하는 단원으로 연결된다.
 - [ ] 세부 콘텐츠에는 출처 refs와 3문항 미니 문제가 있다.
+- [ ] UnitBlueprint에는 공식 출처 locator/evidence와 engineData가 있다.
+- [ ] Pattern engine registry에 renderer가 등록되어 있다.
 - [ ] 초등 대상 단원은 어려운 한자어를 풀어 쓴다.
 - [ ] `npm run audit:completion`에서 blocker가 0개다.
 - [ ] `npm run audit:content`에서 blocker가 0개다.
+- [ ] `npm run audit:blueprint`에서 blocker가 0개다.
+- [ ] `npm run audit:interaction`에서 blocker가 0개다.
 
 ## 4. 프롬프트 템플릿
 
@@ -131,12 +157,15 @@ npm run secret-grep
 - docs/00-MASTER-INDEX.md의 단원 정보
 - lib/curriculum/index.ts와 overrides.ts의 메타데이터
 - lib/unit-content/의 세부 학습자료
-- components/interactive/math/QuadraticFunctionExplorer.tsx
+- lib/unit-blueprints/index.ts의 blueprint/engineData
+- components/interactive/pattern-engines/SliderGraphPatternEngine.tsx
 - app/(units)/grade-9/math/M9-CR-03/page.tsx
 검증:
 - npm run validate
 - npm run audit:completion
 - npm run audit:content
+- npm run audit:blueprint
+- npm run audit:interaction
 - npm run tsc
 - npm test
 ```
@@ -152,6 +181,8 @@ docs/design/figma-stitch-handoff.md의 capture/token checklist를 먼저 채운�
 - npm run validate
 - npm run audit:completion
 - npm run audit:content
+- npm run audit:blueprint
+- npm run audit:interaction
 - npm run tsc
 - npm test
 - npm run test:e2e

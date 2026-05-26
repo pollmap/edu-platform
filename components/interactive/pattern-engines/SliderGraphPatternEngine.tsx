@@ -1,17 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type {
-  UnitInteractionFeedbackRule,
-  UnitInteractionVariable,
-} from '@/lib/unit-blueprints';
-
-interface SliderGraphPatternEngineProps {
-  unitId: string;
-  title: string;
-  variables: UnitInteractionVariable[];
-  feedbackRules: UnitInteractionFeedbackRule[];
-}
+import type { UnitInteractionVariable } from '@/lib/unit-blueprints';
+import type { PatternEngineProps } from './types';
 
 type EngineState = Record<string, string | number | boolean>;
 
@@ -25,20 +16,24 @@ export function SliderGraphPatternEngine({
   unitId,
   title,
   variables,
+  initialState,
   feedbackRules,
-}: SliderGraphPatternEngineProps) {
-  const initialState = useMemo<EngineState>(
-    () => Object.fromEntries(variables.map((variable) => [variable.id, variable.initial])),
-    [variables],
+}: PatternEngineProps) {
+  const resolvedInitialState = useMemo<EngineState>(
+    () => ({ ...Object.fromEntries(variables.map((variable) => [variable.id, variable.initial])), ...initialState }),
+    [initialState, variables],
   );
-  const [state, setState] = useState<EngineState>(initialState);
+  const [state, setState] = useState<EngineState>(resolvedInitialState);
 
   const graph = useMemo(() => buildGraph(unitId, state), [unitId, state]);
   const formula = formulaFor(unitId, state);
   const hint = feedbackRules[0]?.message ?? 'Change one variable and compare the result.';
 
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-4 shadow-sm dark:border-blue-900/60 dark:bg-zinc-950">
+    <div
+      data-pattern-engine="slider-graph"
+      className="rounded-lg border border-blue-100 bg-white p-4 shadow-sm dark:border-blue-900/60 dark:bg-zinc-950"
+    >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="text-xs font-bold uppercase text-blue-700 dark:text-blue-300">Pattern engine</div>
@@ -46,7 +41,7 @@ export function SliderGraphPatternEngine({
         </div>
         <button
           type="button"
-          onClick={() => setState(initialState)}
+          onClick={() => setState(resolvedInitialState)}
           className="min-h-[44px] rounded-md border border-zinc-300 px-3 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900"
         >
           Reset

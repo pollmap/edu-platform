@@ -11,12 +11,14 @@
 | 활성 단원 | 392 |
 | planned 단원 | 0 |
 | generated stub page | 0 |
-| 인터랙티브 export | 270 |
+| 패턴엔진 | 20/20 |
+| legacy renderer | 0 |
 | 공통 학습자료 | 392/392 |
 | 세부 UnitContent | 392/392 |
+| UnitBlueprint | 392/392 |
 | 488 확장 후보 | 96 보류 |
 
-위 수치는 `npm run audit:completion`과 `npm run audit:content`로 검증한다.
+위 수치는 `npm run audit:completion`, `npm run audit:content`, `npm run audit:blueprint`, `npm run audit:interaction`으로 검증한다.
 
 ## 문서 구성
 
@@ -28,6 +30,8 @@
 | `03-claude-code-playbook.md` | 새 단원이나 컴포넌트 작업 시 쓰는 제작 SOP |
 | `04-sample-interactives/quadratic-function.html` | 이차함수 인터랙티브 원형 샘플 |
 | `COMPLETION-AUDIT.md` | 저장소 완료 감사 기준과 명령 |
+| `PRODUCT-STRATEGY.md` | 제품 가치, 전체 범위, 전략, 한계 |
+| `unit-source-ledger.md` | 392 verified rows와 96 blocked rows의 출처 원장 |
 | `UNIT-CONTENT-EXPANSION-CANDIDATES.md` | 488 확장 후보의 공식 출처 검증 보류 정책 |
 | `MOBILE-CHECKLIST.md` | 모바일 수동 검증 체크리스트 |
 | `PROGRESS.md` | 현재 커버리지와 품질 게이트 |
@@ -36,16 +40,18 @@
 | `design/26seconds-ux-reference.md` | 26초식 오늘 큐·카드 집중·복습 큐 디자인/UX 레퍼런스 |
 | `design/brand-assets.md` | 하루배움 로고·캐릭터 브랜드 자산 사용 기준 |
 | `design/figma-stitch-handoff.md` | Figma 중심, Stitch 보조 프론트엔드 핸드오프 기준 |
+| `design/figma-development-readiness.md` | 배포 직전 Figma 개발 적합성 검토와 blocker 체크리스트 |
 
 ## 운영 원칙
 
 1. **Figma가 최종 디자인 기준**이다. Stitch는 초안 생성과 변형 탐색에만 사용한다.
 2. **제품 UX와 디자인 판단은 인터랙티브 학습 맵 기준**이다. 자세한 기준은 `design/product-ux-foundation.md`, `design/competitive-ux-reverse-engineering.md`, `design/26seconds-ux-reference.md`를 따른다.
 3. **기본 디자인은 Light-first**다. 다크 모드는 선택 옵션으로만 유지한다.
-4. **코드 반영은 출처가 있는 입력물 기준**으로 한다. Figma 링크, 캡처, token export, NCIC/공식 출처를 우선한다.
+4. **코드 반영은 출처가 있는 입력물 기준**으로 한다. Figma 링크, Dev Mode inspect 정보, Ready for dev 상태, annotation, 캡처, token export, NCIC/공식 출처를 우선한다.
 5. **세부 학습자료는 `UnitContent`로 관리한다.** 모든 앱 단원은 sourceRefs, 설명 3단계, 예시, 3문항 미니 문제, 정답/해설, 흔한 실수, 실생활 적용, 다음 단원 연결을 가져야 한다.
-6. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 `npm run audit:completion`과 `npm run audit:content`를 통과해야 한다.
-7. **보안과 공개 저장소 기본 문서는 유지한다.** LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING, README가 누락되면 감사가 실패한다.
+6. **단원 렌더링은 `UnitBlueprint`와 20개 pattern engine registry로 관리한다.** 정상 경로에서 legacy fallback이 실행되면 감사가 실패해야 한다.
+7. **문서 수치와 앱 수치는 자동 감사로 맞춘다.** 새 단원을 추가하거나 상태를 바꾸면 completion/content/blueprint/interaction audits를 통과해야 한다.
+8. **보안과 공개 저장소 기본 문서는 유지한다.** LICENSE, LICENSE-CONTENT, SECURITY, CONTRIBUTING, README가 누락되면 감사가 실패한다.
 
 ## 검증 명령
 
@@ -54,6 +60,8 @@ npm run lint:md
 npm run validate
 npm run audit:completion
 npm run audit:content
+npm run audit:blueprint
+npm run audit:interaction
 npm run audit:security
 npm run tsc
 npm test
@@ -62,8 +70,8 @@ npm run test:e2e
 
 ## 1차 출처
 
-- [NCIC 국가교육과정정보센터](https://ncic.re.kr)
-- [고교학점제 지원센터](https://hscredit.kr)
+- [NCIC 국가교육과정정보센터](https://www.ncic.re.kr/)
+- [고교학점제 지원센터](https://www.hscredit.net/)
 - [한국교육과정평가원](https://www.kice.re.kr)
 - [에듀넷·티-클리어](https://www.edunet.net)
 

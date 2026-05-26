@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { TodayConceptQueue } from '@/components/learning/TodayConceptQueue';
 import { HomeProgress } from '@/components/primitives/HomeProgress';
+import { RoadmapPreview } from '@/components/primitives/RoadmapPreview';
 import type { LearningUnitSummary } from '@/lib/learning';
-import { CURRICULUM, GRADE_LABEL, HIGHSCHOOL_UNITS, isHighSchoolUnit, unitPath } from '@/lib/curriculum';
+import { CURRICULUM, GRADE_LABEL, HIGHSCHOOL_UNITS, findUnit, isHighSchoolUnit, unitPath } from '@/lib/curriculum';
 import type { HighSchoolUnit, Unit } from '@/lib/types';
 
 function gradeLabelFor(unit: Unit | HighSchoolUnit): string {
@@ -31,6 +32,7 @@ export default function Home() {
   const learningUnits = [...CURRICULUM, ...HIGHSCHOOL_UNITS]
     .filter((u) => u.status !== 'planned')
     .map(toLearningUnitSummary);
+  const roadmapUnit = findUnit('M9-CR-03');
 
   return (
     <main className="container mx-auto max-w-6xl px-4 py-8">
@@ -133,6 +135,8 @@ export default function Home() {
       <section className="mt-12">
         <HomeProgress totalUnits={totalUnits} />
       </section>
+
+      {roadmapUnit ? <RoadmapPreview unit={roadmapUnit} className="mt-12" /> : null}
 
       <div className="va-disclaimer">
         <div className="va-disclaimer__title">데이터 출처 및 라이선스</div>
